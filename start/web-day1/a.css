@@ -1,0 +1,153 @@
+.clearfix::after{
+	content: '';
+	display: block;
+	clear: both;
+}
+
+body{
+	margin: 0px;
+	background-color: #efefef;
+}
+
+hr{
+	height: 0;
+	border: none;
+	border-top: 0.125rem solid #DEDEDE;
+}
+
+dl,dt,dd{
+	margin: 0;padding: 0;
+}
+
+.topnavibar{
+	padding: 1.25rem 0 1.25rem 0;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+
+.navibar-inline{
+	padding: 0 0 0 1rem;
+}
+
+.topnavibar nav>ul{
+	list-style: none;margin: 0;padding: 0;
+}
+
+.topnavibar nav>ul>li{
+	float:left;
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+
+.topnavibar nav>ul>li>a{
+	font-size: 12px;
+	text-decoration: none;
+	color: #b1b1b1;
+	font-weight: bold;
+	border-bottom:3px solid transparent;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	display: block;
+}
+
+.topnavibar nav>ul>li>a:hover{
+	border-bottom:3px solid red;
+}
+
+.binner{
+	background-image: url(img/bg_cover.jpg);
+	height: 32.1875rem;
+	background-position: center center;
+	background-size: cover;
+}
+
+.binner .mask{
+	height: 32.1875rem;
+	background-color: rgba(0,0,0,0.8);
+}
+
+.userCard{
+	max-width: 50rem;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -20rem;
+	background-color: #ffffff;
+}
+
+.userCard .welcome{
+	background: #E66B6a;
+	color: white;
+	padding: 0.25rem 1rem;
+	position: relative;
+}
+
+.userCard .tran{
+	border: 10px solid transparent;
+	width: 0rem;
+	border-left-color: #E66B6A;
+	border-top-width: 0rem;
+	position: absolute;
+	top: 100%;
+	left: 0.5rem;
+}
+
+.userCard .pictureAndText{
+	padding: 3.125rem;
+}
+
+.userCard .picture{
+	float: left;
+}
+
+.userCard .text{
+	margin-left: 4rem;
+	float: left;
+	width: 45%;
+}
+
+.userCard .text .hr{
+	margin: 1.25rem 0;
+}
+
+.userCard dl dt,
+.userCard dl dd{
+	float: left;
+	padding: 0.4rem 0;
+}
+
+.userCard dl dt{
+	width: 30%;
+	font-weight: bold;
+}
+
+.userCard dl dd{
+	width: 70%;
+	color: #B1B1B1;
+}
+
+.userCard>footer.media{
+	background-color: #E66B6A;
+	text-align: center;
+}
+.userCard>footer.media>a{
+	display: inline-block;
+	width: 2.5rem;
+	line-height: 1.875rem;
+	padding: 0.3125rem 0;
+	border-radius: 50%;
+	margin: 1rem;
+}
+
+.userCard>footer.media>a:hover{
+	background: #CF5D5F;
+}
+
+.userCard svg{
+	width: 1.875rem;
+	height: 1.875rem;
+	fill: white;
+	margin: 0 0.125rem;
+	vertical-align: top;
+}
