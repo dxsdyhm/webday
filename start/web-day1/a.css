@@ -22,6 +22,14 @@ a{
 	text-decoration: none;
 }
 
+ol>li{
+	list-style: none;
+}
+
+h1,h2,h3,h4,h5,h6{
+	font-weight: normal;
+}
+
 .topnavibar{
 	padding: 1.25rem 0 1.25rem 0;
 	position: fixed;
@@ -77,6 +85,7 @@ a{
 	margin-right: auto;
 	margin-top: -20rem;
 	background-color: #ffffff;
+	box-shadow: 0rem 0.0625rem 0.3125rem 0rem rgba(0,0,0,0.3);
 }
 
 .userCard .welcome{
@@ -173,4 +182,65 @@ body > .main .downloadResume{
 body > .main .downloadResume:hover{
 	transition: box-shadow 0.2s;
 	box-shadow: 0rem 0.25rem 0.8125rem 0rem rgba(0,0,0,0.2);
+}
+
+.selfIntroduction{
+	max-width: 50rem;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	line-height: 1.8;
+	font-size: 1.125rem;
+}
+
+section.jobs,
+section.skills{
+	max-width: 50rem;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 3.75rem;
+}
+
+section.jobs >h2,
+section.skills >h2{
+	text-align: center;
+	line-height: 1.2;
+	color: #3D4457;
+	font-size: 2.125rem;
+	font-weight: 600;
+}
+
+section.skills >ol{
+	background: white;
+	margin-top: 1.875rem;
+	box-shadow: 0rem 0.0625rem 0.3125rem 0rem rgba(0,0,0,0.3);
+	padding: 2.625rem 3.125rem 0.625rem;
+}
+
+section.skills >ol >li{
+	float: left;
+	width: 47%;
+	box-sizing: border-box;
+}
+
+section.skills >ol >li:nth-child(even){
+	float: right;
+}
+
+section.skills .progressBar{
+	height: 0.3125rem;
+	background: #FAE1E1;
+	border-radius: 0.125rem;
+	margin: 0.25rem 0rem 2.5rem;
+}
+
+section.skills .progressBar .progress{
+	height: 100%;
+	background: #E66B6A;
+	width: 70%;
+	border-radius: 0.125rem;
+}
+
+section.jobs >nav >ol >li{
+	float: left;
 }
