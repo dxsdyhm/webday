@@ -18,6 +18,9 @@ hr{
 dl,dt,dd{
 	margin: 0;padding: 0;
 }
+a{
+	text-decoration: none;
+}
 
 .topnavibar{
 	padding: 1.25rem 0 1.25rem 0;
@@ -150,4 +153,24 @@ dl,dt,dd{
 	fill: white;
 	margin: 0 0.125rem;
 	vertical-align: top;
+}
+body > .main .resume_wapper{
+	text-align: center;
+}
+body > .main .downloadResume{
+	font-size: 0.875rem;
+	line-height: 1rem;
+	padding: 1.3125rem 3.4375rem;
+	border: 0.0625rem solid #CDCFD1;
+	background: #EFEFEF;
+	display: inline-block;
+	border-radius: 0.125rem;
+	color: #3D4457;
+	font-weight: bold;
+	margin: 2rem 0;
+}
+
+body > .main .downloadResume:hover{
+	transition: box-shadow 0.2s;
+	box-shadow: 0rem 0.25rem 0.8125rem 0rem rgba(0,0,0,0.2);
 }
