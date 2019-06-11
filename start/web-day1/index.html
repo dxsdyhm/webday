@@ -16,7 +16,7 @@
 		</style>
 	</head>
 	<body>
-		<div class="topnavibar">
+		<div id= "topNavibar" class="topnavibar">
 			<div class="navibar-inline clearfix">
 				<img src="./img/logo.png" alt="logo" style="float: left;" width="50px" />
 				<nav>
@@ -164,4 +164,13 @@
 			<div class="jobs"></div>
 		</section>
 	</body>
+	<script>
+		window.onscroll=function(){
+			if(window.scrollY>0){
+				topNavibar.classList.add("sticky")
+			}else{
+				topNavibar.classList.remove("sticky")
+			}
+		}
+	</script>
 </html>

@@ -32,14 +32,27 @@ h1,h2,h3,h4,h5,h6{
 
 .topnavibar{
 	padding: 1.25rem 0 1.25rem 0;
+	z-index: 1;
+	color: #b1b1b1;
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
+	transition: all 0.5s;
+}
+.topnavibar.sticky{
+	background: white;
+	padding: 0.625rem 0rem;
+	box-shadow: 0 0 0.625rem rgba(0,0,0,0.25);
+	color: #3d4451;
 }
 
 .navibar-inline{
 	padding: 0 0 0 1rem;
+}
+
+.topnavibar nav{
+	padding-top: 0.3125rem;
 }
 
 .topnavibar nav>ul{
@@ -55,7 +68,7 @@ h1,h2,h3,h4,h5,h6{
 .topnavibar nav>ul>li>a{
 	font-size: 12px;
 	text-decoration: none;
-	color: #b1b1b1;
+	color: inherit;
 	font-weight: bold;
 	border-bottom:3px solid transparent;
 	padding-top: 5px;
