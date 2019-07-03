@@ -4,7 +4,7 @@
  */
 import axios from 'axios';
 import router from '../router/router';
-// import store from '../store/index';
+import store from '../store/index';
 import {
 	Message
 } from 'element-ui';
@@ -63,13 +63,9 @@ var instance = axios.create({
 	timeout: 1000 * 12
 });
 // 设置公共请求头
-instance.defaults.headers['Content-Type'] = 'application/json; charset=UTF-8';
-instance.defaults.headers['apiV'] = '1';
-instance.defaults.headers['appV'] = '16777228';
-instance.defaults.headers['appID'] = 'D2FCF180E43044859F3AD196F3E1F0EC';
-instance.defaults.headers['Lan'] = 'zh';
-instance.defaults.headers['uid'] = '0';
-instance.defaults.headers['sid'] = '0';
+Object.keys(store.state.activeUser.headers).forEach(function(key){
+	instance.defaults.headers[key]=store.state.activeUser.headers[key]
+})
 /**
  * 请求拦截器
  * 每次请求前，如果存在token则在请求头中携带token
@@ -82,6 +78,8 @@ instance.interceptors.request.use(
 		// 而后我们可以在响应拦截器中，根据状态码进行一些统一的操作。
 		// const token = store.state.token;
 		// token && (config.headers.Authorization = token);
+		config.headers['sid']=store.state.activeUser.headers['sid']
+		config.headers['uid']=store.state.activeUser.headers['uid']
 		return config;
 	},
 	error => Promise.error(error))

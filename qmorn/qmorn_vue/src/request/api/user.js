@@ -9,8 +9,10 @@ import qs from 'qs'; // 根据需求是否导入qs模块
 const user = {
     login (params) {
         return instance.post(`/app/user/login`, params);
-    }
-    // 其他接口…………
+    },
+    getdeviceinfo(params){
+		return instance.post('/app/relation/device/list',params)
+	}
 }
 
 export default user;
