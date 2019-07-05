@@ -3,10 +3,10 @@
 		<v-responsive :aspect-ratio="16/9" class="up pink lighten-3">
 			<v-layout align-center justify-center column fill-height @click="jumpTo('/userdetail')">
 				<v-avatar :size=72>
-					<img :src="this.$store.state.activeUser.userinfo.image" />
+					<img :src="userimg" />
 				</v-avatar>
 				<div class="user_phone">
-					{{this.$store.state.activeUser.userinfo.nickName}}
+					{{username}}
 				</div>
 			</v-layout>
 		</v-responsive>
@@ -66,7 +66,12 @@
 			}
 		},
 		computed: {
-
+			userimg(){
+				return this.$store.getters.getUserInfo.image
+			},
+			username(){
+				return this.$store.getters.getUserInfo.nickName
+			}
 		},
 	}
 </script>

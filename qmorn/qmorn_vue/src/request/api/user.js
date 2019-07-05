@@ -18,6 +18,9 @@ const user = {
 	},
 	commitBabyInfo(params){
 		return instance.post('/app/user/baby/addormodify',params)
+	},
+	getBookList(params){
+		return instance.post('/app/device/bookself/list',params)
 	}
 }
 

@@ -8,7 +8,7 @@
 				</v-list-tile-content>
 
 				<v-list-tile-avatar>
-					<img :src="this.$store.state.activeUser.userinfo.image">
+					<img :src="userimg">
 				</v-list-tile-avatar>
 			</v-list-tile>
 			<v-list-tile avatar>
@@ -17,7 +17,7 @@
 				</v-list-tile-content>
 			
 				<v-list-tile-action-text>
-					{{this.$store.state.activeUser.userinfo.phoneNo}}
+					{{userphone}}
 				</v-list-tile-action-text>
 			</v-list-tile>
 		</v-list>
@@ -37,6 +37,14 @@
 				this.$router.push('/user')
 			}
 		},
+		computed:{
+			userimg(){
+				return this.$store.getters.getUserInfo.image
+			},
+			userphone(){
+				return this.$store.getters.getUserInfo.phoneNo
+			}
+		}
 	}
 </script>
 

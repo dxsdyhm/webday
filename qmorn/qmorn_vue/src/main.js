@@ -30,11 +30,9 @@ Vue.use(VueRouter)
 Vue.use(Vuetify,{
 	theme:{
 		primary:'#F48FB1',
-		// primary:'#FFA114',
 	}
 })
 Object.keys(filters).forEach(key => {  
-	console.log(key)
   Vue.filter(key, filters[key])  
 }) 
 const router = new VueRouter({

@@ -1,6 +1,8 @@
 <template>
 	<v-layout column fill-height justify-space-between>
-		<router-view class="content"></router-view>
+		<keep-alive>
+			<router-view class="content"></router-view>
+		</keep-alive>
 		<v-bottom-nav :active.sync="activeBtn" :value="showNav" absolute color="#fff">
 			<router-link to="/main/voice" replace>
 				<v-btn flat color="pink lighten-3">
@@ -32,10 +34,17 @@
 				showNav: true
 			}
 		},
+		mounted: function() {
+			this.activeBtn=this.$store.getters.getActive
+		},
+		watch:{
+            activeBtn(newvalue,old){
+				this.$store.commit('updateActive', newvalue)
+			}
+		},
 		methods: {
 
 		},
-
 	}
 </script>
 

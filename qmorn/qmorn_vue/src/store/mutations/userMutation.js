@@ -7,8 +7,8 @@ export const fetchUserMutation = {
     },
 	updateUserDevcie (state, action){
 		state.deviceList=action
-		if(action.length>0&&state.selectDevice===null){
-			setSelectDevice(state,action[0])
+		if(action.length>0&&state.selectDevice==null){
+			state.selectDevice=action[0]
 		}
 		state.lastUpdated = (new Date()).getTime()
 	},
@@ -20,5 +20,11 @@ export const fetchUserMutation = {
 	},
 	updateBabyInfo(state,action){
 		state.babyinfo=action
+	},
+	updateBookList(state,action){
+		state.booklist=action
+	},
+	updateActive(state,action){
+		state.active=action
 	}
 }

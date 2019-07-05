@@ -5,6 +5,8 @@ import main from '../page/main/Main.vue'
 import voice from '../page/main/Voice.vue'
 import device from '../page/main/Device.vue'
 import userinfo from '../page/main/UserInfo.vue'
+import devicesetting from '../page/main/DeviceSetting.vue'
+import moniter from '../page/main/Moniter.vue'
 
 import about from '../page/action/About.vue'
 import devicelist from '../page/action/DeviceList.vue'
@@ -64,6 +66,14 @@ export default [{
 		{
 			path: '/userdetail',
 			component: userdetail
+		},
+		{
+			path: '/devicesetting',
+			component: devicesetting
+		},
+		{
+			path: '/moniter',
+			component: moniter
 		}
 	]
 }]

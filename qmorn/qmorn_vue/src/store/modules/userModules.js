@@ -21,7 +21,9 @@ export const activeUser = {
 		versionName:'v1.0.0.13',
 		windSize:{x:0,y:0},
 		selectDevice:null,
-		babyinfo:[]
+		babyinfo:[],
+		booklist:[],
+		active:1,
     },
     actions: fetchUserAction,
     getters: userInfo,

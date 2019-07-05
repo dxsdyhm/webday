@@ -10,46 +10,12 @@
 			</v-avatar>
 		</v-flex>
 		<v-layout row wrap class="fun">
-			<v-flex xs4 class="item">
-				<v-icon class="circle">settings</v-icon>
-				<div> 设备设置 </div>
-			</v-flex>
-			<v-flex xs4 class="item">
-				<v-icon class="circle">videocam</v-icon>
-				<div> 远程陪护 </div>
-			</v-flex>
-			<v-flex xs4 class="item">
-				<v-icon class="circle">local_library</v-icon>
-				<div> 绘本书架 </div>
+			<v-flex xs4 class="item" v-for="item in fundata" :key="item.funid" @click="toFunction(item.path)">
+				<v-icon class="circle">{{item.icon}}</v-icon>
+				<div> {{item.funname}} </div>
 			</v-flex>
 		</v-layout>
 	</v-layout>
-	<!-- <v-img aspect-ratio="1.7" :style="note" contain>
-		<v-layout pa-2 column fill-height class="white--text" text-xs-center>
-			<v-flex xs12>
-				
-			</v-flex>
-			<v-flex xs12>
-				<v-avatar :size=144 tile>
-					<img src="../../assets/img/ic_dev_elf.png" />
-				</v-avatar>
-			</v-flex>
-			<v-layout row wrap class="fun">
-				<v-flex xs4 class="item">
-					<v-icon class="circle">settings</v-icon>
-					<div> 设备设置 </div>
-				</v-flex>
-				<v-flex xs4 class="item">
-					<v-icon class="circle">videocam</v-icon>
-					<div> 远程陪护 </div>
-				</v-flex>
-				<v-flex xs4 class="item">
-					<v-icon class="circle">local_library</v-icon>
-					<div> 绘本书架 </div>
-				</v-flex>
-			</v-layout>
-		</v-layout>
-	</v-img> -->
 </template>
 <script>
 	export default {
@@ -61,6 +27,26 @@
 					backgroundRepeat: "no-repeat",
 					backgroundPosition: 'center',
 				},
+				fundata:[
+					{
+						funid:1,
+						icon:'settings',
+						funname:'设备设置',
+						path:'/devicesetting'
+					},
+					{
+						funid:2,
+						icon:'videocam',
+						funname:'远程陪护',
+						path:'/moniter'
+					},
+					{
+						funid:3,
+						icon:'local_library',
+						funname:'绘本书架',
+						path:'/booklist'
+					}
+				]
 			}
 		},
 		methods: {
@@ -79,6 +65,9 @@
 			getDeviceOnline() {
 				console.log("执行一次")
 			},
+			toFunction(path){
+				this.$router.push(path)
+			}
 		},
 		mounted: function() {
 			//获取用户所有设备
@@ -95,10 +84,6 @@
 <style>
 	.fun {
 		margin-bottom: 4rem;
-	}
-
-	.bgcolor{
-		background-color: pink;
 	}
 	.item {}
 
