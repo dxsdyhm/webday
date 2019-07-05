@@ -1,5 +1,5 @@
 <template>
-	<v-toolbar dark color="primary" scroll-off-screen scroll-target="#scrolling-techniques">
+	<v-toolbar dark flat color="primary" scroll-off-screen scroll-target="#scrolling-techniques" :class="gape">
 		<v-btn icon @click="goBack">
 			<v-icon>arrow_back</v-icon>
 		</v-btn>
@@ -20,8 +20,15 @@
 				type: String,
 				default: '启萌星'
 			},
+			gape: {
+				type: String,
+				default: 'toolbar'
+			},
 		},
 	}
 </script>
 <style>
+	.toolbar{
+		margin-bottom: 0.8rem;
+	}
 </style>

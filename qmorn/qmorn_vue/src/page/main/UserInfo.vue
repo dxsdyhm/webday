@@ -1,7 +1,7 @@
 <template>
 	<div class="content">
-		<v-responsive :aspect-ratio="16/9" class="up">
-			<v-layout align-center justify-center column fill-height>
+		<v-responsive :aspect-ratio="16/9" class="up pink lighten-3">
+			<v-layout align-center justify-center column fill-height @click="jumpTo('/userdetail')">
 				<v-avatar :size=72>
 					<img :src="this.$store.state.activeUser.userinfo.image" />
 				</v-avatar>
@@ -14,7 +14,7 @@
 			<v-list>
 				<template v-for="(item,index) in items">
 					<v-list-tile class="list_action" avatar :key="item.title" @click="jumpTo(item.path)">
-						<v-icon class="action_icon" color="pink">{{item.icon}}</v-icon>
+						<v-icon class="action_icon " color="pink lighten-3">{{item.icon}}</v-icon>
 						<v-list-tile-content>
 							<v-list-tile-title>{{item.title}}</v-list-tile-title>
 						</v-list-tile-content>
@@ -50,7 +50,7 @@
 					{
 						icon: 'help',
 						title: '使用帮助',
-						path: '/webview'
+						path: '/help'
 					},
 					{
 						icon: 'info',
@@ -74,7 +74,6 @@
 <style>
 	.content {}
 	.up {
-		background-color: pink;
 	}
 	.dowm {
 		margin-top: 0.5rem;

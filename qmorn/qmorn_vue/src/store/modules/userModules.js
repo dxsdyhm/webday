@@ -2,6 +2,8 @@ import { fetchUserAction } from '../actions/userAction'
 import { userInfo } from '../getters/userGetter'
 import { fetchUserMutation } from '../mutations/userMutation.js'
 
+//{"msg":"成功","code":"0","data":{"total":1,"deviceList":[{"id":10043,"name":"小精灵慧读机器人","pkey":"a1gsxwfY5uS","dname":"DQME10FFFIFIm7dCYrOidW2SZCeaZG","secret":"8Xqi4xUzDA1xtOWy6jRwxIGlmIRMYMlP","role":1,"perm":0,"remark":"小精灵"}]}}
+//https://static.qmorn.com/help/app/?lan=%s&version=%s
 export const activeUser = {
     state: {
 		headers:{
@@ -16,6 +18,10 @@ export const activeUser = {
         userinfo: {},
 		deviceList:[],
 		lastUpdated:'',
+		versionName:'v1.0.0.13',
+		windSize:{x:0,y:0},
+		selectDevice:null,
+		babyinfo:[]
     },
     actions: fetchUserAction,
     getters: userInfo,

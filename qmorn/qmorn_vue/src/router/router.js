@@ -10,45 +10,60 @@ import about from '../page/action/About.vue'
 import devicelist from '../page/action/DeviceList.vue'
 import webview from '../page/action/WebView.vue'
 import babyinfo from '../page/action/BabyInfo.vue'
+import help from '../page/action/Help.vue'
 
+import booklist from '../page/book/BookList.vue'
+import userdetail from '../page/user/UserInfoDetail.vue'
 export default [{
-    path: '/',
-    component: App,
-    children: [{
-        path: '',
-        redirect: '/user'
-    }, {
-        path: '/user',
-        component: login
-    }, {
-        path: '/main',
-        component: main,
-		redirect: '/main/device',
-		children:[{
-			path:'/main/voice',
-			component:voice
-		},{
-			path:'/main/device',
-			component:device
-		},{
-			path:'/main/userinfo',
-			component:userinfo
-		}]
-    },
-	{
-		 path: '/about',
-		component: about
-	},
-	{
-		 path: '/devicelist',
-		component: devicelist
-	},{
-		 path: '/webview',
-		component: webview
-	},
-	{
-		path:'/babyinfo',
-		component:babyinfo
-	}
+	path: '/',
+	component: App,
+	children: [{
+			path: '',
+			redirect: '/user'
+		}, {
+			path: '/user',
+			component: login
+		}, {
+			path: '/main',
+			component: main,
+			redirect: '/main/device',
+			children: [{
+				path: '/main/voice',
+				component: voice
+			}, {
+				path: '/main/device',
+				component: device
+			}, {
+				path: '/main/userinfo',
+				component: userinfo
+			}]
+		},
+		{
+			path: '/about',
+			component: about
+		},
+		{
+			path: '/devicelist',
+			component: devicelist
+		}, {
+			path: '/webview',
+			component: webview
+		},
+		{
+			path: '/babyinfo',
+			component: babyinfo
+		},
+		{
+			path: '/help',
+			component: help
+		},
+		{
+			path: '/booklist',
+			component: booklist
+		},
+		{
+			path: '/userdetail',
+			component: userdetail
+		}
 	]
 }]

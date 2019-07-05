@@ -12,6 +12,12 @@ const user = {
     },
     getdeviceinfo(params){
 		return instance.post('/app/relation/device/list',params)
+	},
+	getUserBabyInfo(){
+		return instance.post('/app/user/baby/list')
+	},
+	commitBabyInfo(params){
+		return instance.post('/app/user/baby/addormodify',params)
 	}
 }
 

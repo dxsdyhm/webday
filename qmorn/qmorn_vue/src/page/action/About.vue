@@ -5,7 +5,7 @@
 			<v-avatar :size=144 tile>
 				<img src="../../assets/img/logo.svg" />
 			</v-avatar>
-			<div class="version">v1.0.0.13</div>
+			<div class="version">{{this.$store.state.activeUser.versionName}}</div>
 		</div>
 		<div class="copyright">深圳启萌星科技有限公司提供技术支持</div>
 	</v-layout>
