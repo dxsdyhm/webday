@@ -63,7 +63,7 @@
 				})
 			},
 			getDeviceOnline() {
-				console.log("执行一次")
+				console.log("请求在线状态")
 			},
 			toFunction(path){
 				this.$router.push(path)

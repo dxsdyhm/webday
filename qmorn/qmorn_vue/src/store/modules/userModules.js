@@ -24,6 +24,7 @@ export const activeUser = {
 		babyinfo:[],
 		booklist:[],
 		active:1,
+		selectDeviceOnline:{},
     },
     actions: fetchUserAction,
     getters: userInfo,
