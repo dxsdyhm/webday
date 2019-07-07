@@ -12,19 +12,26 @@ export const fetchUserMutation = {
 		}
 		state.lastUpdated = (new Date()).getTime()
 	},
-	setWindowSize(state,action){
+	setWindowSize (state,action){
 		state.windSize=action
 	},
-	setSelectDevice(state,action){
+	setSelectDevice (state,action){
 		state.selectDevice=action
 	},
-	updateBabyInfo(state,action){
+	updateBabyInfo (state,action){
 		state.babyinfo=action
 	},
-	updateBookList(state,action){
+	updateBookList (state,action){
 		state.booklist=action
 	},
-	updateActive(state,action){
+	updateActive (state,action){
 		state.active=action
+	},
+	updateSelectOnline (state,action){
+		action.forEach(function(device){
+			if(device.id==state.selectDevice.id){
+				state.selectDeviceOnline=device
+			}
+		})
 	}
 }

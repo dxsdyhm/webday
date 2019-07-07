@@ -21,6 +21,12 @@ const user = {
 	},
 	getBookList(params){
 		return instance.post('/app/device/bookself/list',params)
+	},
+	getdevicebatter(params){
+		return instance.post('/app/device/stateinfo',params)
+	},
+	getAlionline(params){
+		return instance.post('/app/device/onlinestate',params)
 	}
 }
 

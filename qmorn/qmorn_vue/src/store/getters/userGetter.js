@@ -19,5 +19,8 @@ export const userInfo = {
 	},
 	getActive (state) {
 		return state.active;
+	},
+	getSelectOnline (state){
+		return state.selectDeviceOnline;
 	}
 }

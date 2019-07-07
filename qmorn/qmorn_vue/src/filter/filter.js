@@ -13,7 +13,17 @@ const fensfilter=function(value){
 	}
 	return fens[value-1];
 }
+const batteryfilter=function(value){
+    let fens=['#F44336','#F9A825','#4CAF50']
+	if(value<=40){
+		return fens[0]
+	}else if(value<=80){
+		return fens[1]
+	}
+	return fens[2]
+}
 export default {
     sexfilter,
-	fensfilter
+	fensfilter,
+	batteryfilter
 }
