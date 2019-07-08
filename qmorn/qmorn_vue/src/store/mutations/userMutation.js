@@ -33,5 +33,17 @@ export const fetchUserMutation = {
 				state.selectDeviceOnline=device
 			}
 		})
+	},
+	updataeAliyunState(state,action){
+		state.aliiotstate=action
+	},
+	setAliIotDevice(state,action){
+		state.aliDevice=action
+	},
+	updateDeviceSetting (state,action){
+		state.deviceSetting=action;
+	},
+	updateDeviceOsInfo (state,action){
+		state.deviceOsInfo=action;
 	}
 }

@@ -8,7 +8,7 @@ module.exports = {
 				secure: false,
 			},
 			'/online': {
-				target: 'http://online-state.api1.q-links.net:10081',
+				target: 'https://online-state.api1.q-links.net:10081',
 				changeOrigin: true,
 				secure: false,
 				pathRewrite: {'^/online': ''}

@@ -122,29 +122,23 @@
 			inet() {
 				this.getDeviceOnline()
 				clearInterval(this.interval)
-				this.interval = setInterval(this.getDeviceOnline, 10000);
+				this.interval = setInterval(this.getDeviceOnline, 60000);
 			},
 			getAliOnline() {
-				axios({
-						method: 'post',
-						url: '/online/app/device/onlinestate',
-						baseURL: 'https://online-state.api1.q-links.net:10081',
-						headers: this.$store.state.activeUser.headers,
-						data: {
-							groupList: [{
-								productKey: this.$store.getters.getSelectDevice.pkey,
-								deviceList: [{
-									id: this.$store.getters.getSelectDevice.id,
-									name: this.$store.getters.getSelectDevice.dname
-								}]
-							}]
-						}
-					}).then(function(response) {
-						console.log(response);
-					})
-					.catch(function(error) {
-						console.log(error);
-					});
+				this.$api.user.getAlionline({
+					groupList: [{
+						productKey: this.$store.getters.getSelectDevice.pkey,
+						deviceList: [{
+							id: this.$store.getters.getSelectDevice.id,
+							name: this.$store.getters.getSelectDevice.dname
+						}]
+					}]
+				}).then(res => {
+					console.log(response);
+				}).catch(res => {
+					//登陆失败
+					this.$message(res.msg)
+				})
 			}
 		},
 		mounted: function() {

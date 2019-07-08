@@ -27,6 +27,7 @@
 </template>
 
 <script>
+	import {iotinit} from '../../aliiot/iot.js'
 	export default {
 		data() {
 			return {
@@ -45,6 +46,9 @@
 		methods: {
 
 		},
+		created() {
+			iotinit();
+		}
 	}
 </script>
 

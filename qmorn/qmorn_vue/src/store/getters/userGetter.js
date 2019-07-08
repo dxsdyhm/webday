@@ -22,5 +22,11 @@ export const userInfo = {
 	},
 	getSelectOnline (state){
 		return state.selectDeviceOnline;
+	},
+	getAliyunState (state){
+		return state.aliiotstate;
+	},
+	getAliIotDevice (state){
+		return state.aliDevice;
 	}
 }

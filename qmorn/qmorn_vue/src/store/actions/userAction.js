@@ -4,5 +4,8 @@ import axios from 'axios'
 export const fetchUserAction = {
     fetchUserInfo ({ commit, state }, param) {
         commit(FETCH_USER_INFO,param)  
-    }
+    },
+	getSelectDeviceInfo (){
+		
+	}
 }

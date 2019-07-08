@@ -5,6 +5,7 @@
 import axios from 'axios';
 import router from '../router/router';
 import store from '../store/index';
+import base from './api/base';
 import {
 	Message
 } from 'element-ui';
@@ -26,7 +27,7 @@ const tip = (msg, option = 'info') => {
  */
 const toLogin = () => {
 	router.replace({
-		path: '/login',
+		path: '/',
 		query: {
 			redirect: router.currentRoute.fullPath
 		}
@@ -49,12 +50,22 @@ const errorHandle = (status, code, other) => {
 		case 404:
 			tip('请求的资源不存在');
 			break;
-		case 200:
-			//请求正常，但后台错误码异常，在这里特殊处理
-			tip(other,'error')
+		default:
+			console.log('axios request error ,but default status ******'+status)
+	}
+}
+
+/**
+ * 请求成功，但服务器返回内部错误码
+ * @param {Object} data 服务器返回的数据   
+ */
+const serverErrorHandler = (data) => {
+	switch (data.code) {
+		case '10901008':
+			toLogin()
 			break;
 		default:
-			tip(other,'error')
+			break;
 	}
 }
 
@@ -63,8 +74,8 @@ var instance = axios.create({
 	timeout: 1000 * 12
 });
 // 设置公共请求头
-Object.keys(store.state.activeUser.headers).forEach(function(key){
-	instance.defaults.headers[key]=store.state.activeUser.headers[key]
+Object.keys(store.state.activeUser.headers).forEach(function(key) {
+	instance.defaults.headers[key] = store.state.activeUser.headers[key]
 })
 /**
  * 请求拦截器
@@ -78,11 +89,25 @@ instance.interceptors.request.use(
 		// 而后我们可以在响应拦截器中，根据状态码进行一些统一的操作。
 		// const token = store.state.token;
 		// token && (config.headers.Authorization = token);
-		config.headers['sid']=store.state.activeUser.headers['sid']
-		config.headers['uid']=store.state.activeUser.headers['uid']
+		if(config.url==='/app/device/onlinestate'){
+			//在线状态使用特殊域名
+			config.url="/online"+config.url
+		}
+		console.log(config.baseURL)
+		if(config.url==='/app/user/login'){
+			//登陆接口不检查session id
+			return config;
+		}
+		let sid=store.state.activeUser.headers['sid']
+		if(sid === '0'){
+			toLogin()
+			throw new Error('login')
+		}
+		config.headers['sid'] = store.state.activeUser.headers['sid']
+		config.headers['uid'] = store.state.activeUser.headers['uid']
 		return config;
 	},
-	error => Promise.error(error))
+	error => Promise.reject(error))
 
 // 响应拦截器
 //1.http错误在拦截器中处理
@@ -95,17 +120,17 @@ instance.interceptors.response.use(
 			if (res.data.code === '0') {
 				return Promise.resolve(res.data)
 			} else {
+				serverErrorHandler(res.data)
 				return Promise.reject(res.data)
 			}
 		}
 	},
 	// 请求失败
 	error => {
-		const { response } = error;
-		console.log("=========")
+		const {response} = error;
+		console.log(response)
 		if (response) {
 			// 请求已发出，但是不在2xx的范围
-			console.log( response.data)
 			errorHandle(response.status, response.data.code, response.data.msg);
 			return Promise.reject(response);
 		} else {
