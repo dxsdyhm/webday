@@ -34,10 +34,10 @@ export const fetchUserMutation = {
 			}
 		})
 	},
-	updataeAliyunState(state,action){
+	updataeAliyunState (state,action){
 		state.aliiotstate=action
 	},
-	setAliIotDevice(state,action){
+	setAliIotDevice (state,action){
 		state.aliDevice=action
 	},
 	updateDeviceSetting (state,action){
@@ -45,5 +45,10 @@ export const fetchUserMutation = {
 	},
 	updateDeviceOsInfo (state,action){
 		state.deviceOsInfo=action;
+	},
+	updateSettingsParems (state,action){
+		Object.keys(action).forEach(function(key){
+			state.deviceSetting[key]=action[key];
+		});
 	}
 }

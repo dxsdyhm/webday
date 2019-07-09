@@ -6,6 +6,9 @@ import { fetchUserMutation } from '../mutations/userMutation.js'
 //https://static.qmorn.com/help/app/?lan=%s&version=%s
 export const activeUser = {
     state: {
+		theme:{
+			showDevider:false,
+		},
 		headers:{
 			'Content-Type':'application/json; charset=UTF-8',
 			apiV:'1',
@@ -25,6 +28,39 @@ export const activeUser = {
 		booklist:[],
 		active:1,
 		selectDeviceOnline:{},
+		aliDevice:{},
+		aliiotstate:false,
+		deviceSetting:{
+			cmd:1,
+            option:0,
+            msgid:0,
+            error:0,
+			nikname:'',
+			nightmode:'',
+			volume:0,
+			maxvolume:0,
+			childlockswitch:false,
+			lightswitch:0,
+			lightmode:0,
+			wifissid:'',
+			smartpicbookswitch:false,
+			nightmodeswitch:false,
+			touchwake:false
+		},
+		deviceOsInfo:{
+			cmd:17,
+			option:0,
+			msgid:3,
+			error:0,
+		    deviceid:'',
+            battery:100,
+            sdcapacity:0,
+            sdcapacityspace:0,
+            versioncode:0,
+            versionname:'',
+            lunvercode:0,
+            lunvername:''
+		},
     },
     actions: fetchUserAction,
     getters: userInfo,

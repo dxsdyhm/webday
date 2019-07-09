@@ -21,6 +21,7 @@
 </template>
 
 <script>
+	import { mapGetters} from 'vuex'
 	export default {
 		inject: ['reload'],
 		data() {
@@ -47,9 +48,9 @@
 			}
 		},
 		computed: {
-			bookLists() {
-				return this.$store.getters.getBookLists
-			}
+			...mapGetters({
+				bookLists:'getBookLists'
+			})
 		}
 	}
 </script>

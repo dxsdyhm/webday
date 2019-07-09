@@ -1,4 +1,5 @@
 import store from '../store/index';
+import Vue from 'vue';
 import {
 	CMD
 } from './cmd.js';
@@ -6,6 +7,7 @@ const iot = require('alibabacloud-iot-device-sdk');
 const SrvNotify = 'SrvNotifyMesgRecv';
 const Forward = 'ForwardMesgRecv';
 const Group = 'GroupMesgRecv';
+var device
 // 订阅
 // 接收服务器通知类消息
 // /a1d3EgnxD1M/${deviceName}/user/SrvNotifyMesgRecv
@@ -26,7 +28,7 @@ const Group = 'GroupMesgRecv';
 export function iotinit() {
 	//本机设备信息
 	let deviceinfo = store.getters.getUserInfo
-	let device = iot.device({
+	device = iot.device({
 		productKey: deviceinfo.productKey, //将<productKey>修改为实际产品的ProductKey
 		deviceName: deviceinfo.deviceName, //将<deviceName>修改为实际设备的DeviceName
 		deviceSecret: deviceinfo.deviceSecret, //将<deviceSecret>修改为实际设备的DeviceSecret
@@ -62,15 +64,14 @@ export function iotinit() {
 						break;
 					case Forward: //普通消息
 						let msgBody = JSON.parse(remote.MesgBody)
-						console.log(msgBody)
-						console.log(msgBody.cmd)
-						console.log('---------')
-						console.log(CMD.OPTION_SET)
+						console.log("--------------")
 						switch (msgBody.cmd) {
 							case CMD.OPTION_SET:
-								console.log(msgBody)
 								store.commit('updateDeviceSetting', msgBody)
 								break;
+							case CMD.JSON_CODE_INFOOS:
+								store.commit('updateDeviceOsInfo', msgBody)
+								break
 							default:
 								break;
 						}
@@ -108,15 +109,16 @@ export function sendSettingMesg(msg) {
 		"BodyFmt": 1,
 		"MesgBody": msgStr
 	};
-	console.log(target.pkey)
-	console.log(target.dname)
 	device.publish(`/${deviceinfo.productKey}/${deviceinfo.deviceName}/user/ForwardMesgSend`, JSON.stringify(msgParen));
 }
 export function sendGroupMesg(msg) {
 	//目标设备信息
 	let device = store.getters.getAliIotDevice
 	let target = store.getters.getSelectDevice
-	device.publish(`/${target.pkey}/${target.dname}/user/GroupMesgRecv`, msg);
+	// store.commit('sendMsgByAliDevice',{
+	// 	topic:`/${target.pkey}/${target.dname}/user/GroupMesgRecv`, 
+	// 	msg:msg
+	// })
 }
 
 export function disconnect() {

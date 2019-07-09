@@ -7,6 +7,7 @@ import device from '../page/main/Device.vue'
 import userinfo from '../page/main/UserInfo.vue'
 import devicesetting from '../page/main/DeviceSetting.vue'
 import moniter from '../page/main/Moniter.vue'
+import osinfo from '../page/main/DeviceOsInfo.vue'
 
 import about from '../page/action/About.vue'
 import devicelist from '../page/action/DeviceList.vue'
@@ -74,6 +75,10 @@ var s=[{
 		{
 			path: '/moniter',
 			component: moniter
+		},
+		{
+			path: '/deviceosinfo',
+			component: osinfo
 		}
 	]
 }]

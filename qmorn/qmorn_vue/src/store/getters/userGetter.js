@@ -28,5 +28,15 @@ export const userInfo = {
 	},
 	getAliIotDevice (state){
 		return state.aliDevice;
+	},
+	getDeviceSettings (state){
+		console.log('this code is running')
+		return state.deviceSetting;
+	},
+	getDeviceOSInfo (state){
+		return state.deviceOsInfo;
+	},
+	getTheme (state){
+		return state.theme;
 	}
 }
