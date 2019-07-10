@@ -7,11 +7,11 @@ const sexfilter=function(value){
 	return value===1?sex[0]:sex[1];
 }
 const fensfilter=function(value){
-    let fens=['妈妈','爸爸','奶奶','爷爷','其他']
+    let fens=['其他','妈妈','爸爸','奶奶','爷爷']
 	if(value>=fens.length){
-		return fens[fens.length-1]
+		return fens[0]
 	}
-	return fens[value-1];
+	return fens[value];
 }
 const batteryfilter=function(value){
     let fens=['#F44336','#F9A825','#4CAF50']

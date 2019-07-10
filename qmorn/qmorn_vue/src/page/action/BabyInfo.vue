@@ -29,12 +29,12 @@
 		<v-bottom-sheet v-model="fen">
 			<v-list>
 				<v-subheader>{{fun4}}</v-subheader>
-				<v-list-tile v-for="x in 5" :key="x" @click="changeFen(x)">
+				<v-list-tile v-for="x in 5" :key="x" @click="changeFen(x-1)">
 					<v-list-tile-avatar :ripple="{ class: 'primary--text' }">
-						<v-icon v-if="value4==x" color="primary">radio_button_checked</v-icon>
+						<v-icon v-if="value4==(x-1)" color="primary">radio_button_checked</v-icon>
 						<v-icon v-else color="gray">radio_button_unchecked</v-icon>
 					</v-list-tile-avatar>
-					<v-list-tile-title>{{ x | fensfilter}}</v-list-tile-title>
+					<v-list-tile-title>{{ (x-1) | fensfilter}}</v-list-tile-title>
 				</v-list-tile>
 			</v-list>
 		</v-bottom-sheet>
@@ -118,6 +118,7 @@
 				this.value4 = temp[this.paremskey[4]];
 			},
 			changeFen(x) {
+				console.log(x)
 				this.value4 = x;
 				this.fen = false;
 			},

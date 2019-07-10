@@ -1,9 +1,9 @@
 <template>
-	<v-layout column>
+	<v-layout v-if="selectdevice!=null" column>
 		<qmorntoolbar :title="title"></qmorntoolbar>
 		<v-list two-line>
-			<template v-for="(item,index) in funs">
-				<v-list-tile class="list" :key="item.title" @click="changeInfo(item.id)">
+			<template v-for="(item,index) in funs" >
+				<v-list-tile v-if="item.id!==6 || selectdevice.role!==2" class="list" :key="item.title" @click="changeInfo(item.id)">
 					<v-list-tile-content>
 						<v-list-tile-title>{{ item.title }}</v-list-tile-title>
 						<v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
@@ -20,7 +20,7 @@
 				<!-- <v-divider v-if="index + 1 < funs.length" :key="index"></v-divider> -->
 			</template>
 		</v-list>
-		<v-btn ripple color="primary" @click="getSettings">
+		<v-btn v-if="selectdevice.role===1" ripple color="primary" @click="unbindShow=true">
 			解除绑定
 		</v-btn>
 		<!-- 昵称输入 -->
@@ -46,6 +46,18 @@
 				</v-card-title>
 			</v-card>
 		</v-dialog>
+		<!-- 解除绑定 -->
+		<v-dialog v-model="unbindShow">
+			<v-card>
+				<v-card-title class="headline">解除绑定</v-card-title>
+				<v-card-text>解除绑定后，你将不能再远程操作设备的功能</v-card-text>
+				<v-card-actions>
+					<v-spacer></v-spacer>
+					<v-btn color="green darken-1" flat @click="unbindShow = false">取消</v-btn>
+					<v-btn color="green darken-1" flat @click="unbind()">确定</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 	</v-layout>
 </template>
 
@@ -65,6 +77,7 @@
 				title: '设备设置',
 				nicknameShow: false,
 				volumeShow: false,
+				unbindShow:false,
 				value1: '',
 				funs: [{
 						id: 0,
@@ -130,7 +143,11 @@
 					error:0,
 					nickname:this.settingTemp.nikname
 				}
-				sendSettingMesg(this.$iotdevice, nic)
+				if(!!this.settingTemp.nikname){
+					sendSettingMesg(this.$iotdevice, nic)
+				}else{
+					console.log("非法值")
+				}
 			},
 			setVolume(){
 				let nic={
@@ -141,7 +158,11 @@
 					VolumeMax:this.settingTemp.maxvolume,
 					CurrentVolume:Math.round(this.settingTemp.volume*100/this.settingTemp.maxvolume)
 				}
-				sendSettingMesg(this.$iotdevice, nic)
+				if(!!this.settingTemp.maxvolume){
+					sendSettingMesg(this.$iotdevice, nic)
+				}else{
+					console.log("非法值")
+				}
 			},
 			setChildLock(){
 				let nic={
@@ -200,6 +221,17 @@
 						break;
 				}
 			},
+			unbind(){
+				this.unbindShow=false;
+				this.$api.user.unbindDevice({
+					deviceId: this.selectdevice.id
+				}).then(res => {
+					this.$router.go(-1)
+					this.$store.commit('deleteSelectDevice', this.selectdevice.id)
+				}).catch(res => {
+					this.$message(res.msg)
+				})
+			}
 		},
 		created() {
 			this.getSettings()
@@ -218,7 +250,8 @@
 		},
 		computed: {
 			...mapGetters({
-				settingTemp: 'getDeviceSettings'
+				settingTemp: 'getDeviceSettings',
+				selectdevice: 'getSelectDevice',
 			}),
 			childlockswitch: {
 				get() {

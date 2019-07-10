@@ -36,6 +36,9 @@ const user = {
 	},
 	deleteDeviceMember(params){
 		return instance.post('/app/relation/guest/delete',params)
+	},
+	unbindDevice(params){
+		return instance.post('/app/relation/master/unbind',params)
 	}
 }
 

@@ -1,6 +1,5 @@
 <template>
 	<v-layout pa-2 column fill-height class="white--text pink lighten-3" text-xs-center>
-		<!-- <div>{{this.$store.state.activeUser.deviceList[0]}}</div> -->
 		<v-container grid-list-md>
 			<v-layout row wrap>
 				<v-flex v-for="item in onlinestate" :key="item.id" xs4>
@@ -31,6 +30,9 @@
 </template>
 <script>
 	import axios from 'axios';
+	import {
+		mapGetters
+	} from 'vuex';
 	export default {
 		data() {
 			return {
@@ -85,7 +87,11 @@
 					pageSize: 100,
 				}).then(res => {
 					this.$store.commit('updateUserDevcie', res.data.deviceList)
-					this.inet();
+					if(this.$store.getters.getSelectDevice==null){
+						this.$router.push("/main/empty")
+					}else{
+						this.inet();
+					}
 				}).catch(res => {
 					//登陆失败
 					this.$message(res.msg)
@@ -147,6 +153,11 @@
 		},
 		beforeDestroy: function() {
 			clearInterval(this.interval)
+		},
+		computed: {
+			...mapGetters({
+				selectdevice: 'getSelectDevice',
+			}),
 		}
 	}
 </script>
@@ -173,5 +184,9 @@
 		width: 100%;
 		overflow: hidden;
 		text-overflow: ellipsis;
+	}
+
+	.ss {
+		height: 85vh;
 	}
 </style>

@@ -10,7 +10,7 @@
 					<v-icon>library_music</v-icon>
 				</v-btn>
 			</router-link>
-			<router-link to="/main/device" replace>
+			<router-link :to="selectdevice==null?'/main/empty':'/main/device'" replace>
 				<v-btn flat color="pink lighten-3">
 					<span>设备</span>
 					<v-icon>widgets</v-icon>
@@ -27,6 +27,9 @@
 </template>
 
 <script>
+	import {
+		mapGetters
+	} from 'vuex';
 	export default {
 		data() {
 			return {
@@ -45,12 +48,11 @@
 		methods: {
 
 		},
-		// created() {
-		// 	console.log("--------")
-		// 	if(!this.$store.state.activeUser.aliiotstate){
-		// 		iotinit();
-		// 	}
-		// },
+		computed:{
+			...mapGetters({
+				selectdevice: 'getSelectDevice',
+			}),
+		}
 	}
 </script>
 

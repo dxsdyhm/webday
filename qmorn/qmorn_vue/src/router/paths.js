@@ -10,6 +10,7 @@ import moniter from '../page/main/Moniter.vue'
 import osinfo from '../page/main/DeviceOsInfo.vue'
 import light from '../page/main/Light.vue'
 import membermanager from '../page/main/MemberManager.vue'
+import empty from '../page/main/Empty.vue'
 
 import about from '../page/action/About.vue'
 import devicelist from '../page/action/DeviceList.vue'
@@ -41,6 +42,9 @@ var s=[{
 			}, {
 				path: '/main/userinfo',
 				component: userinfo
+			},{
+				path:'/main/empty',
+				component:empty
 			}]
 		},
 		{

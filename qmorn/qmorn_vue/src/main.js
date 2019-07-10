@@ -17,7 +17,7 @@ import WebView from './components/WebView.vue'
 import App from './App.vue'
 
 import filters from './filter/filter.js';
-import {iotinit} from './aliiot/iot.js';
+import {iotinit,disconnect} from './aliiot/iot.js';
 
 Vue.config.productionTip = false
 Vue.prototype.$api = api;
@@ -40,6 +40,10 @@ router.beforeResolve((to, from, next)=>{
 	if(from.path==='/user' && to.path==='/main/device'){
 		//登陆成功，执行iot初始化
 		Vue.prototype.$iotdevice = iotinit();
+	}
+	if(to.path==='/user'){
+		//退出
+		disconnect();
 	}
 	next()
 })
