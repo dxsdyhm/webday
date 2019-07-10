@@ -37,9 +37,6 @@ export const fetchUserMutation = {
 	updataeAliyunState (state,action){
 		state.aliiotstate=action
 	},
-	setAliIotDevice (state,action){
-		state.aliDevice=action
-	},
 	updateDeviceSetting (state,action){
 		state.deviceSetting=action;
 	},
@@ -50,5 +47,8 @@ export const fetchUserMutation = {
 		Object.keys(action).forEach(function(key){
 			state.deviceSetting[key]=action[key];
 		});
+	},
+	updateGuestList (state,action){
+		state.guestList=action;
 	}
 }

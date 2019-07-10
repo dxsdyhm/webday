@@ -27,7 +27,6 @@
 </template>
 
 <script>
-	import {iotinit} from '../../aliiot/iot.js';
 	export default {
 		data() {
 			return {
@@ -46,12 +45,12 @@
 		methods: {
 
 		},
-		created() {
-			console.log("--------")
-			if(!this.$store.state.activeUser.aliiotstate){
-				iotinit();
-			}
-		},
+		// created() {
+		// 	console.log("--------")
+		// 	if(!this.$store.state.activeUser.aliiotstate){
+		// 		iotinit();
+		// 	}
+		// },
 	}
 </script>
 

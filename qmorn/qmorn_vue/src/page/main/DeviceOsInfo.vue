@@ -3,7 +3,7 @@
 		<qmorntoolbar :title="title"></qmorntoolbar>
 		<v-responsive :aspect-ratio="3/1" class="up">
 			<v-layout align-center justify-center row fill-height>
-				<v-avatar  :size=96>
+				<v-avatar :size=96>
 					<img src="../../assets/img/ic_dev_elf.png" />
 				</v-avatar>
 			</v-layout>
@@ -38,18 +38,31 @@
 				title: '设备信息'
 			}
 		},
-		methods:{
-			jumpTo(id){
-				if(id==3){
+		methods: {
+			jumpTo(id) {
+				if (id == 3) {
 					//检查固件更新
 				}
 			},
-			getosInfo(){
-				let os=this.$store.getters.getDeviceOSInfo
-				sendSettingMesg(os)
+			getosInfo() {
+				let os = this.$store.getters.getDeviceOSInfo
+				sendSettingMesg(this.$iotdevice, os)
 			},
-			checkDeviceUpdate(){
-				
+			checkDeviceUpdate() {
+
+			},
+			capacity(value) {
+				if (null == value || value == '') {
+					return "0 Bytes";
+				}
+				let unitArr = new Array("Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB");
+				let index = 0,
+					srcsize = parseFloat(value);
+				index = Math.floor(Math.log(srcsize) / Math.log(1024));
+				let size = srcsize / Math.pow(1024, index);
+				//  保留的小数位数
+				size = size.toFixed(2);
+				return size + unitArr[index];
 			}
 		},
 		mounted() {
@@ -60,7 +73,7 @@
 				theme: 'getTheme'
 			}),
 			deviceosinfo() {
-				let deviceinfo = this.$store.getters.getDeviceSettings
+				let deviceinfo = this.$store.getters.getSelectDevice
 				let osinfo = this.$store.getters.getDeviceOSInfo
 				return [{
 					id: 0,
@@ -85,12 +98,12 @@
 				}, {
 					id: 4,
 					title: '存储空间',
-					dis: osinfo.sdcapacity,
+					dis: '剩余'+this.capacity(osinfo.sdcapacity),
 					co: true
 				}, {
 					id: 5,
 					title: '设备电量',
-					dis: osinfo.battery+'%',
+					dis: osinfo.battery + '%',
 					co: false
 				}];
 			}
@@ -99,7 +112,7 @@
 </script>
 
 <style>
-	.up{
+	.up {
 		margin-bottom: 0.5rem;
 	}
 </style>

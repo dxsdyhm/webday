@@ -1,5 +1,4 @@
 import store from '../store/index';
-import Vue from 'vue';
 import {
 	CMD
 } from './cmd.js';
@@ -7,7 +6,6 @@ const iot = require('alibabacloud-iot-device-sdk');
 const SrvNotify = 'SrvNotifyMesgRecv';
 const Forward = 'ForwardMesgRecv';
 const Group = 'GroupMesgRecv';
-var device
 // 订阅
 // 接收服务器通知类消息
 // /a1d3EgnxD1M/${deviceName}/user/SrvNotifyMesgRecv
@@ -28,12 +26,12 @@ var device
 export function iotinit() {
 	//本机设备信息
 	let deviceinfo = store.getters.getUserInfo
-	device = iot.device({
+	let device = iot.device({
 		productKey: deviceinfo.productKey, //将<productKey>修改为实际产品的ProductKey
 		deviceName: deviceinfo.deviceName, //将<deviceName>修改为实际设备的DeviceName
 		deviceSecret: deviceinfo.deviceSecret, //将<deviceSecret>修改为实际设备的DeviceSecret
 	});
-	store.commit('setAliIotDevice', device)
+	// store.commit('setAliIotDevice', device)
 	//监听connect事件
 	device.on('connect', () => {
 		//连接后立马订阅相关topic
@@ -89,13 +87,13 @@ export function iotinit() {
 			console.log("payload is null:" + topic)
 		}
 	});
+	return device;
 }
 
-export function sendSettingMesg(msg) {
+export function sendSettingMesg(device,msg) {
 	//目标设备信息
 	let target = store.getters.getSelectDevice
 	let deviceinfo = store.getters.getUserInfo
-	let device = store.getters.getAliIotDevice
 	let msgStr = JSON.stringify(msg)
 	let msgParen = {
 		"SrcProName": deviceinfo.productKey,
@@ -103,27 +101,23 @@ export function sendSettingMesg(msg) {
 		"DstProName": target.pkey,
 		"DstDevName": target.dname,
 		"dwMesgType": 1,
-		"dwMesgID": msg.msgid,
+		"dwMesgID": device.mqttClient.nextId,
 		"tLocMesgTimeMs": new Date().getTime(),
 		"dwMesgSize": msgStr.length,
 		"BodyFmt": 1,
 		"MesgBody": msgStr
 	};
+	console.log(msgStr)
 	device.publish(`/${deviceinfo.productKey}/${deviceinfo.deviceName}/user/ForwardMesgSend`, JSON.stringify(msgParen));
 }
-export function sendGroupMesg(msg) {
+export function sendGroupMesg(device,msg) {
 	//目标设备信息
-	let device = store.getters.getAliIotDevice
 	let target = store.getters.getSelectDevice
-	// store.commit('sendMsgByAliDevice',{
-	// 	topic:`/${target.pkey}/${target.dname}/user/GroupMesgRecv`, 
-	// 	msg:msg
-	// })
+	device.publish(`/${deviceinfo.productKey}/${deviceinfo.deviceName}/user/GroupMesgSend`, JSON.stringify(msg));
 }
 
-export function disconnect() {
+export function disconnect(device) {
 	//目标设备信息
-	let device = store.getters.getAliIotDevice
 	if (device) {
 		device.end();
 	}

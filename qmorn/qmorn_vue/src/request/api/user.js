@@ -27,6 +27,15 @@ const user = {
 	},
 	getAlionline(params){
 		return instance.post('/app/device/onlinestate',params)
+	},
+	getMember(params){
+		return instance.post('/app/relation/guest/list',params)
+	},
+	addDeviceMember(params){
+		return instance.post('/app/relation/guest/add',params)
+	},
+	deleteDeviceMember(params){
+		return instance.post('/app/relation/guest/delete',params)
 	}
 }
 

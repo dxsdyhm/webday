@@ -8,6 +8,8 @@ import userinfo from '../page/main/UserInfo.vue'
 import devicesetting from '../page/main/DeviceSetting.vue'
 import moniter from '../page/main/Moniter.vue'
 import osinfo from '../page/main/DeviceOsInfo.vue'
+import light from '../page/main/Light.vue'
+import membermanager from '../page/main/MemberManager.vue'
 
 import about from '../page/action/About.vue'
 import devicelist from '../page/action/DeviceList.vue'
@@ -79,6 +81,14 @@ var s=[{
 		{
 			path: '/deviceosinfo',
 			component: osinfo
+		},
+		{
+			path: '/light',
+			component: light
+		},
+		{
+			path: '/membermanager',
+			component: membermanager
 		}
 	]
 }]

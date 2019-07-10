@@ -26,11 +26,7 @@ export const userInfo = {
 	getAliyunState (state){
 		return state.aliiotstate;
 	},
-	getAliIotDevice (state){
-		return state.aliDevice;
-	},
 	getDeviceSettings (state){
-		console.log('this code is running')
 		return state.deviceSetting;
 	},
 	getDeviceOSInfo (state){
@@ -38,5 +34,8 @@ export const userInfo = {
 	},
 	getTheme (state){
 		return state.theme;
+	},
+	getGuestList (state){
+		return state.guestList;
 	}
 }

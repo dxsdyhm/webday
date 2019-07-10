@@ -9,7 +9,7 @@
 						<v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
 					</v-list-tile-content>
 					<v-list-tile-action-text v-if="item.id===0">{{settingTemp.nikname}}</v-list-tile-action-text>
-					<v-list-tile-action-text v-else-if="item.id===1">{{settingTemp.volume}}</v-list-tile-action-text>
+					<v-list-tile-action-text v-else-if="item.id===1">{{volume}}</v-list-tile-action-text>
 					<v-list-tile-action-text v-else-if="item.id===4">{{settingTemp.wifissid}}</v-list-tile-action-text>
 					<v-icon v-if="item.solit===0" class="chevron">chevron_right</v-icon>
 					<v-list-tile-action v-if="item.solit===1">
@@ -26,9 +26,24 @@
 		<!-- 昵称输入 -->
 		<v-dialog v-model="nicknameShow">
 			<v-card>
+				<v-card-title>
+				</v-card-title>
 				<v-card-text>
-					<v-text-field v-model="value1"  :counter="10" :label="funs[0].title" required></v-text-field>
+					<v-text-field v-model="nikname" :counter="10" :label="funs[0].title" required></v-text-field>
 				</v-card-text>
+				<v-card-actions>
+					<v-spacer></v-spacer>
+					<v-btn flat color="primary">取消</v-btn>
+					<v-btn flat color="primary" @click="nicknameShow=!nicknameShow">确定</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
+		<!-- 音量调节 -->
+		<v-dialog v-model="volumeShow">
+			<v-card>
+				<v-card-title>
+					<v-slider v-model="volume" :max="100" thumb-label :min="0" :step="1" append-icon="volume_up" prepend-icon="volume_down"></v-slider>
+				</v-card-title>
 			</v-card>
 		</v-dialog>
 	</v-layout>
@@ -39,13 +54,18 @@
 		sendSettingMesg
 	} from '../../aliiot/iot.js';
 	import {
+		CMD
+	} from '../../aliiot/cmd.js';
+	import {
 		mapGetters
 	} from 'vuex';
 	export default {
 		data() {
 			return {
 				title: '设备设置',
-				nicknameShow:false,
+				nicknameShow: false,
+				volumeShow: false,
+				value1: '',
 				funs: [{
 						id: 0,
 						title: '小精灵名称',
@@ -99,8 +119,49 @@
 		},
 		methods: {
 			getSettings() {
-				let set=this.$store.getters.getDeviceSettings
-				sendSettingMesg(set)
+				let set = this.$store.getters.getDeviceSettings
+				sendSettingMesg(this.$iotdevice, set)
+			},
+			setNickName(){
+				let nic={
+					cmd:CMD.JSON_CODE_NICKNAME,
+					option:1,
+					msgid:0,
+					error:0,
+					nickname:this.settingTemp.nikname
+				}
+				sendSettingMesg(this.$iotdevice, nic)
+			},
+			setVolume(){
+				let nic={
+					cmd:CMD.JSON_CODE_VOLUME,
+					option:1,
+					msgid:0,
+					error:0,
+					VolumeMax:this.settingTemp.maxvolume,
+					CurrentVolume:Math.round(this.settingTemp.volume*100/this.settingTemp.maxvolume)
+				}
+				sendSettingMesg(this.$iotdevice, nic)
+			},
+			setChildLock(){
+				let nic={
+					cmd:CMD.JSON_CODE_CHILDLOOK,
+					option:1,
+					msgid:0,
+					error:0,
+					look:this.settingTemp.childlockswitch
+				}
+				sendSettingMesg(this.$iotdevice, nic)
+			},
+			setSmartSwitch(){
+				let nic={
+					cmd:CMD.JSON_CODE_SMARTPICBOOK,
+					option:1,
+					msgid:0,
+					error:0,
+					smart:this.settingTemp.smartpicbookswitch
+				}
+				sendSettingMesg(this.$iotdevice, nic)
 			},
 			changeInfo(id) {
 				switch (id) {
@@ -110,21 +171,26 @@
 						break;
 					case 1:
 						//设置音量
+						this.volumeShow = true
 						break
 					case 2:
 						//童锁开关
+						//this.setChildLock()
 						break
 					case 3:
 						//小夜灯
+						this.$router.push('/light')
 						break;
 					case 4:
 						//wifi
 						break
 					case 5:
 						//智能绘本
+						//this.setSmartSwitch()
 						break
 					case 6:
 						//成员
+						this.$router.push('/membermanager')
 						break;
 					case 7:
 						//基本信息
@@ -138,6 +204,18 @@
 		created() {
 			this.getSettings()
 		},
+		watch:{
+			nicknameShow:function(nva,ova){
+				if(!nva){
+					this.setNickName()
+				}
+			},
+			volumeShow:function(nva,ova){
+				if(!nva){
+					this.setVolume()
+				}
+			}
+		},
 		computed: {
 			...mapGetters({
 				settingTemp: 'getDeviceSettings'
@@ -150,6 +228,7 @@
 					this.$store.commit('updateSettingsParems', {
 						childlockswitch: value
 					})
+					this.setChildLock();
 				}
 			},
 			smartpicbookswitch: {
@@ -159,6 +238,27 @@
 				set(value) {
 					this.$store.commit('updateSettingsParems', {
 						smartpicbookswitch: value
+					})
+					this.setSmartSwitch();
+				}
+			},
+			nikname: {
+				get() {
+					return this.$store.state.activeUser.deviceSetting.nikname;
+				},
+				set(value) {
+					this.$store.commit('updateSettingsParems', {
+						nikname: value
+					})
+				}
+			},
+			volume: {
+				get() {
+					return Math.round(this.settingTemp.volume*100/this.settingTemp.maxvolume);
+				},
+				set(value) {
+					this.$store.commit('updateSettingsParems', {
+						volume: Math.round(value*this.settingTemp.maxvolume/100)
 					})
 				}
 			}

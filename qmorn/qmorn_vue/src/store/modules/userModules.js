@@ -28,7 +28,6 @@ export const activeUser = {
 		booklist:[],
 		active:1,
 		selectDeviceOnline:{},
-		aliDevice:{},
 		aliiotstate:false,
 		deviceSetting:{
 			cmd:1,
@@ -61,6 +60,7 @@ export const activeUser = {
             lunvercode:0,
             lunvername:''
 		},
+		guestList:[],
     },
     actions: fetchUserAction,
     getters: userInfo,
