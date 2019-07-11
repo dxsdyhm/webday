@@ -61,6 +61,7 @@ export const activeUser = {
             lunvername:''
 		},
 		guestList:[],
+		groupinfo:{},
     },
     actions: fetchUserAction,
     getters: userInfo,

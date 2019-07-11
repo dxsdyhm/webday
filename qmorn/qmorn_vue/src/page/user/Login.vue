@@ -1,8 +1,11 @@
 <template>
 	<v-container>
-		<v-alert :value="true" type="warning">测试行为，正式版本中将改为微信登陆</v-alert>
-		<v-form>
-			<v-layout class="contain" align-space-around justify-center column fill-height>
+		<v-alert :value="true" outline type="warning">测试行为，正式版本中将改为微信登陆</v-alert>
+		<v-layout class="contain" align-center justify-center column fill-height>
+			<v-avatar class="qmorn" :size=96 tile>
+				<img src="../../assets/img/logo.svg" />
+			</v-avatar>
+			<v-layout column align-space-between>
 				<v-flex xs12 sm6 md3>
 					<v-text-field prefix="86-" prepend-icon="person" label="手机号码" type="text" v-model="phone" clearable></v-text-field>
 				</v-flex>
@@ -12,12 +15,14 @@
 				</v-flex>
 				<v-btn color="primary" @click="login">登录</v-btn>
 			</v-layout>
-		</v-form>
+		</v-layout>
 	</v-container>
 </template>
 
 <script>
 	import md5 from 'js-md5';
+	import axios from 'axios';
+	
 	export default {
 		data() {
 			return {
@@ -28,10 +33,6 @@
 		},
 		methods: {
 			login() {
-				if (!this.checkAccount()) {
-					this.$message("请输入用户信息")
-					return
-				}
 				this.$api.user.login({
 					account: this.sufixUser,
 					pwd: this.mdPwd,
@@ -65,6 +66,11 @@
 
 <style>
 	.contain {
-		margin-top: 50%;
+		/* margin-top: 50%; */
+	}
+
+	.qmorn {
+		margin-top: 4rem;
+		margin-bottom: 3rem;
 	}
 </style>

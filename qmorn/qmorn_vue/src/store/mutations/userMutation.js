@@ -82,5 +82,8 @@ export const fetchUserMutation = {
 		if(state.deviceList.length>0){
 			state.selectDevice=state.deviceList[0];
 		}
+	},
+	setGroupInfo (state,action){
+		state.groupinfo=action;
 	}
 }

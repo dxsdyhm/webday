@@ -1,6 +1,7 @@
 import App from '../App'
 
 import login from '../page/user/Login.vue'
+import weixin from '../page/user/WeiXin.vue'
 import main from '../page/main/Main.vue'
 import voice from '../page/main/Voice.vue'
 import device from '../page/main/Device.vue'
@@ -25,7 +26,7 @@ var s=[{
 	component: App,
 	children: [{
 			path: '',
-			redirect: '/user'
+			redirect: '/weixin'
 		}, {
 			path: '/user',
 			component: login
@@ -93,6 +94,10 @@ var s=[{
 		{
 			path: '/membermanager',
 			component: membermanager
+		},
+		{
+			path: '/weixin',
+			component: weixin
 		}
 	]
 }]

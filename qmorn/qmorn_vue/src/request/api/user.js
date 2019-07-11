@@ -5,10 +5,11 @@
 import base from './base'; // 导入接口域名列表
 import instance from '../http'; // 导入http中创建的axios实例
 import qs from 'qs'; // 根据需求是否导入qs模块
+import store from '../../store/index';
 
 const user = {
     login (params) {
-        return instance.post(`/app/user/login`, params);
+        return instance.post('/app/user/login', params);
     },
     getdeviceinfo(params){
 		return instance.post('/app/relation/device/list',params)
@@ -39,6 +40,9 @@ const user = {
 	},
 	unbindDevice(params){
 		return instance.post('/app/relation/master/unbind',params)
+	},
+	getGroupList(params){
+		return instance.post('/app/group/member/getbydeviceid',params)
 	}
 }
 

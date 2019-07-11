@@ -11,7 +11,14 @@ module.exports = {
 				target: 'https://online-state.api1.q-links.net:10081',
 				changeOrigin: true,
 				secure: false,
-				pathRewrite: {'^/online': ''}
+				pathRewrite: {
+					'^/online': ''
+				}
+			},
+			'/cgi-bin/token': {
+				target: 'https://api.weixin.qq.com',
+				changeOrigin: true,
+				secure: false,
 			}
 		},
 		disableHostCheck: true,

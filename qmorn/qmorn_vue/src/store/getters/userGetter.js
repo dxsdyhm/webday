@@ -37,5 +37,8 @@ export const userInfo = {
 	},
 	getGuestList (state){
 		return state.guestList;
+	},
+	getGroupInfo (state){
+		return state.groupinfo;
 	}
 }
