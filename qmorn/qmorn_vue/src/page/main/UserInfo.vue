@@ -3,10 +3,10 @@
 		<v-responsive :aspect-ratio="16/9" class="up pink lighten-3">
 			<v-layout align-center justify-center column fill-height @click="jumpTo('/userdetail')">
 				<v-avatar :size=72>
-					<img :src="userimg" />
+					<img :src="getWeixinUserInfo.headimgurl?getWeixinUserInfo.headimgurl:userimg" />
 				</v-avatar>
 				<div class="user_phone">
-					{{username}}
+					{{getWeixinUserInfo.nickname?getWeixinUserInfo.nickname:username}}
 				</div>
 			</v-layout>
 		</v-responsive>
@@ -28,6 +28,12 @@
 </template>
 
 <script>
+	import {
+		mapActions
+	} from 'vuex';
+	import {
+		mapGetters
+	} from 'vuex';
 	export default {
 		data() {
 			return {
@@ -63,7 +69,10 @@
 		methods: {
 			jumpTo(path) {
 				this.$router.push(path)
-			}
+			},
+			...mapActions([
+				'getWeixinInfo', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
+			]),
 		},
 		computed: {
 			userimg(){
@@ -71,8 +80,14 @@
 			},
 			username(){
 				return this.$store.getters.getUserInfo.nickName
-			}
+			},
+			...mapGetters([
+				'getWeixinUserInfo', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
+			]),
 		},
+		mounted() {
+			this.getWeixinInfo()
+		}
 	}
 </script>
 

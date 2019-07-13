@@ -18,7 +18,7 @@ export const activeUser = {
 			uid:'0',
 			sid:'0'
 		},
-        userinfo: {},
+        userinfo: null,
 		deviceList:[],
 		lastUpdated:'',
 		versionName:'v1.0.0.13',
@@ -62,6 +62,7 @@ export const activeUser = {
 		},
 		guestList:[],
 		groupinfo:{},
+		logintype:0,
     },
     actions: fetchUserAction,
     getters: userInfo,

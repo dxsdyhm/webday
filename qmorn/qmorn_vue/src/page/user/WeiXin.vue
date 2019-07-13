@@ -3,15 +3,14 @@
 </template>
 
 <script>
-	import {initweixin,getCode} from '../../weixin/weixin.js';
+	import weinxin from '../../weixin/weixin.js';
 	export default{
 		data() {
 			return {
 			}
 		},
 		mounted() {
-			window.location.href=getCode()
-			//initweixin();
+			window.location.href=weinxin.getCode()
 		}
 	}
 </script>

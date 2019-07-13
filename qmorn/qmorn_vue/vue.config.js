@@ -19,6 +19,11 @@ module.exports = {
 				target: 'https://api.weixin.qq.com',
 				changeOrigin: true,
 				secure: false,
+			},
+			'/sns': {
+				target: 'https://api.weixin.qq.com',
+				changeOrigin: true,
+				secure: false,
 			}
 		},
 		disableHostCheck: true,

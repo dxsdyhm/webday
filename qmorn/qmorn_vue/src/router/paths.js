@@ -21,84 +21,93 @@ import help from '../page/action/Help.vue'
 
 import booklist from '../page/book/BookList.vue'
 import userdetail from '../page/user/UserInfoDetail.vue'
-var s=[{
-	path: '/',
-	component: App,
-	children: [{
-			path: '',
-			redirect: '/weixin'
+
+function isWeixin() {
+	var ua = navigator.userAgent.toLowerCase();
+	var isWeixin = ua.indexOf('micromessenger') != -1;
+	if (isWeixin) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+var s = [{
+		path: '/',
+		component: App,
+		// redirect: '/user'
+	}, {
+		path: '/user',
+		component: login,
+		props: (route) => ({ logintype: route.query.logintype})
+	}, {
+		path: '/main',
+		component: main,
+		redirect: '/main/device',
+		children: [{
+			path: '/main/voice',
+			component: voice
 		}, {
-			path: '/user',
-			component: login
+			path: '/main/device',
+			component: device
 		}, {
-			path: '/main',
-			component: main,
-			redirect: '/main/device',
-			children: [{
-				path: '/main/voice',
-				component: voice
-			}, {
-				path: '/main/device',
-				component: device
-			}, {
-				path: '/main/userinfo',
-				component: userinfo
-			},{
-				path:'/main/empty',
-				component:empty
-			}]
-		},
-		{
-			path: '/about',
-			component: about
-		},
-		{
-			path: '/devicelist',
-			component: devicelist
+			path: '/main/userinfo',
+			component: userinfo
 		}, {
-			path: '/webview',
-			component: webview
-		},
-		{
-			path: '/babyinfo',
-			component: babyinfo
-		},
-		{
-			path: '/help',
-			component: help
-		},
-		{
-			path: '/booklist',
-			component: booklist
-		},
-		{
-			path: '/userdetail',
-			component: userdetail
-		},
-		{
-			path: '/devicesetting',
-			component: devicesetting
-		},
-		{
-			path: '/moniter',
-			component: moniter
-		},
-		{
-			path: '/deviceosinfo',
-			component: osinfo
-		},
-		{
-			path: '/light',
-			component: light
-		},
-		{
-			path: '/membermanager',
-			component: membermanager
-		},
-		{
-			path: '/weixin',
-			component: weixin
-		}
-	]
-}]
+			path: '/main/empty',
+			component: empty
+		}]
+	},
+	{
+		path: '/about',
+		component: about
+	},
+	{
+		path: '/devicelist',
+		component: devicelist
+	}, {
+		path: '/webview',
+		component: webview
+	},
+	{
+		path: '/babyinfo',
+		component: babyinfo
+	},
+	{
+		path: '/help',
+		component: help
+	},
+	{
+		path: '/booklist',
+		component: booklist
+	},
+	{
+		path: '/userdetail',
+		component: userdetail
+	},
+	{
+		path: '/devicesetting',
+		component: devicesetting
+	},
+	{
+		path: '/moniter',
+		component: moniter
+	},
+	{
+		path: '/deviceosinfo',
+		component: osinfo
+	},
+	{
+		path: '/light',
+		component: light
+	},
+	{
+		path: '/membermanager',
+		component: membermanager
+	},
+	{
+		path: '/weixin',
+		component: weixin
+	}
+]
 export default s

@@ -91,9 +91,9 @@ instance.interceptors.request.use(
 		// token && (config.headers.Authorization = token);
 		if(config.url==='/app/device/onlinestate'){
 			//在线状态使用特殊域名
-			config.baseURL=base.onlineBase1
+			// config.baseURL=base.onlineBase1
 		}else{
-			config.baseURL=base.base2
+			// config.baseURL=base.base2
 		}
 		if(config.url==='/app/user/login'){
 			//登陆接口不检查session id

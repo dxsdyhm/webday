@@ -140,6 +140,7 @@
 						}]
 					}]
 				}).then(res => {
+					console.log("获取阿里云状态");
 					console.log(response);
 				}).catch(res => {
 					//登陆失败

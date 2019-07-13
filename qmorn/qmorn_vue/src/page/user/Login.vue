@@ -1,11 +1,10 @@
 <template>
 	<v-container>
-		<v-alert :value="true" outline type="warning">测试行为，正式版本中将改为微信登陆</v-alert>
 		<v-layout class="contain" align-center justify-center column fill-height>
 			<v-avatar class="qmorn" :size=96 tile>
 				<img src="../../assets/img/logo.svg" />
 			</v-avatar>
-			<v-layout column align-space-between>
+			<v-layout v-if="logintype===0" column align-space-between>
 				<v-flex xs12 sm6 md3>
 					<v-text-field prefix="86-" prepend-icon="person" label="手机号码" type="text" v-model="phone" clearable></v-text-field>
 				</v-flex>
@@ -15,15 +14,26 @@
 				</v-flex>
 				<v-btn color="primary" @click="login">登录</v-btn>
 			</v-layout>
+			<v-progress-circular v-else :size="56" :width="4" color="primary" indeterminate></v-progress-circular>
 		</v-layout>
 	</v-container>
 </template>
 
 <script>
 	import md5 from 'js-md5';
-	import axios from 'axios';
-	
+	import {
+		mapActions
+	} from 'vuex'
+	import {
+		getUrlKey
+	} from '../../utils/utils.js'
 	export default {
+		props: {
+			logintype: {
+				type: Number,
+				default: 0
+			}
+		},
 		data() {
 			return {
 				phone: '',
@@ -32,6 +42,9 @@
 			}
 		},
 		methods: {
+			...mapActions([
+				'weixinLogin',
+			]),
 			login() {
 				this.$api.user.login({
 					account: this.sufixUser,
@@ -60,7 +73,24 @@
 			'mdPwd': function() {
 				return md5(this.pwd).toUpperCase()
 			},
+
 		},
+		mounted() {
+			if (logintype === 1) {
+				//微信登陆
+				let code = getUrlKey('code');
+				let state = getUrlKey('state')
+				if (code) {
+					this.weixinLogin(code).then(function(result) {
+						if(result==1){
+							this.$router.replace('main')
+						}
+					}).catch(function(error) {
+						console.log(error);
+					});
+				}
+			}
+		}
 	}
 </script>
 
