@@ -6,6 +6,7 @@ export const weixinState = {
     state: {
 		token:{},
 		weixininfo:{},
+		tiketToken:{},
 		jstiket:{},
     },
     actions: weixinAction,

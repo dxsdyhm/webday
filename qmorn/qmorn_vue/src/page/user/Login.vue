@@ -4,7 +4,7 @@
 			<v-avatar class="qmorn" :size=96 tile>
 				<img src="../../assets/img/logo.svg" />
 			</v-avatar>
-			<v-layout v-if="logintype===0" column align-space-between>
+			<v-layout v-if="logintype==='0'||showMuti" column align-space-between>
 				<v-flex xs12 sm6 md3>
 					<v-text-field prefix="86-" prepend-icon="person" label="手机号码" type="text" v-model="phone" clearable></v-text-field>
 				</v-flex>
@@ -30,15 +30,16 @@
 	export default {
 		props: {
 			logintype: {
-				type: Number,
-				default: 0
+				type: String,
+				default: '0'
 			}
 		},
 		data() {
 			return {
 				phone: '',
 				pwd: '',
-				show: false
+				show: false,
+				showMuti:false,
 			}
 		},
 		methods: {
@@ -76,14 +77,18 @@
 
 		},
 		mounted() {
-			if (logintype === 1) {
+			if (this.logintype === '1') {
 				//微信登陆
+				console.log("微信登陆")
 				let code = getUrlKey('code');
 				let state = getUrlKey('state')
 				if (code) {
-					this.weixinLogin(code).then(function(result) {
-						if(result==1){
-							this.$router.replace('main')
+					this.weixinLogin(code).then((result)=> {
+						console.log("result")
+						console.log(result)
+						if(result===1){
+							this.$message('微信登陆成功')
+							this.showMuti=true
 						}
 					}).catch(function(error) {
 						console.log(error);

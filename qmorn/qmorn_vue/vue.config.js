@@ -15,7 +15,7 @@ module.exports = {
 					'^/online': ''
 				}
 			},
-			'/cgi-bin/token': {
+			'/cgi-bin': {
 				target: 'https://api.weixin.qq.com',
 				changeOrigin: true,
 				secure: false,

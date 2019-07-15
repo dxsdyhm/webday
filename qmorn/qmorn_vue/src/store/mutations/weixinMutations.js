@@ -6,6 +6,9 @@ export const weixinMutation = {
 		state.weixininfo=action;
 	},
 	setJsTiket (state,action){
-		state.jstiket=action
+		state.jstiket=action;
+	},
+	setJsToken (state,action){
+		state.tiketToken=action;
 	}
 }

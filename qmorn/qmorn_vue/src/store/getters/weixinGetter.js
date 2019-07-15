@@ -4,5 +4,8 @@ export const weixinGetter = {
 	},
 	getWeixinUserInfo (state){
 		return state.weixininfo;
+	},
+	getJssToken (state){
+		return state.tiketToken;
 	}
 }

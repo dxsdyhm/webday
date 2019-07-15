@@ -5,7 +5,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 export default new VueRouter({
 	routes,
-	strict: process.env.NODE_ENV !== 'production',
+	// strict: process.env.NODE_ENV !== 'production',
 	scrollBehavior (to, fro, savedPosition) {
 	    if (savedPosition) {
 		    return savedPosition

@@ -43,6 +43,9 @@ const user = {
 	},
 	getGroupList(params){
 		return instance.post('/app/group/member/getbydeviceid',params)
+	},
+	searchBook(params){
+		return instance.post('/app/res/book/search',params)
 	}
 }
 

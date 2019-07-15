@@ -13,6 +13,7 @@
     "http-proxy-middleware": "^0.19.1",
     "js-md5": "^0.7.3",
     "js-sha1": "^0.6.0",
+    "jssha": "^2.3.1",
     "keymirror": "^0.1.1",
     "qs": "^6.7.0",
     "vue": "^2.6.10",

@@ -39,6 +39,8 @@ Object.keys(filters).forEach(key => {
 
 router.beforeResolve((to, from, next)=>{
 	//检查用户登陆信息，如果存在，则处理存在的信息
+    console.log(to)
+    console.log(from)
 	if(store.getters.getUserInfo){
 		//已经登陆
 		//如果不存在，则处理登陆
@@ -53,7 +55,7 @@ router.beforeResolve((to, from, next)=>{
 			if(weixin.isWeixin()){
 				next('/weixin')
 			}else{
-				next({path:'/user',query: { logintype: 0 }})
+				next({path:'/user',query: { logintype: '0' }})
 			}
 		}
 	}

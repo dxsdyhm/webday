@@ -204,6 +204,7 @@
 						break;
 					case 4:
 						//wifi
+						this.$router.push('/netconfig')
 						break
 					case 5:
 						//智能绘本
