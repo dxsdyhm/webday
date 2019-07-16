@@ -63,6 +63,7 @@ export const activeUser = {
 		guestList:[],
 		groupinfo:{},
 		logintype:0,
+		stateList:[],
     },
     actions: fetchUserAction,
     getters: userInfo,

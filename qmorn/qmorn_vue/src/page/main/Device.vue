@@ -6,6 +6,7 @@
 					<v-card>
 						<v-card-actions>
 							<v-icon v-if="item.id==2" :color="item.text | batteryfilter">{{item.icon}}</v-icon>
+							<v-icon v-else-if="item.id==1" color="primary">{{deviceonline?item.icon:'wifi_off'}}</v-icon>
 							<v-icon v-else color="primary">{{item.icon}}</v-icon>
 							<!-- <v-icon :color="item.id==2?(85 | batteryfilter):'primary'">{{item.icon}}</v-icon> -->
 						</v-card-actions>
@@ -34,6 +35,7 @@
 		mapGetters
 	} from 'vuex';
 	export default {
+		name:'Device',
 		data() {
 			return {
 				interval: '',
@@ -132,7 +134,7 @@
 			},
 			getAliOnline() {
 				this.$api.user.getAlionline({
-					groupList: [{
+					productList: [{
 						productKey: this.$store.getters.getSelectDevice.pkey,
 						deviceList: [{
 							id: this.$store.getters.getSelectDevice.id,
@@ -140,11 +142,10 @@
 						}]
 					}]
 				}).then(res => {
-					console.log("获取阿里云状态");
-					console.log(response);
+					console.log(res);
+					this.$store.commit('updateList', res.data.stateList)
 				}).catch(res => {
-					//登陆失败
-					this.$message(res.msg)
+					console.log(res)
 				})
 			}
 		},
@@ -158,6 +159,7 @@
 		computed: {
 			...mapGetters({
 				selectdevice: 'getSelectDevice',
+				deviceonline:'selectDeviceOnlineState',
 			}),
 		}
 	}

@@ -35,6 +35,7 @@
 		mapGetters
 	} from 'vuex';
 	export default {
+		name:'UserInfo',
 		data() {
 			return {
 				showDevider:false,

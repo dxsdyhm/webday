@@ -1,8 +1,12 @@
 <template>
-	<v-layout v-if="selectdevice!=null" column>
+	<v-layout v-if="selectdevice!=null" column align-space-around>
 		<qmorntoolbar :title="title"></qmorntoolbar>
+		<v-chip :value="!deviceonline" color="warning " text-color="white" class="mx-2">
+			<v-icon class="ma-2">warning</v-icon>
+			设备离线，无法远程操作.
+		</v-chip>
 		<v-list two-line>
-			<template v-for="(item,index) in funs" >
+			<template v-for="(item,index) in funs">
 				<v-list-tile v-if="item.id!==6 || selectdevice.role!==2" class="list" :key="item.title" @click="changeInfo(item.id)">
 					<v-list-tile-content>
 						<v-list-tile-title>{{ item.title }}</v-list-tile-title>
@@ -20,7 +24,7 @@
 				<!-- <v-divider v-if="index + 1 < funs.length" :key="index"></v-divider> -->
 			</template>
 		</v-list>
-		<v-btn v-if="selectdevice.role===1" ripple color="primary" @click="unbindShow=true">
+		<v-btn class="mb-5" v-if="selectdevice.role===1" ripple color="primary" @click="unbindShow=true">
 			解除绑定
 		</v-btn>
 		<!-- 昵称输入 -->
@@ -77,7 +81,7 @@
 				title: '设备设置',
 				nicknameShow: false,
 				volumeShow: false,
-				unbindShow:false,
+				unbindShow: false,
 				value1: '',
 				funs: [{
 						id: 0,
@@ -135,52 +139,52 @@
 				let set = this.$store.getters.getDeviceSettings
 				sendSettingMesg(this.$iotdevice, set)
 			},
-			setNickName(){
-				let nic={
-					cmd:CMD.JSON_CODE_NICKNAME,
-					option:1,
-					msgid:0,
-					error:0,
-					nickname:this.settingTemp.nikname
+			setNickName() {
+				let nic = {
+					cmd: CMD.JSON_CODE_NICKNAME,
+					option: 1,
+					msgid: 0,
+					error: 0,
+					nickname: this.settingTemp.nikname
 				}
-				if(!!this.settingTemp.nikname){
+				if (!!this.settingTemp.nikname) {
 					sendSettingMesg(this.$iotdevice, nic)
-				}else{
+				} else {
 					console.log("非法值")
 				}
 			},
-			setVolume(){
-				let nic={
-					cmd:CMD.JSON_CODE_VOLUME,
-					option:1,
-					msgid:0,
-					error:0,
-					VolumeMax:this.settingTemp.maxvolume,
-					CurrentVolume:Math.round(this.settingTemp.volume*100/this.settingTemp.maxvolume)
+			setVolume() {
+				let nic = {
+					cmd: CMD.JSON_CODE_VOLUME,
+					option: 1,
+					msgid: 0,
+					error: 0,
+					VolumeMax: this.settingTemp.maxvolume,
+					CurrentVolume: Math.round(this.settingTemp.volume * 100 / this.settingTemp.maxvolume)
 				}
-				if(!!this.settingTemp.maxvolume){
+				if (!!this.settingTemp.maxvolume) {
 					sendSettingMesg(this.$iotdevice, nic)
-				}else{
+				} else {
 					console.log("非法值")
 				}
 			},
-			setChildLock(){
-				let nic={
-					cmd:CMD.JSON_CODE_CHILDLOOK,
-					option:1,
-					msgid:0,
-					error:0,
-					look:this.settingTemp.childlockswitch
+			setChildLock() {
+				let nic = {
+					cmd: CMD.JSON_CODE_CHILDLOOK,
+					option: 1,
+					msgid: 0,
+					error: 0,
+					look: this.settingTemp.childlockswitch
 				}
 				sendSettingMesg(this.$iotdevice, nic)
 			},
-			setSmartSwitch(){
-				let nic={
-					cmd:CMD.JSON_CODE_SMARTPICBOOK,
-					option:1,
-					msgid:0,
-					error:0,
-					smart:this.settingTemp.smartpicbookswitch
+			setSmartSwitch() {
+				let nic = {
+					cmd: CMD.JSON_CODE_SMARTPICBOOK,
+					option: 1,
+					msgid: 0,
+					error: 0,
+					smart: this.settingTemp.smartpicbookswitch
 				}
 				sendSettingMesg(this.$iotdevice, nic)
 			},
@@ -222,8 +226,8 @@
 						break;
 				}
 			},
-			unbind(){
-				this.unbindShow=false;
+			unbind() {
+				this.unbindShow = false;
 				this.$api.user.unbindDevice({
 					deviceId: this.selectdevice.id
 				}).then(res => {
@@ -237,14 +241,14 @@
 		created() {
 			this.getSettings()
 		},
-		watch:{
-			nicknameShow:function(nva,ova){
-				if(!nva){
+		watch: {
+			nicknameShow: function(nva, ova) {
+				if (!nva) {
 					this.setNickName()
 				}
 			},
-			volumeShow:function(nva,ova){
-				if(!nva){
+			volumeShow: function(nva, ova) {
+				if (!nva) {
 					this.setVolume()
 				}
 			}
@@ -253,6 +257,7 @@
 			...mapGetters({
 				settingTemp: 'getDeviceSettings',
 				selectdevice: 'getSelectDevice',
+				deviceonline: 'selectDeviceOnlineState',
 			}),
 			childlockswitch: {
 				get() {
@@ -288,11 +293,11 @@
 			},
 			volume: {
 				get() {
-					return Math.round(this.settingTemp.volume*100/this.settingTemp.maxvolume);
+					return Math.round(this.settingTemp.volume * 100 / this.settingTemp.maxvolume);
 				},
 				set(value) {
 					this.$store.commit('updateSettingsParems', {
-						volume: Math.round(value*this.settingTemp.maxvolume/100)
+						volume: Math.round(value * this.settingTemp.maxvolume / 100)
 					})
 				}
 			}

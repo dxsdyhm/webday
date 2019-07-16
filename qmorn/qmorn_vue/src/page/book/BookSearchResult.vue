@@ -31,6 +31,7 @@
 
 <script>
 	export default {
+		name:'BookSearchResult',
 		props: {
 			keyword: {
 				type: String,
@@ -69,6 +70,8 @@
 			}
 		},
 		mounted() {
+			console.log("=-==-=--=--=--=-=-")
+			console.log(this)
 			if (this.booklist.length <= 0) {
 				this.search()
 			}

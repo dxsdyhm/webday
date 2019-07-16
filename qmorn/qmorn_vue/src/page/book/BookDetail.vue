@@ -13,11 +13,13 @@
 		<div>{{book.description}}</div>
 		<p></p>
 		<div>{{book.author}}&nbsp;&nbsp;&nbsp;{{book.publisher}}&nbsp;&nbsp;&nbsp;{{book.pubdate}}</div>
+		<v-btn v-if="booklistids" class="ma-4" color="gray" disabled>已添加到书架</v-btn>
+		<v-btn v-else class="ma-4" color="primary" @click="addbook">添加到书架</v-btn>
 	</v-layout>
 </template>
 
 <script>
-	import Grade from 'grade-js'
+	import { mapGetters,mapActions} from 'vuex'
 	export default{
 		data() {
 			return {
@@ -26,8 +28,31 @@
 			}
 		},
 		methods: {
-			
+			addbook(){
+				this.$api.user.addbook({
+					deviceId: this.getSelectDevice.id,
+					bookId: this.book.id,
+				}).then(response => {
+					this.$message({message:'添加成功',type:'success'})
+					this.$store.commit('addBook', response.data)
+				}).catch(error => {
+					this.$message(error.msg)
+				});
+			}
 		},
+		computed:{
+			...mapGetters({
+				bookLists:'getBookLists',
+				getSelectDevice:'getSelectDevice',
+			}),
+			booklistids(){
+				let ids=[]
+				this.bookLists.forEach(item=>{
+					ids.push(item.id)
+				})
+				return ids.includes(this.book.id);
+			}
+		}
 	}
 </script>
 

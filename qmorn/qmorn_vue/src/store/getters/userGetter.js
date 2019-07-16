@@ -40,5 +40,13 @@ export const userInfo = {
 	},
 	getGroupInfo (state){
 		return state.groupinfo;
+	},
+	selectDeviceOnlineState (state){
+		state.stateList.forEach(sta=>{
+			if(sta.id===state.selectDevice.id){
+				return sta.state&0x1===1;
+			}
+		})
+		return false;
 	}
 }

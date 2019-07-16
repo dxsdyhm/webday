@@ -85,5 +85,18 @@ export const fetchUserMutation = {
 	},
 	setGroupInfo (state,action){
 		state.groupinfo=action;
+	},
+	addBook (state,action){
+		state.booklist.unshift(action);
+	},
+	deleteBook (state,action){
+		state.booklist.forEach((device,index)=>{
+			if(device.id===action.id){
+				state.booklist.splice(index,1)
+			}
+		});
+	},
+	updateList (state,action){
+		state.stateList=action;
 	}
 }

@@ -31,6 +31,7 @@
 		mapGetters
 	} from 'vuex';
 	export default {
+		name:'Main',
 		data() {
 			return {
 				activeBtn: 1,

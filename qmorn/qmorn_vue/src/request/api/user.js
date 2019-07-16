@@ -27,7 +27,7 @@ const user = {
 		return instance.post('/app/device/stateinfo',params)
 	},
 	getAlionline(params){
-		return instance.post('/online/app/device/onlinestate',params)
+		return instance.post('/app/device/onlinestate',params)
 	},
 	getMember(params){
 		return instance.post('/app/relation/guest/list',params)
@@ -46,6 +46,12 @@ const user = {
 	},
 	searchBook(params){
 		return instance.post('/app/res/book/search',params)
+	},
+	addbook(params){
+		return instance.post('/app/device/bookself/add',params)
+	},
+	deletebook(params){
+		return instance.post('/app/device/bookself/delete',params)
 	}
 }
 

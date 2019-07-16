@@ -39,7 +39,6 @@ var s = [{
 		path: '/',
 		name:'app',
 		component: App,
-		// redirect: '/user'
 	}, {
 		path: '/user',
 		name:'user',
