@@ -4,7 +4,7 @@
 		<v-container fluid grid-list-lg>
 			<v-layout row wrap>
 				<v-flex v-for="item in bookLists" :key="item.id" xs4 md2>
-					<v-card class="elevation-${showDelete?3:1}" @touchstart.capture.prevent="gotouchstart(item)" @touchmove="gotouchmove" @touchend="gotouchend">
+					<v-card class="elevation-${showDelete?3:1}" @touchstart="gotouchstart(item)" @touchmove="gotouchmove" @touchend="gotouchend">
 						<v-img :src="item.coverUrl" aspect-ratio="1"></v-img>
 						<div class="cardText">
 							<div class="bookName">{{item.name}}</div>
@@ -36,11 +36,10 @@
 		mapGetters,
 		mapActions
 	} from 'vuex'
+	import weixin from '../../weixin/weixin.js';
 	import acount, {
 		info
 	} from '../../weixin/config';
-	import wx from 'weixin-js-sdk';
-	import weixin from '../../weixin/weixin.js';
 	export default {
 		data() {
 			return {
@@ -121,7 +120,7 @@
 			toQrScan() {
 				//申请签名
 				this.getJsApiTiket(this.config).then(result => {
-					wx.config({
+					this.$wx.config({
 						debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
 						appId: acount.appID, // 必填，公众号的唯一标识
 						timestamp: this.config.timestamp, // 必填，生成签名的时间戳
@@ -134,9 +133,9 @@
 					console.log(error)
 					console.log('请在微信客户端打开')
 				})
-				wx.ready(() => {
+				this.$wx.ready(() => {
 					console.log('微信jssdk准本好了')
-					wx.scanQRCode({
+					this.$wx.scanQRCode({
 						needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
 						scanType: ["barCode"], // 可以指定扫二维码还是一维码，默认二者都有 "qrCode", 
 						success: res => {

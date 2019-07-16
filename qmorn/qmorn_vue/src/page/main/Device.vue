@@ -11,6 +11,7 @@
 							<v-icon v-if="item.id==2" :color="item.text | batteryfilter">{{item.icon}}</v-icon>
 							<v-icon v-else-if="item.id==1" color="primary">{{deviceonline?item.icon:'wifi_off'}}</v-icon>
 							<v-icon v-else color="primary">{{item.icon}}</v-icon>
+							<div class="ml-1" v-if="item.id==1&&!deviceonline">(离线)</div>
 							<!-- <v-icon :color="item.id==2?(85 | batteryfilter):'primary'">{{item.icon}}</v-icon> -->
 						</v-card-actions>
 						<v-card-text class="cardtext" v-if="item.id==2">{{item.text+'%'}}</v-card-text>

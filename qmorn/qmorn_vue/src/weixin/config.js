@@ -1,5 +1,5 @@
 export const info={
-	redirect_uri:'http%3a%2f%2f192.168.0.187%3a8080%2f%23%2fuser%3flogintype%3d1'
+	redirect_uri:'http%3a%2f%2f192.168.0.187%3a8080%2f%23%2fuser%3flogintype%3d1',
 }
 
 export default {

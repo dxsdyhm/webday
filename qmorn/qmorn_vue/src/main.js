@@ -19,9 +19,14 @@ import App from './App.vue'
 import filters from './filter/filter.js';
 import {iotinit,disconnect} from './aliiot/iot.js';
 import weixin from './weixin/weixin.js';
-import VueQriously from 'vue-qriously'
-Vue.use(VueQriously)
-
+import('vue-qriously').then(VueQriously=>{
+	Vue.use(VueQriously)
+})
+if(weixin.isWeixin()){
+	import('weixin-js-sdk').then(wx=>{
+		Vue.prototype.$wx = wx;
+	})
+}
 Vue.config.productionTip = false
 Vue.prototype.$api = api;
 
@@ -41,8 +46,6 @@ Object.keys(filters).forEach(key => {
 
 router.beforeResolve((to, from, next)=>{
 	//检查用户登陆信息，如果存在，则处理存在的信息
-    console.log(to)
-    console.log(from)
 	if(store.getters.getUserInfo){
 		//已经登陆
 		//如果不存在，则处理登陆
