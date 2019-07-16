@@ -52,6 +52,9 @@ const user = {
 	},
 	deletebook(params){
 		return instance.post('/app/device/bookself/delete',params)
+	},
+	checknewdevice(){
+		return instance.post('/app/relation/device/new')
 	}
 }
 

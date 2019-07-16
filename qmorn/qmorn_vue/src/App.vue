@@ -1,7 +1,7 @@
 <template>
 	<v-app>
 		<v-content v-resize="onResize">
-			<keep-alive include='BookSearchResult,Main,UserInfo,Voice,Device'>
+			<keep-alive include='BookSearchResult,Main,UserInfo,Voice,Device,NetConfig'>
 				<router-view></router-view>
 			</keep-alive>
 		</v-content>

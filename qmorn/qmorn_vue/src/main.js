@@ -19,6 +19,8 @@ import App from './App.vue'
 import filters from './filter/filter.js';
 import {iotinit,disconnect} from './aliiot/iot.js';
 import weixin from './weixin/weixin.js';
+import VueQriously from 'vue-qriously'
+Vue.use(VueQriously)
 
 Vue.config.productionTip = false
 Vue.prototype.$api = api;

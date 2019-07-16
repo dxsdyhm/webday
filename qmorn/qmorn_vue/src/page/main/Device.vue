@@ -1,5 +1,8 @@
 <template>
 	<v-layout pa-2 column fill-height class="white--text pink lighten-3" text-xs-center>
+		<v-layout class="ma-2" row justify-end>
+			<v-icon color="#fff" size="32" @click="toadd()">add</v-icon>
+		</v-layout>
 		<v-container grid-list-md>
 			<v-layout row wrap>
 				<v-flex v-for="item in onlinestate" :key="item.id" xs4>
@@ -147,6 +150,9 @@
 				}).catch(res => {
 					console.log(res)
 				})
+			},
+			toadd(){
+				this.$router.push({name:'netconfig',params:{type:0}})
 			}
 		},
 		mounted: function() {

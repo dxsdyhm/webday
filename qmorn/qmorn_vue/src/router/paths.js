@@ -12,6 +12,7 @@ import osinfo from '../page/main/DeviceOsInfo.vue'
 import light from '../page/main/Light.vue'
 import membermanager from '../page/main/MemberManager.vue'
 import empty from '../page/main/Empty.vue'
+import qrcode from '../page/main/Qrcode.vue'
 
 import about from '../page/action/About.vue'
 import devicelist from '../page/action/DeviceList.vue'
@@ -155,6 +156,11 @@ var s = [{
 		path: '/bookdetail',
 		name: 'bookdetail',
 		component: bookdetail,
+	},
+	{
+		path: '/qrcode',
+		name: 'qrcode',
+		component: qrcode,
 	}
 ]
 export default s

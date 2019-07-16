@@ -208,7 +208,7 @@
 						break;
 					case 4:
 						//wifi
-						this.$router.push('/netconfig')
+						this.$router.push({name:'netconfig',params:{type:1}})
 						break
 					case 5:
 						//智能绘本

@@ -98,5 +98,11 @@ export const fetchUserMutation = {
 	},
 	updateList (state,action){
 		state.stateList=action;
+	},
+	addUserDevice (state,action){
+		//在列表中加入新设备
+		state.deviceList.unshift(action);
+		//将选中设备改为当前设备
+		state.selectDevice=action;
 	}
 }
