@@ -42,11 +42,11 @@ export const userInfo = {
 		return state.groupinfo;
 	},
 	selectDeviceOnlineState (state){
-		state.stateList.forEach(sta=>{
-			if(sta.id===state.selectDevice.id){
-				return sta.state&0x1===1;
+		for (var i = 0; i < state.stateList.length; i++) {
+			if(state.stateList[i].id===state.selectDevice.id){
+				return (state.stateList[i].state&0x1)===1;
 			}
-		})
+		}
 		return false;
 	},
 	getGroupMessage (state){
