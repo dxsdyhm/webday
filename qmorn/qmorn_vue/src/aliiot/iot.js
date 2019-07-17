@@ -53,35 +53,44 @@ export function iotinit() {
 	device.on('message', (topic, payload) => {
 		const topicArray = topic.split('/')
 		//非本设备的消息不予处理
+		console.log(topic)
+		if(topic.indexOf('/ext/error')==0){
+			//发生错误
+			return;
+		}
 		if (payload) {
 			let remote = JSON.parse(payload.toString())
-			if (remote.DstDevName === deviceinfo.deviceName) {
-				//最后一个区分大类
-				switch (topicArray[topicArray.length - 1]) {
-					case SrvNotify: //服务器通知
-						break;
-					case Forward: //普通消息
-						let msgBody = JSON.parse(remote.MesgBody)
-						console.log("--------------")
-						switch (msgBody.cmd) {
-							case CMD.OPTION_SET:
-								store.commit('updateDeviceSetting', msgBody)
-								break;
-							case CMD.JSON_CODE_INFOOS:
-								store.commit('updateDeviceOsInfo', msgBody)
-								break
-							default:
-								break;
-						}
-						break;
-					case Group: //群组消息
-						break;
-					default:
-						console.log("not device msg :" + topic)
-						break;
-				}
-			} else {
-				console.log("not my msg" + topic)
+			console.log(remote)
+			let msgBody = JSON.parse(remote.MesgBody)
+			switch (remote.dwMesgType) {
+				case 1:
+					//设置类的消息
+					console.log("--------------")
+					switch (msgBody.cmd) {
+						case CMD.OPTION_SET:
+							store.commit('updateDeviceSetting', msgBody)
+							break;
+						case CMD.JSON_CODE_INFOOS:
+							store.commit('updateDeviceOsInfo', msgBody)
+							break
+						default:
+							break;
+					}
+					break;
+				case 2:
+					//呼叫消息
+					break;
+				case 800:
+					//群组消息
+					if(parseInt(remote.DstGrpId)===store.getters.getGroupInfo.id){
+						store.commit('addGroupMessage', msgBody)
+					}else{
+						console.log("非本群消息 :" + remote)
+					}
+					break;
+				default:
+					console.log("not device msg :" + topic)
+					break;
 			}
 		} else {
 			console.log("payload is null:" + topic)
@@ -90,7 +99,7 @@ export function iotinit() {
 	return device;
 }
 
-export function sendSettingMesg(device,msg) {
+export function sendSettingMesg(device, msg) {
 	//目标设备信息
 	let target = store.getters.getSelectDevice
 	let deviceinfo = store.getters.getUserInfo
@@ -110,10 +119,25 @@ export function sendSettingMesg(device,msg) {
 	console.log(msgStr)
 	device.publish(`/${deviceinfo.productKey}/${deviceinfo.deviceName}/user/ForwardMesgSend`, JSON.stringify(msgParen));
 }
-export function sendGroupMesg(device,msg) {
+export function sendGroupMesg(device, msg, role) {
 	//目标设备信息
 	let target = store.getters.getSelectDevice
-	device.publish(`/${deviceinfo.productKey}/${deviceinfo.deviceName}/user/GroupMesgSend`, JSON.stringify(msg));
+	let deviceinfo = store.getters.getUserInfo
+	let msgStr = JSON.stringify(msg)
+	let msgParen = {
+		"SrcRole": role,
+		"SrcID": deviceinfo.uid,
+		"SrcProName": deviceinfo.productKey,
+		"SrcDevName": deviceinfo.deviceName,
+		"DstGrpId": msg.groupid.toString(),
+		"dwMesgType": 800,
+		"dwMesgID": msg.msgid,
+		"tLocMesgTimeMs": msg.time,
+		"dwMesgSize":msgStr.length,
+		"BodyFmt": 1,
+		"MesgBody": msgStr,
+	};
+	device.publish(`/${deviceinfo.productKey}/${deviceinfo.deviceName}/user/GroupMesgSend`, JSON.stringify(msgParen));
 }
 
 export function disconnect(device) {

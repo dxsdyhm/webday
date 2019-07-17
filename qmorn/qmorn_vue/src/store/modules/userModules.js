@@ -64,6 +64,7 @@ export const activeUser = {
 		groupinfo:{},
 		logintype:0,
 		stateList:[],
+		groupmessage:[],
     },
     actions: fetchUserAction,
     getters: userInfo,

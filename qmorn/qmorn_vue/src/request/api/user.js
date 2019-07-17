@@ -54,6 +54,9 @@ const user = {
 	},
 	checknewdevice(){
 		return instance.post('/app/relation/device/new')
+	},
+	getGroupInfo(params){
+		return instance.post('/app/group/member/getbydeviceid',params)
 	}
 }
 

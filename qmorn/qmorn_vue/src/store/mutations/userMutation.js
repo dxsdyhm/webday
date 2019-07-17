@@ -104,5 +104,17 @@ export const fetchUserMutation = {
 		state.deviceList.unshift(action);
 		//将选中设备改为当前设备
 		state.selectDevice=action;
+	},
+	addGroupMessage (state,action){
+		let isadded=false;
+		for (var i = 0; i < state.groupmessage.length; i++) {
+			if(state.groupmessage[i].chatmsgid===action.chatmsgid){
+				isadded=true;
+				break;
+			}
+		}
+		if(!isadded){
+			state.groupmessage.push(action)
+		}
 	}
 }

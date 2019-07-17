@@ -48,5 +48,8 @@ export const userInfo = {
 			}
 		})
 		return false;
+	},
+	getGroupMessage (state){
+		return state.groupmessage;
 	}
 }
