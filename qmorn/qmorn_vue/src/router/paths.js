@@ -26,6 +26,9 @@ import userdetail from '../page/user/UserInfoDetail.vue'
 import netconfig from '../page/main/NetConfig.vue'
 import bookdetail from '../page/book/BookDetail.vue'
 
+import regist from '../page/user/Regist.vue'
+import findpwd from '../page/user/FindPwd.vue'
+
 function isWeixin() {
 	var ua = navigator.userAgent.toLowerCase();
 	var isWeixin = ua.indexOf('micromessenger') != -1;
@@ -161,6 +164,16 @@ var s = [{
 		path: '/qrcode',
 		name: 'qrcode',
 		component: qrcode,
+	},
+	{
+		path: '/regist',
+		name: 'regist',
+		component: regist,
+	},
+	{
+		path: '/findpwd',
+		name: 'findpwd',
+		component: findpwd,
 	}
 ]
 export default s

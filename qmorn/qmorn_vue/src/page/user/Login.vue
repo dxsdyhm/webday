@@ -13,6 +13,15 @@
 					 :type="show?'text':'password'" @click:append="show=!show"></v-text-field>
 				</v-flex>
 				<v-btn color="primary" @click="login">登录</v-btn>
+				<v-layout row class="my-2">
+					<router-link to="/findpwd">
+						<div class="px-1">找回密码</div>
+					</router-link>
+					<v-spacer></v-spacer>
+					<router-link to="/regist">
+						<div class="px-1">注册</div>
+					</router-link>
+				</v-layout>
 			</v-layout>
 			<v-progress-circular v-else :size="56" :width="4" color="primary" indeterminate></v-progress-circular>
 		</v-layout>
@@ -39,7 +48,7 @@
 				phone: '',
 				pwd: '',
 				show: false,
-				showMuti:false,
+				showMuti: false,
 			}
 		},
 		methods: {
@@ -83,12 +92,12 @@
 				let code = getUrlKey('code');
 				let state = getUrlKey('state')
 				if (code) {
-					this.weixinLogin(code).then((result)=> {
+					this.weixinLogin(code).then((result) => {
 						console.log("result")
 						console.log(result)
-						if(result===1){
+						if (result === 1) {
 							this.$message('微信登陆成功')
-							this.showMuti=true
+							this.showMuti = true
 						}
 					}).catch(function(error) {
 						console.log(error);
