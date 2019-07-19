@@ -68,7 +68,6 @@ const serverErrorHandler = (data) => {
 			break;
 	}
 }
-
 // 创建axios实例
 var instance = axios.create({
 	timeout: 1000 * 12
@@ -77,6 +76,14 @@ var instance = axios.create({
 Object.keys(store.state.activeUser.headers).forEach(function(key) {
 	instance.defaults.headers[key] = store.state.activeUser.headers[key]
 })
+
+const special=['/app/user/login','/app/com/sms/send','/app/com/verifycode/verify','/app/user/register']
+
+//是否需要检查sessionid
+function nosession(url){
+	return special.includes(url);
+}
+
 /**
  * 请求拦截器
  * 每次请求前，如果存在token则在请求头中携带token
@@ -95,8 +102,7 @@ instance.interceptors.request.use(
 		}else{
 			config.baseURL=base.base1
 		}
-		if(config.url==='/app/user/login'){
-			//登陆接口不检查session id
+		if(nosession(config.url)){
 			return config;
 		}
 		let sid=store.state.activeUser.headers['sid']

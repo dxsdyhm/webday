@@ -57,6 +57,18 @@ const user = {
 	},
 	getGroupInfo(params){
 		return instance.post('/app/group/member/getbydeviceid',params)
+	},
+	sendsms(params){
+		return instance.post('/app/com/sms/send',params)
+	},
+	vertycode(params){
+		return instance.post('/app/com/verifycode/verify',params)
+	},
+	regist(params){
+		return instance.post('/app/user/register',params)
+	},
+	resetpwd(params){
+		return instance.post('/app/user/pwd/reset',params)
 	}
 }
 

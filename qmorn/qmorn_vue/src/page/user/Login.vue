@@ -45,7 +45,7 @@
 		},
 		data() {
 			return {
-				phone: '',
+				phone: this.$route.params.phone||'',
 				pwd: '',
 				show: false,
 				showMuti: false,
