@@ -45,7 +45,7 @@
 		},
 		data() {
 			return {
-				phone: this.$route.params.phone||'',
+				phone: this.$route.params.phone || '',
 				pwd: '',
 				show: false,
 				showMuti: false,
@@ -116,5 +116,13 @@
 	.qmorn {
 		margin-top: 4rem;
 		margin-bottom: 3rem;
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	.router-link-active {
+		text-decoration: none;
 	}
 </style>

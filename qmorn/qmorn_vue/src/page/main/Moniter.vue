@@ -74,6 +74,7 @@
 					return;
 				}
 				let message=this.getSendTextMessage();
+				console.log(JSON.stringify(message))
 				sendGroupMesg(this.$iotdevice, message, this.userrole)
 				this.$store.commit('addGroupMessage', message)
 				this.messtext="";
@@ -101,12 +102,16 @@
 					type: 0,
 					text: this.messtext,
 					url: '',
-					time: this.getUtcTime(),
+					time: this.getUtcTime()/1000,
 					duration: 0,
 					sendid: this.userinfo.uid,
 					chatmsgid: msgid,
 					elfid: this.selectdevice.id,
 					groupid: this.getGroupInfo.id,
+					localuri: '',
+					buckname: '',
+					objkey: '',
+					extra: ''
 				}
 			},
 			chatmsid(){
