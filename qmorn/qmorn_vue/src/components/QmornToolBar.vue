@@ -12,7 +12,14 @@
 	export default{
 		methods: {
 			goBack() {
-				this.$router.back()
+				if(typeof(this.$parent.back)==='function'){
+					let canback=this.$parent.back()
+					if(!!canback){
+						this.$router.back()
+					}
+				}else{
+					this.$router.back()
+				}
 			}
 		},
 		props: {

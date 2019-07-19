@@ -77,7 +77,7 @@ Object.keys(store.state.activeUser.headers).forEach(function(key) {
 	instance.defaults.headers[key] = store.state.activeUser.headers[key]
 })
 
-const special=['/app/user/login','/app/com/sms/send','/app/com/verifycode/verify','/app/user/register']
+const special=['/app/user/login','/app/com/sms/send','/app/com/verifycode/verify','/app/user/register','/app/user/pwd/reset']
 
 //是否需要检查sessionid
 function nosession(url){

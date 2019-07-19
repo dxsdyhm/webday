@@ -1,6 +1,6 @@
 <template>
 	<v-layout column align-space-around>
-		<qmorntoolbar :title='title'></qmorntoolbar>
+		<qmorntoolbar :title='title' v-on:back="back"></qmorntoolbar>
 		<v-stepper v-model="el" alt-labels>
 			<v-stepper-header>
 				<v-stepper-step :complete="el>1" step="1">手机号码</v-stepper-step>
@@ -100,6 +100,15 @@
 				}).catch(error => {
 					this.$message(error.msg)
 				})
+			},
+			back(){
+				if(this.el<=1){
+					//直接返回上一个页面
+					return true;
+				}else{
+					this.el=this.el-1;
+					return false;
+				}
 			}
 		},
 		computed: {
