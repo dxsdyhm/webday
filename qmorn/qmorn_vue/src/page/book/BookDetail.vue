@@ -10,7 +10,7 @@
 			</v-layout>
 		</v-responsive>
 		<p></p>
-		<div>{{book.description}}</div>
+		<div class="des">{{book.description}}</div>
 		<p></p>
 		<div>{{book.author}}&nbsp;&nbsp;&nbsp;{{book.publisher}}&nbsp;&nbsp;&nbsp;{{book.pubdate}}</div>
 		<v-btn v-if="booklistids" class="ma-4" color="gray" disabled>已添加到书架</v-btn>
@@ -64,5 +64,8 @@
 	.bookname{
 		color: #FFFFFF;
 		margin-top: 1rem;
+	}
+	.des{
+		text-indent: 2em;
 	}
 </style>
