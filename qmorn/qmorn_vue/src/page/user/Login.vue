@@ -68,7 +68,6 @@
 					//router 跳转到main
 					this.$router.replace('main')
 				}).catch(res => {
-					//登陆失败
 					this.$message(res.msg)
 				})
 			},
