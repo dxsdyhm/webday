@@ -1,6 +1,7 @@
 <template>
 	<v-container>
 		<v-layout class="contain" align-center justify-center column fill-height>
+			<v-text-field v-model="code" type="text"></v-text-field>
 			<v-avatar class="qmorn" :size=96 tile>
 				<img src="../../assets/img/logo.svg" />
 			</v-avatar>
@@ -49,6 +50,7 @@
 				pwd: '',
 				show: false,
 				showMuti: false,
+				code:''
 			}
 		},
 		methods: {
@@ -91,16 +93,18 @@
 				let code = getUrlKey('code');
 				let state = getUrlKey('state')
 				if (code) {
-					this.weixinLogin(code).then((result) => {
-						console.log("result")
-						console.log(result)
-						if (result === 1) {
-							this.$message('微信登陆成功')
-							this.showMuti = true
-						}
-					}).catch(function(error) {
-						console.log(error);
-					});
+					// this.weixinLogin(code).then((result) => {
+					// 	console.log("result")
+					// 	console.log(result)
+					// 	if (result === 1) {
+					// 		this.$message('微信登陆成功')
+					// 		this.showMuti = true
+					// 	}
+					// }).catch(function(error) {
+					// 	console.log(error);
+					// });
+					this.code=code;
+					this.showMuti = true
 				}
 			}
 		}
