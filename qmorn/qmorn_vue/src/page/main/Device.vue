@@ -83,7 +83,7 @@
 						text: "80"
 					}
 				],
-				online: 0
+				online: 0,
 			}
 		},
 		methods: {
@@ -104,7 +104,6 @@
 				})
 			},
 			getDeviceOnline() {
-				console.log("请求在线状态,与电量信息")
 				this.$api.user.getdevicebatter({
 					deviceList: [this.$store.getters.getSelectDevice.id]
 				}).then(res => {
@@ -134,7 +133,8 @@
 			inet() {
 				this.getDeviceOnline()
 				clearInterval(this.interval)
-				this.interval = setInterval(this.getDeviceOnline, 60000);
+				//修改轮询逻辑，将均匀逻辑改为前期密集，后期稀疏   //放弃
+				this.interval = setInterval(this.getDeviceOnline, 30000);
 			},
 			getAliOnline() {
 				this.$api.user.getAlionline({
