@@ -92,6 +92,7 @@
 				console.log("微信登陆")
 				let code = getUrlKey('code');
 				let state = getUrlKey('state')
+				//调用后台微信登陆接口，如果失败，转而展示普通登陆界面
 				if (code) {
 					// this.weixinLogin(code).then((result) => {
 					// 	console.log("result")
