@@ -4,12 +4,7 @@
 			<div class="col-9 text-justify">系列图书</div>
 		</div>
 		<div class="row mh-10 justify-content-around">
-			<div v-for="(book,index) in getBookSingle" :key="index" class="col-4 my-1" @click="toSigleBook(book)">
-				<figure class="figure">
-					<img :src="book.coverUrl" class="figure-img img-fluid rounded ratio">
-					<figcaption class="figure-caption">{{book.name}}</figcaption>
-				</figure>
-			</div>
+			<Book v-for="(book,index) in getBookSingle" :key="index" @click.native="toSigleBook(book)" :book="book"></Book>
 		</div>
 	</div>
 </template>
@@ -19,7 +14,7 @@
 		mapGetters
 	} from 'vuex';
 	export default {
-		name: 'bookhome',
+		name: 'catenlist',
 		data() {
 			return {
 				keywords:'我'
@@ -61,4 +56,7 @@
 </script>
 
 <style>
+	.tt{
+		border: 0.0625rem solid #42B983;
+	}
 </style>

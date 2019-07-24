@@ -1,33 +1,24 @@
 <template>
 	<div class="col">
 		<div class="col px-0">
-			<div class="row lable align-items-center primarybg mb-2">
-				<div class="col-9 text-justify">系列图书</div>
+			<div class="row lable align-items-center mb-2">
+				<h5 class="col-9 text-justify">系列图书</h5>
 				<div class="col-2 pr-0 text-right" @click="catena">更多</div>
 				<i class="material-icons" @click="catena">chevron_right</i>
 			</div>
 			<div class="row mh-10 justify-content-around">
-				<div v-for="(book,index) in getBookSingle.slice(0,6)" :key="index" class="col-4 my-1" @click="toSigleBook(book)">
-					<figure class="figure">
-						<img :src="book.coverUrl" class="figure-img img-fluid rounded ratio">
-						<figcaption class="figure-caption">{{book.name}}</figcaption>
-					</figure>
-				</div>
+				<Book v-for="(book,index) in getBookSingle.slice(0,6)" :key="index" @click.native="toSigleBook(book)" :book="book"></Book>
 			</div>
 		</div>
+		<hr />
 		<div class="col px-0">
-			<div class="row lable align-items-center primarybg mb-2">
-				<div class="col-9 text-justify">精品图书</div>
+			<div class="row lable align-items-center mb-2">
+				<h5 class="col-9 text-justify">精品图书</h5>
 				<div class="col-2 pr-0 text-right" @click="singlelist">更多</div>
 				<i class="material-icons" @click="singlelist">chevron_right</i>
 			</div>
 			<div class="row mh-10">
-				<div v-for="(book,index) in getBookSingle" :key="index" class="col-4 my-1" @click="toSigleBook(book)">
-					<figure class="figure">
-						<b-img-lazy :src="book.coverUrl" class="figure-img img-fluid rounded img-thumbnail ratio"></b-img-lazy>
-						<figcaption class="figure-caption">{{book.name}}</figcaption>
-					</figure>
-				</div>
+				<Book v-for="(book,index) in getBookSingle" :key="index" @click.native="toSigleBook(book)" :book="book"></Book>
 			</div>
 		</div>
 	</div>
@@ -90,7 +81,7 @@
 		height: 2.5rem;
 	}
 	.ratio{
-		width: 7.5rem;
-		height: 7.5rem;
+		width: 7rem;
+		height: 7rem;
 	}
 </style>
