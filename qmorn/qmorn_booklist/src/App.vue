@@ -1,6 +1,6 @@
 <template>
-	<div id="app" class="container-fluid bg">
-		<keep-alive include='bookhome'>
+	<div id="app" class="container-fluid px-0">
+		<keep-alive include='bookhome,catenlist'>
 			<router-view></router-view>
 		</keep-alive>
 	</div>
@@ -13,7 +13,7 @@
 </script>
 
 <style>
-	.bg{
-		background-color: darkgray;
+	.primarybg{
+		background-color: #42B983;
 	}
 </style>

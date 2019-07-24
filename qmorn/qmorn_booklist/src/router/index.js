@@ -15,6 +15,16 @@ export default new Router({
 	  name: 'bookdetail',
 	  component: require('@/components/BookDetails').default
 	},
+	{
+	  path: '/bookcatena',
+	  name: 'bookcatena',
+	  component: require('@/components/BookCatena').default
+	},
+	{
+	  path: '/catenalist',
+	  name: 'catenalist',
+	  component: require('@/components/CatenList').default
+	},
     {
       path: '*',
       redirect: '/'
