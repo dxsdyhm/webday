@@ -1,10 +1,8 @@
 <template>
 	<div class="col px-0">
-		<div class="primarybg text-center pt-5 pb-4">
-			<figure class="figure">
-				<b-img-lazy :src="book.coverUrl" class="figure-img img-fluid rounded"></b-img-lazy>
-				<figcaption class="figure-caption bookname">{{book.name}}</figcaption>
-			</figure>
+		<div ref="detailbg" class="primarybg text-center pt-5 pb-4">
+			<img ref="imgbooks" :src="book.coverUrl" @load="imgbooks" cross-origin="anonymous" class="figure-img img-fluid rounded"></img>
+			<div class="bookname">{{book.name}}</div>
 		</div>
 		<div class="col">
 			<p></p>
@@ -24,19 +22,26 @@
 			}
 		},
 		mounted: function() {},
+		methods: {
+			imgbooks() {
+				
+			},
+		},
 	}
 </script>
 
 <style>
-	.bookname{
+	.bookname {
 		color: #FFFFFF;
-		margin-top: 1rem;
+		margin-top: 0.8rem;
 	}
-	.des{
+
+	.des {
 		text-indent: 2em;
 		font-size: 16px;
 	}
-	.publish{
+
+	.publish {
 		color: #A9A9A9;
 		font-size: 14px;
 	}

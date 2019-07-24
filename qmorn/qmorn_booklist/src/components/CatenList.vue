@@ -1,9 +1,9 @@
 <template>
 	<div class="col">
 		<div class="row lable align-items-center primarybg mb-2">
-			<div class="col-9 text-justify">系列图书</div>
+			<div class="col-9 text-justify title">系列图书</div>
 		</div>
-		<div class="row mh-10 justify-content-around">
+		<div class="row justify-content-start">
 			<Book v-for="(book,index) in getBookSingle" :key="index" @click.native="toSigleBook(book)" :book="book"></Book>
 		</div>
 	</div>
@@ -56,7 +56,7 @@
 </script>
 
 <style>
-	.tt{
-		border: 0.0625rem solid #42B983;
+	.title{
+		color: #FFFFFF;
 	}
 </style>

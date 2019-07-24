@@ -6,8 +6,8 @@
 				<div class="col-2 pr-0 text-right" @click="catena">更多</div>
 				<i class="material-icons" @click="catena">chevron_right</i>
 			</div>
-			<div class="row mh-10 justify-content-around">
-				<Book v-for="(book,index) in getBookSingle.slice(0,6)" :key="index" @click.native="toSigleBook(book)" :book="book"></Book>
+			<div class="row justify-content-start">
+				<Book v-for="(book,index) in getBookSingle.slice(0,6)" :key="index" @click.native="singlelist(book)" :book="book"></Book>
 			</div>
 		</div>
 		<hr />
@@ -17,7 +17,7 @@
 				<div class="col-2 pr-0 text-right" @click="singlelist">更多</div>
 				<i class="material-icons" @click="singlelist">chevron_right</i>
 			</div>
-			<div class="row mh-10">
+			<div class="row justify-content-start">
 				<Book v-for="(book,index) in getBookSingle" :key="index" @click.native="toSigleBook(book)" :book="book"></Book>
 			</div>
 		</div>
@@ -42,7 +42,8 @@
 			search() {
 				this.$http({
 						method: 'post',
-						url: 'https://dev.oss.qmorn.com/qmorn/oss/app/res/book/search',
+						// url: 'https://dev.oss.qmorn.com/qmorn/oss/app/res/book/search',
+						url: '/qmorn/oss/app/res/book/search',
 						data: {
 							key: this.keywords
 						},
@@ -64,7 +65,7 @@
 			catena(){
 				this.$router.push({name:'catenalist'})
 			},
-			singlelist(){
+			singlelist(book){
 				this.$router.push({name:'bookcatena'})
 			}
 		},
