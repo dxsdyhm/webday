@@ -56,6 +56,7 @@
 					return;
 				}
 				this.$api.user.checknewdevice().then(res => {
+					this.stoploop();
 					//有新设备，弹窗
 					this.device=res.data;
 					this.newDevice=true;
