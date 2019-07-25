@@ -1,5 +1,5 @@
 <template>
-	<div class="col px-0">
+	<div class="container px-0">
 		<div ref="detailbg" class="primarybg text-center pt-5 pb-4">
 			<img ref="imgbooks" :src="book.coverUrl" @load="imgbooks" cross-origin="anonymous" class="figure-img img-fluid rounded"></img>
 			<div class="bookname">{{book.name}}</div>

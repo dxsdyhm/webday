@@ -1,5 +1,5 @@
 <template>
-	<div class="col">
+	<div class="container">
 		<div class="col px-0">
 			<div class="row lable align-items-center mb-2">
 				<h5 class="col-9 text-justify">系列图书</h5>

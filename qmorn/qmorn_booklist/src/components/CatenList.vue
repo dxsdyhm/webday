@@ -1,10 +1,12 @@
 <template>
-	<div class="col">
-		<div class="row lable align-items-center primarybg mb-2">
+	<div>
+		<div class="row lable align-items-center primarybg mb-2 pl-5">
 			<div class="col-9 text-justify title">系列图书</div>
 		</div>
-		<div class="row justify-content-start">
-			<Book v-for="(book,index) in getBookSingle" :key="index" @click.native="toSigleBook(book)" :book="book"></Book>
+		<div class="container">
+			<div class="row justify-content-start">
+				<Book v-for="(book,index) in getBookSingle" :key="index" @click.native="toSigleBook(book)" :book="book"></Book>
+			</div>
 		</div>
 	</div>
 </template>
@@ -17,10 +19,10 @@
 		name: 'catenlist',
 		data() {
 			return {
-				keywords:'我'
+				keywords: '我'
 			}
 		},
-		mounted: function () {
+		mounted: function() {
 			this.search();
 		},
 		methods: {
@@ -43,8 +45,13 @@
 						console.log(error)
 					})
 			},
-			toSigleBook(book){
-				this.$router.push({name:'bookdetail',params:{'book':book}})
+			toSigleBook(book) {
+				this.$router.push({
+					name: 'bookdetail',
+					params: {
+						'book': book
+					}
+				})
 			}
 		},
 		computed: {
@@ -56,7 +63,7 @@
 </script>
 
 <style>
-	.title{
+	.title {
 		color: #FFFFFF;
 	}
 </style>

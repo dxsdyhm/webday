@@ -1,5 +1,5 @@
 <template>
-	<div id="app" class="container-fluid px-0">
+	<div id="app">
 		<keep-alive include='bookhome,catenlist'>
 			<router-view></router-view>
 		</keep-alive>
