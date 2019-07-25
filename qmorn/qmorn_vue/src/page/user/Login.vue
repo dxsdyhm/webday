@@ -1,7 +1,6 @@
 <template>
 	<v-container>
 		<v-layout class="contain" align-center justify-center column fill-height>
-			<v-text-field v-model="code" type="text"></v-text-field>
 			<v-avatar class="qmorn" :size=96 tile>
 				<img src="../../assets/img/logo.svg" />
 			</v-avatar>
@@ -50,7 +49,6 @@
 				pwd: '',
 				show: false,
 				showMuti: false,
-				code:''
 			}
 		},
 		methods: {
@@ -94,18 +92,24 @@
 				let state = getUrlKey('state')
 				//调用后台微信登陆接口，如果失败，转而展示普通登陆界面
 				if (code) {
-					// this.weixinLogin(code).then((result) => {
-					// 	console.log("result")
-					// 	console.log(result)
-					// 	if (result === 1) {
-					// 		this.$message('微信登陆成功')
-					// 		this.showMuti = true
-					// 	}
-					// }).catch(function(error) {
-					// 	console.log(error);
-					// });
-					this.code=code;
-					this.showMuti = true
+					this.$api.user.thirdlogin({
+						thirdType: 1,
+						thirdAccessCode: code,
+						option: 'getAliyunIotInfo',
+						appOs:50,
+						appToken: '97D0E83CD2ED48b0A511590B78EA3B0AC09B6234AFCF4bfa9B73BF8199BEA302',
+						packageName: 'com.qmx.qimengxing'
+					}).then(res => {
+						//vuex 存储user信息
+						console.log(res)
+						this.$store.commit('updateUserInfo', res.data)
+						//router 跳转到main
+						this.$router.replace('main')
+					}).catch(res => {
+						this.showMuti=true;
+					})
+				}else{
+					this.showMuti=true;
 				}
 			}
 		}

@@ -3,10 +3,10 @@
 		<v-responsive :aspect-ratio="16/9" class="up pink lighten-3">
 			<v-layout align-center justify-center column fill-height @click="jumpTo('/userdetail')">
 				<v-avatar :size=72>
-					<img :src="getWeixinUserInfo.headimgurl?getWeixinUserInfo.headimgurl:userimg" />
+					<img :src="userimg" />
 				</v-avatar>
 				<div class="user_phone">
-					{{getWeixinUserInfo.nickname?getWeixinUserInfo.nickname:username}}
+					{{username}}
 				</div>
 			</v-layout>
 		</v-responsive>

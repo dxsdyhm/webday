@@ -71,7 +71,7 @@
 				return JSON.stringify({
 					s: this.s,
 					p: this.p,
-					u: this.userinfo.uid
+					u: this.userinfo.uid+''
 				});
 			},
 			title(){

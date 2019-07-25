@@ -110,7 +110,7 @@
 				this.timeOutEvent = 0;
 			},
 			toSearch() {
-				if (weixin.isWeixin()) {
+				if (weixin.isWeixin()&&false) {
 					this.toQrScan();
 				} else {
 					//直接去搜索页面
@@ -131,7 +131,6 @@
 				}).
 				catch(error => {
 					console.log(error)
-					console.log('请在微信客户端打开')
 				})
 				this.$wx.ready(() => {
 					console.log('微信jssdk准本好了')

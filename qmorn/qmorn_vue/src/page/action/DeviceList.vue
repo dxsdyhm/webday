@@ -1,7 +1,7 @@
 <template>
 	<v-layout column="">
 		<qmorntoolbar :title="title"></qmorntoolbar>
-		<v-list>
+		<v-list v-if="devicelist&&devicelist.lenght>0">
 			<v-list-tile v-for="item in devicelist" :key="item.id" avatar @click="selectdevice(item)">
 				<v-list-tile-avatar>
 					<v-avatar :size=36 tile>
@@ -19,6 +19,9 @@
 				</v-list-tile-action>
 			</v-list-tile>
 		</v-list>
+		<v-layout v-else align-center justify-center column fill-height class="mt-5">
+			还没有设备
+		</v-layout>
 	</v-layout>
 </template>
 

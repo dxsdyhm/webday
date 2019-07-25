@@ -69,6 +69,9 @@ const user = {
 	},
 	resetpwd(params){
 		return instance.post('/app/user/pwd/reset',params)
+	},
+	thirdlogin(params){
+		return instance.post('/app/user/thirdlogin2',params)
 	}
 }
 

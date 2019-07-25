@@ -77,7 +77,7 @@ Object.keys(store.state.activeUser.headers).forEach(function(key) {
 	instance.defaults.headers[key] = store.state.activeUser.headers[key]
 })
 
-const special=['/app/user/login','/app/com/sms/send','/app/com/verifycode/verify','/app/user/register','/app/user/pwd/reset']
+const special=['/app/user/login','/app/com/sms/send','/app/com/verifycode/verify','/app/user/register','/app/user/pwd/reset','/app/user/thirdlogin2']
 
 //是否需要检查sessionid
 function nosession(url){
@@ -135,7 +135,6 @@ instance.interceptors.response.use(
 	// 请求失败
 	error => {
 		const {response} = error;
-		console.log(response)
 		if (response) {
 			// 请求已发出，但是不在2xx的范围
 			errorHandle(response.status, response.data.code, response.data.msg);
@@ -146,6 +145,7 @@ instance.interceptors.response.use(
 			// network状态在app.vue中控制着一个全局的断网提示组件的显示隐藏
 			// 关于断网组件中的刷新重新获取数据，会在断网组件中说明
 			tip("网络异常", 'error');
+			return Promise.reject("error");
 		}
 	});
 
