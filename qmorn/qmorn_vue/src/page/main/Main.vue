@@ -41,6 +41,13 @@
 		mounted: function() {
 			this.activeBtn=this.$store.getters.getActive
 		},
+		activated(){
+			if(this.activeBtn===1){
+				if(this.selectdevice===null||this.selectdevice===undefined){
+					this.$router.replace('/main/empty')
+				}
+			}
+		},
 		watch:{
             activeBtn(newvalue,old){
 				this.$store.commit('updateActive', newvalue)

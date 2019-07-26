@@ -121,7 +121,7 @@
 			updateInfo() {
 				let slect = this.$store.getters.getSelectOnline;
 				if (slect.deviceName != this.onlinestate[0].text) {
-					this.onlinestate[0].text = slect.deviceName
+					this.onlinestate[0].text = this.showname
 				}
 				if (slect.ssid != this.onlinestate[1].text) {
 					this.onlinestate[1].text = slect.ssid
@@ -168,6 +168,13 @@
 				selectdevice: 'getSelectDevice',
 				deviceonline:'selectDeviceOnlineState',
 			}),
+			showname(){
+				if(!!this.selectdevice.remark){
+					return this.selectdevice.remark
+				}else{
+					return this.selectdevice.name
+				}
+			}
 		}
 	}
 </script>

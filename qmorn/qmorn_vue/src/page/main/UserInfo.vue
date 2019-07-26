@@ -29,9 +29,6 @@
 
 <script>
 	import {
-		mapActions
-	} from 'vuex';
-	import {
 		mapGetters
 	} from 'vuex';
 	export default {
@@ -71,9 +68,6 @@
 			jumpTo(path) {
 				this.$router.push(path)
 			},
-			...mapActions([
-				'getWeixinInfo', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
-			]),
 		},
 		computed: {
 			userimg(){
@@ -85,9 +79,6 @@
 			...mapGetters([
 				'getWeixinUserInfo', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
 			]),
-		},
-		mounted() {
-			this.getWeixinInfo()
 		}
 	}
 </script>

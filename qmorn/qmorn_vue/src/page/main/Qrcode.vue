@@ -2,7 +2,7 @@
 	<v-layout column align-center>
 		<qmorntoolbar :title='title'></qmorntoolbar>
 		<qriously :value="qrcode" :size="qrsize" />
-		<div class="mt-4">如果设备不能识别，请在设备面前小幅度移动手机</div>
+		<div class="mt-4">请将二维码放置到设备正前方，如果设备不能识别，请在设备面前小幅度移动手机</div>
 		<v-dialog v-model="newDevice">
 			<v-card>
 				<v-card-title class="headline">
@@ -42,7 +42,7 @@
 				newDevice: false,
 				device: {},
 				interval: '',
-				maxtime:35,
+				maxtime:65,
 				current:0,
 				timeout:false,
 			}
@@ -96,6 +96,13 @@
 			},
 			qrsize() {
 				return (this.$store.state.activeUser.windSize.x - 10)
+			},
+			showname(){
+				if(!!this.device.remark){
+					return this.device.remark
+				}else{
+					return this.device.name
+				}
 			}
 		},
 		mounted() {
