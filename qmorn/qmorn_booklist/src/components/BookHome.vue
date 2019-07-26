@@ -1,5 +1,12 @@
 <template>
 	<div class="container">
+		<br />
+		<div class="jumbotron bg-info text-white">
+			<div class="container">
+				<h1 class="display-5">启萌星</h1>
+				<p class="lead">海量绘本资源，为小朋友提供优质绘本阅读体验！</p>
+			</div>
+		</div>
 		<div class="col px-0">
 			<div class="row lable align-items-center mb-2">
 				<h5 class="col-9 text-justify">系列图书</h5>
@@ -32,10 +39,10 @@
 		name: 'bookhome',
 		data() {
 			return {
-				keywords:'我'
+				keywords: '我'
 			}
 		},
-		mounted: function () {
+		mounted: function() {
 			this.search();
 		},
 		methods: {
@@ -59,14 +66,23 @@
 						console.log(error)
 					})
 			},
-			toSigleBook(book){
-				this.$router.push({name:'bookdetail',params:{'book':book}})
+			toSigleBook(book) {
+				this.$router.push({
+					name: 'bookdetail',
+					params: {
+						'book': book
+					}
+				})
 			},
-			catena(){
-				this.$router.push({name:'catenalist'})
+			catena() {
+				this.$router.push({
+					name: 'catenalist'
+				})
 			},
-			singlelist(book){
-				this.$router.push({name:'bookcatena'})
+			singlelist(book) {
+				this.$router.push({
+					name: 'bookcatena'
+				})
 			}
 		},
 		computed: {
@@ -81,7 +97,8 @@
 	.lable {
 		height: 2.5rem;
 	}
-	.ratio{
+
+	.ratio {
 		width: 7rem;
 		height: 7rem;
 	}
