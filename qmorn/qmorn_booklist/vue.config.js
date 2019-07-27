@@ -23,7 +23,7 @@ module.exports = {
 				secure: false,
 			},
 			'/qmorn': {
-				target: 'https://dev.oss.qmorn.com',
+				target: 'https://api1.q-links.net:10081',
 				changeOrigin: true,
 				secure: false,
 			}

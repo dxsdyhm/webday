@@ -1,11 +1,11 @@
 <template>
 	<div>
-		<div class="row lable align-items-center primarybg mb-2 pl-5">
+		<div class="row lable align-items-center primarybg mb-2 pl-5 sticky-top">
 			<div class="col-9 text-justify title">系列图书</div>
 		</div>
 		<div class="container">
 			<div class="row justify-content-start">
-				<Book v-for="(book,index) in getBookSingle" :key="index" @click.native="toSigleBook(book)" :book="book"></Book>
+				<Book v-for="(book,index) in getBookSeris" :key="index" @click.native="toSeris(book)" :book="book"></Book>
 			</div>
 		</div>
 	</div>
@@ -19,33 +19,10 @@
 		name: 'catenlist',
 		data() {
 			return {
-				keywords: '我'
 			}
 		},
-		mounted: function() {
-			this.search();
-		},
 		methods: {
-			search() {
-				this.$http({
-						method: 'post',
-						url: 'https://dev.oss.qmorn.com/qmorn/oss/app/res/book/search',
-						data: {
-							key: this.keywords
-						},
-						headers: {
-							'content-type': 'application/json',
-							token: 'C5D9921FD458477CBEF5F6484DBBEC6D'
-						}
-					})
-					.then(response => {
-						this.$store.commit('updateHomeBook', response.data.bookList)
-					})
-					.catch(function(error) {
-						console.log(error)
-					})
-			},
-			toSigleBook(book) {
+			toSeris(book) {
 				this.$router.push({
 					name: 'bookdetail',
 					params: {
@@ -56,7 +33,7 @@
 		},
 		computed: {
 			...mapGetters({
-				getBookSingle: 'getBookSingle',
+				getBookSeris: 'getBookSeris',
 			}),
 		},
 	}
