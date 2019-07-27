@@ -8,17 +8,17 @@
 </template>
 
 <script>
-	export default{
+	export default {
 		methods: {
-		
+
 		},
 		props: {
 			book: {
 				type: Object,
-				default: ()=>{
+				default: () => {
 					return {
-						coverUrl:'',
-						name:'',
+						coverUrl: '',
+						name: '',
 					}
 				}
 			},
@@ -27,11 +27,42 @@
 </script>
 
 <style>
-	.ratio{
-		width: 6.5rem;
-		height: 6.5rem;
+	@media (max-width: 575.98px) {
+		.ratio {
+			width: 6.5rem;
+			height: 6.5rem;
+		}
 	}
-	.ww{
+
+	@media (min-width: 576px) and (max-width: 767.98px) {
+		.ratio {
+			width: 7rem;
+			height: 7rem;
+		}
+	}
+
+	@media (min-width: 768px) and (max-width: 991.98px) {
+		.ratio {
+			width: 8rem;
+			height: 8rem;
+		}
+	}
+
+	@media (min-width: 992px) and (max-width: 1199.98px) {
+		.ratio {
+			width: 9rem;
+			height: 9rem;
+		}
+	}
+
+	@media (min-width: 1200px) {
+		.ratio {
+			width: 10rem;
+			height: 10rem;
+		}
+	}
+
+	.ww {
 		border: 0.0625rem solid #42B983;
 	}
 </style>

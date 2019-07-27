@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="row lable align-items-center primarybg mb-2 pl-5 sticky-top">
+		<div class="row lable align-items-center primarybg mb-2 pl-3 sticky-top">
 			<div class="col-9 text-justify title">系列图书</div>
 		</div>
 		<div class="container">

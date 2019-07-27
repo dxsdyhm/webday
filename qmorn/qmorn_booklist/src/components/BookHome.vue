@@ -53,8 +53,14 @@
 						url: '/res/book/recommend',
 					})
 					.then(response => {
-						this.$store.commit('updateserisBook', response.data.seriseBooks)
-						this.$store.commit('updateHomeBook', response.data.books)
+						
+						let test1=response.data.data.seriseBooks.concat(response.data.data.seriseBooks).concat(response.data.data.seriseBooks)
+						let test2=response.data.data.books.concat(response.data.data.books).concat(response.data.data.books)
+						// this.$store.commit('updateserisBook', response.data.data.seriseBooks)
+						// this.$store.commit('updateHomeBook', response.data.data.books)
+						console.log(test1)
+						this.$store.commit('updateserisBook', test1)
+						this.$store.commit('updateHomeBook', test2)
 					})
 					.catch(function(error) {
 						console.log(error)
@@ -94,10 +100,5 @@
 <style>
 	.lable {
 		height: 3rem;
-	}
-
-	.ratio {
-		width: 7rem;
-		height: 7rem;
 	}
 </style>

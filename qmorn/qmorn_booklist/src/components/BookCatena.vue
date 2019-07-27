@@ -5,7 +5,7 @@
 		</div>
 		<div class="container">
 			<div class="row justify-content-start">
-				<Book v-for="(book,index) in getBookSeris" :key="index" @click.native="toSeris(book)" :book="book"></Book>
+				<Book v-for="(book,index) in booklist" :key="index" @click.native="toSeris(book)" :book="book"></Book>
 			</div>
 		</div>
 	</div>
@@ -20,7 +20,9 @@
 				booklist:[]
 			}
 		},
-		mounted: function() {},
+		mounted: function() {
+			this.getAllserisBook();
+		},
 		methods: {
 			getAllserisBook() {
 				let bookslist=this.$store.getters.getBookSerisbyid(this.book.seriseId)
@@ -37,8 +39,8 @@
 						})
 						.then(response => {
 							let serisid=this.book.seriseId
-							this.$store.commit('saveserisbooklist', {serisid:response.data.books})
-							this.booklist=response.data.books
+							this.$store.commit('saveserisbooklist', {serisid:response.data.data.books})
+							this.booklist=response.data.data.books
 						})
 						.catch(function(error) {
 							console.log(error)
