@@ -41,6 +41,7 @@
 			searchbykey() {
 				this.$http({
 					method: 'post',
+					baseURL:'https://api1.q-links.net:10081',
 					// url: 'https://dev.oss.qmorn.com/qmorn/oss/app/res/book/search',
 					url: '/res/book/recommend/search',
 					data: {

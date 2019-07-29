@@ -4,11 +4,11 @@
 			<div class="container">
 				<a class="navbar-brand text-white">
 					<img src="../assets/logo.svg" width="40" height="40" class="d-inline-block mr-3" alt="">启萌星</a>
-				<form class="form-inline">
+				<div class="form-inline">
 					<input class="form-control mr-sm-2" type="search" v-model="keywords" placeholder="输入书名或者ISBN" aria-label="Search"
-					 @keyup.enter.native="searchbykey">
+					 @keyup.enter="searchbykey">
 					<i class="material-icons text-light" @click="searchbykey">search</i>
-				</form>
+				</div>
 			</div>
 		</nav>
 		<div class="container">
@@ -65,17 +65,17 @@
 				this.$http({
 						method: 'post',
 						// url: 'https://dev.oss.qmorn.com/qmorn/oss/app/res/book/search',
+						baseURL:'https://api1.q-links.net:10081',
 						url: '/res/book/recommend',
 					})
 					.then(response => {
-
-						let test1 = response.data.data.seriseBooks.concat(response.data.data.seriseBooks).concat(response.data.data.seriseBooks)
-						let test2 = response.data.data.books.concat(response.data.data.books).concat(response.data.data.books)
-						// this.$store.commit('updateserisBook', response.data.data.seriseBooks)
-						// this.$store.commit('updateHomeBook', response.data.data.books)
-						console.log(test1)
-						this.$store.commit('updateserisBook', test1)
-						this.$store.commit('updateHomeBook', test2)
+						// let test1 = response.data.data.seriseBooks.concat(response.data.data.seriseBooks).concat(response.data.data.seriseBooks)
+						// let test2 = response.data.data.books.concat(response.data.data.books).concat(response.data.data.books)
+						// console.log(test1)
+						// this.$store.commit('updateserisBook', test1)
+						// this.$store.commit('updateHomeBook', test2)
+						this.$store.commit('updateserisBook', response.data.data.seriseBooks)
+						this.$store.commit('updateHomeBook', response.data.data.books)
 					})
 					.catch(function(error) {
 						console.log(error)
@@ -105,7 +105,7 @@
 			searchbykey() {
 				this.$http({
 					method: 'post',
-					// url: 'https://dev.oss.qmorn.com/qmorn/oss/app/res/book/search',
+					baseURL:'https://api1.q-links.net:10081',
 					url: '/res/book/recommend/search',
 					data: {
 						key: this.keywords

@@ -37,6 +37,7 @@
 					this.$http({
 							method: 'post',
 							// url: 'https://dev.oss.qmorn.com/qmorn/oss/app/res/book/search',
+							baseURL:'https://api1.q-links.net:10081',
 							url: '/res/book/recommend/serise',
 							data:{
 								seriseId:this.book.seriseId
