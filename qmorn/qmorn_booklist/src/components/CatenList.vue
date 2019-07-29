@@ -23,7 +23,7 @@
 		methods: {
 			toSeris(book) {
 				this.$router.push({
-					name: 'bookdetail',
+					name: 'bookcatena',
 					params: {
 						'book': book
 					}

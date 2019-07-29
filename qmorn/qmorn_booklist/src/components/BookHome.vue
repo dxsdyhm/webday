@@ -6,7 +6,7 @@
 					<img src="../assets/logo.svg" width="40" height="40" class="d-inline-block mr-3" alt="">启萌星</a>
 				<form class="form-inline">
 					<input class="form-control mr-sm-2" type="search" v-model="keywords" placeholder="输入书名或者ISBN" aria-label="Search"
-					 @keyup.enter="searchbykey">
+					 @keyup.enter.native="searchbykey">
 					<i class="material-icons text-light" @click="searchbykey">search</i>
 				</form>
 			</div>
@@ -20,12 +20,14 @@
 				</div>
 			</div>
 			<div class="col px-0">
-				<div class="row lable align-items-center mb-2">
-					<h5 class="col-9 text-justify">系列图书</h5>
-					<div class="col-2 pr-0 text-right" @click="catena">更多</div>
-					<i class="material-icons" @click="catena">chevron_right</i>
+				<div class="row lable align-items-center justify-content-between mb-2">
+					<h5 class="col text-justify">系列图书</h5>
+					<div class="col-auto d-inline-flex" @click="catena">
+						<div class="d-inline-block">更多</div>
+						<i class="material-icons pr-0">chevron_right</i>
+					</div>
 				</div>
-				<div class="row justify-content-start">
+				<div class="row">
 					<Book v-for="(book,index) in getbook.slice(0,6)" :key="index" @click.native="singlelist(book)" :book="book"></Book>
 				</div>
 			</div>
