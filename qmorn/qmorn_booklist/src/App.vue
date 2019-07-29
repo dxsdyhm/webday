@@ -1,6 +1,6 @@
 <template>
 	<div id="app">
-		<keep-alive include='bookhome,catenlist'>
+		<keep-alive include='bookhome,catenlist,bookserisdetal'>
 			<router-view></router-view>
 		</keep-alive>
 	</div>
@@ -13,7 +13,7 @@
 </script>
 
 <style>
-	.primarybg{
-		background-color: #42B983;
+	.primarybg {
+		background-color: #17a2b8 !important;
 	}
 </style>

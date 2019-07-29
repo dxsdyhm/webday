@@ -1,6 +1,7 @@
 <template>
 	<div class="container px-0">
-		<div ref="detailbg" class="primarybg text-center pt-5 pb-4">
+		<QmornToolBar title=''></QmornToolBar>
+		<div ref="detailbg" class="primarybg text-center pt-2 pb-4">
 			<img ref="imgbooks" :src="book.coverUrl" @load="imgbooks" cross-origin="anonymous" class="figure-img img-fluid rounded"></img>
 			<div class="bookname">{{book.name}}</div>
 		</div>
@@ -24,7 +25,7 @@
 		mounted: function() {},
 		methods: {
 			imgbooks() {
-				
+
 			},
 		},
 	}

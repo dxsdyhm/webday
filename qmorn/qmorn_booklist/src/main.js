@@ -5,6 +5,7 @@ import router from './router'
 import store from './store'
 import BootstrapVue from 'bootstrap-vue'
 import Book from './components/Book.vue'
+import QmornToolBar from './components/MdTitle.vue'
 
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../node_modules/bootstrap-vue/dist/bootstrap-vue.css'
@@ -13,6 +14,7 @@ Vue.config.productionTip = false
 Vue.prototype.$http = axios
 Vue.use(BootstrapVue)
 Vue.component('Book',Book)
+Vue.component('QmornToolBar',QmornToolBar)
 
 new Vue({
   render: h => h(App),

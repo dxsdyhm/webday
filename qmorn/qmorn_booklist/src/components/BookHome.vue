@@ -1,31 +1,44 @@
 <template>
-	<div class="container">
-		<br />
-		<div class="jumbotron bg-info text-white">
+	<div>
+		<nav class="navbar navbar-dark bg-info justify-content-between sticky-top d-none d-lg-block d-xl-block">
 			<div class="container">
-				<h1 class="display-5">启萌星</h1>
-				<p class="lead">海量绘本资源，为小朋友提供优质绘本阅读体验！</p>
+				<a class="navbar-brand text-white">
+					<img src="../assets/logo.svg" width="40" height="40" class="d-inline-block mr-3" alt="">启萌星</a>
+				<form class="form-inline">
+					<input class="form-control mr-sm-2" type="search" v-model="keywords" placeholder="输入书名或者ISBN" aria-label="Search"
+					 @keyup.enter="searchbykey">
+					<i class="material-icons text-light" @click="searchbykey">search</i>
+				</form>
 			</div>
-		</div>
-		<div class="col px-0">
-			<div class="row lable align-items-center mb-2">
-				<h5 class="col-9 text-justify">系列图书</h5>
-				<div class="col-2 pr-0 text-right" @click="catena">更多</div>
-				<i class="material-icons" @click="catena">chevron_right</i>
+		</nav>
+		<div class="container">
+			<br />
+			<div class="jumbotron bg-info text-white">
+				<div class="container">
+					<h1 class="display-5">绘本大全</h1>
+					<p class="lead">海量人声绘本，让小朋友远离屏幕回归书本！</p>
+				</div>
 			</div>
-			<div class="row justify-content-start">
-				<Book v-for="(book,index) in getbook.slice(0,6)" :key="index" @click.native="singlelist(book)" :book="book"></Book>
+			<div class="col px-0">
+				<div class="row lable align-items-center mb-2">
+					<h5 class="col-9 text-justify">系列图书</h5>
+					<div class="col-2 pr-0 text-right" @click="catena">更多</div>
+					<i class="material-icons" @click="catena">chevron_right</i>
+				</div>
+				<div class="row justify-content-start">
+					<Book v-for="(book,index) in getbook.slice(0,6)" :key="index" @click.native="singlelist(book)" :book="book"></Book>
+				</div>
 			</div>
-		</div>
-		<hr />
-		<div class="col px-0">
-			<div class="row lable align-items-center mb-2">
-				<h5 class="col-12 text-justify">精品图书</h5>
-				<!-- <div class="col-2 pr-0 text-right" @click="singlelist">更多</div>
-				<i class="material-icons" @click="singlelist">chevron_right</i> -->
-			</div>
-			<div class="row justify-content-start">
-				<Book v-for="(book,index) in getBookSingle" :key="index" @click.native="toSigleBook(book)" :book="book"></Book>
+			<hr />
+			<div class="col px-0">
+				<div class="row lable align-items-center mb-2">
+					<h5 class="col-12 text-justify">精品图书</h5>
+					<!-- <div class="col-2 pr-0 text-right" @click="singlelist">更多</div>
+					<i class="material-icons" @click="singlelist">chevron_right</i> -->
+				</div>
+				<div class="row justify-content-start">
+					<Book v-for="(book,index) in getBookSingle" :key="index" @click.native="toSigleBook(book)" :book="book"></Book>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -39,7 +52,7 @@
 		name: 'bookhome',
 		data() {
 			return {
-				keywords: '我'
+				keywords: ''
 			}
 		},
 		mounted: function() {
@@ -53,9 +66,9 @@
 						url: '/res/book/recommend',
 					})
 					.then(response => {
-						
-						let test1=response.data.data.seriseBooks.concat(response.data.data.seriseBooks).concat(response.data.data.seriseBooks)
-						let test2=response.data.data.books.concat(response.data.data.books).concat(response.data.data.books)
+
+						let test1 = response.data.data.seriseBooks.concat(response.data.data.seriseBooks).concat(response.data.data.seriseBooks)
+						let test2 = response.data.data.books.concat(response.data.data.books).concat(response.data.data.books)
 						// this.$store.commit('updateserisBook', response.data.data.seriseBooks)
 						// this.$store.commit('updateHomeBook', response.data.data.books)
 						console.log(test1)
@@ -85,6 +98,33 @@
 					params: {
 						'book': book
 					}
+				})
+			},
+			searchbykey() {
+				this.$http({
+					method: 'post',
+					// url: 'https://dev.oss.qmorn.com/qmorn/oss/app/res/book/search',
+					url: '/res/book/recommend/search',
+					data: {
+						key: this.keywords
+					}
+				}).then(response => {
+					let books = response.data.data.books
+					if (books.length <= 0) {
+						//提示
+						alert('没有找到书本')
+					} else {
+						//跳转到搜索结果页
+						this.$router.push({
+							name: 'searchresult',
+							params: {
+								keywords:this.keywords,
+								'books': books
+							}
+						})
+					}
+				}).catch(function(error) {
+					console.log(error)
 				})
 			}
 		},

@@ -1,8 +1,7 @@
 <template>
 	<div>
-		<div class="row lable align-items-center primarybg mb-2 pl-5 sticky-top">
-			<div class="col-9 text-justify title">{{book.name}}</div>
-		</div>
+		<QmornToolBar :title='book.name'></QmornToolBar>
+		<br />
 		<div class="container">
 			<div class="row justify-content-start">
 				<Book v-for="(book,index) in booklist" :key="index" @click.native="toSeris(book)" :book="book"></Book>
@@ -20,8 +19,14 @@
 				booklist:[]
 			}
 		},
-		mounted: function() {
+		mounted() {
 			this.getAllserisBook();
+		},
+		activated() {
+			if(this.book!==this.$route.params.book){
+				this.book=this.$route.params.book;
+				this.getAllserisBook();
+			}
 		},
 		methods: {
 			getAllserisBook() {
@@ -54,6 +59,9 @@
 						'book': book
 					}
 				})
+			},
+			back(){
+				this.$router.back()
 			}
 		},
 	}

@@ -25,6 +25,11 @@ export default new Router({
 	  name: 'catenalist',
 	  component: require('@/components/CatenList').default
 	},
+	{
+	  path: '/searchresult',
+	  name: 'searchresult',
+	  component: require('@/components/SearchResult').default
+	},
     {
       path: '*',
       redirect: '/'
