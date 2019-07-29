@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<nav class="navbar navbar-dark bg-info justify-content-between sticky-top d-none d-lg-block d-xl-block">
+		<nav class="navbar navbar-dark bg-info justify-content-between d-none d-sm-block sticky-top">
 			<div class="container">
 				<a class="navbar-brand text-white">
 					<img src="../assets/logo.svg" width="40" height="40" class="d-inline-block mr-3" alt="">启萌星</a>
@@ -13,12 +13,17 @@
 		</nav>
 		<div class="container">
 			<br />
-			<div class="jumbotron bg-info text-white">
-				<div class="container">
-					<h1 class="display-5">绘本大全</h1>
-					<p class="lead">海量人声绘本，让小朋友远离屏幕回归书本！</p>
+			<div>
+				<i class="material-icons text-light float-right p-3 d-block d-sm-none" @click="tosearch">search</i>
+				<div class="jumbotron bg-info text-white shadow">
+					<div class="container">
+						<h1 class="display-5">绘本大全</h1>
+						<p class="lead">海量人声绘本，让小朋友远离屏幕回归书本！</p>
+					</div>
 				</div>
+				
 			</div>
+			
 			<div class="col px-0">
 				<div class="row lable align-items-center justify-content-between mb-2">
 					<h5 class="col text-justify">系列图书</h5>
@@ -128,6 +133,15 @@
 				}).catch(function(error) {
 					console.log(error)
 				})
+			},
+			tosearch(){
+				this.$router.push({
+					name: 'searchresult',
+					params: {
+						keywords:'',
+						'books': []
+					}
+				})
 			}
 		},
 		computed: {
@@ -142,5 +156,9 @@
 <style>
 	.lable {
 		height: 3rem;
+	}
+	.search{
+		right: 0;
+		top:0;
 	}
 </style>

@@ -1,20 +1,21 @@
 <template>
-	<div class="container">
+	<div>
+		<QmornToolBar title='搜索结果'></QmornToolBar>
 		<br />
-		<div class="input-group my-3">
-			<input type="text" class="form-control" placeholder="书名或者ISBN" v-model="keywords" @keyup.enter="searchbykey" />
-			<div class="input-group-append">
-				<span class="input-group-text" id="basic-addon2" @click="searchbykey">
-					<i class="material-icons">search</i>
-				</span>
+		<div class="container">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="书名或者ISBN" v-model="keywords" @keyup.enter="searchbykey" />
+				<div class="input-group-append">
+					<span class="input-group-text" id="basic-addon2" @click="searchbykey">
+						<i class="material-icons">search</i>
+					</span>
+				</div>
 			</div>
-		</div>
-		<div class="col px-0">
-			<div class="row lable align-items-center mb-2">
-				<h5 class="col-12 text-justify">搜索结果</h5>
-			</div>
-			<div class="row justify-content-start">
-				<Book v-for="(book,index) in books" :key="index" @click.native="toSigleBook(book)" :book="book"></Book>
+			<br />
+			<div class="col px-0">
+				<div class="row justify-content-start">
+					<Book v-for="(book,index) in books" :key="index" @click.native="toSigleBook(book)" :book="book"></Book>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -25,8 +26,14 @@
 		name: 'searchresult',
 		data() {
 			return {
-				keywords:this.$route.params.keywords,
+				keywords: this.$route.params.keywords,
 				books: this.$route.params.books,
+			}
+		},
+		activated() {
+			if (!!this.$route.params.keywords) {
+				this.keywords = this.$route.params.keywords;
+					this.books = this.$route.params.books;
 			}
 		},
 		methods: {
@@ -41,7 +48,7 @@
 			searchbykey() {
 				this.$http({
 					method: 'post',
-					baseURL:'https://api1.q-links.net:10081',
+					baseURL: 'https://api1.q-links.net:10081',
 					// url: 'https://dev.oss.qmorn.com/qmorn/oss/app/res/book/search',
 					url: '/res/book/recommend/search',
 					data: {
@@ -53,13 +60,7 @@
 						//提示
 						alert('没有找到书本')
 					} else {
-						//跳转到搜索结果页
-						this.$router.push({
-							name: 'searchresult',
-							params: {
-								'books': books
-							}
-						})
+						this.books = books;
 					}
 				}).catch(function(error) {
 					console.log(error)
