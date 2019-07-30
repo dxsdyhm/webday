@@ -33,7 +33,7 @@
 		activated() {
 			if (!!this.$route.params.keywords) {
 				this.keywords = this.$route.params.keywords;
-					this.books = this.$route.params.books;
+				this.books = this.$route.params.books;
 			}
 		},
 		methods: {

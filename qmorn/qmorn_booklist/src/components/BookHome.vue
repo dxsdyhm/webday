@@ -21,9 +21,7 @@
 						<p class="lead">海量人声绘本，让小朋友远离屏幕回归书本！</p>
 					</div>
 				</div>
-				
 			</div>
-			
 			<div class="col px-0">
 				<div class="row lable align-items-center justify-content-between mb-2">
 					<h5 class="col text-justify">系列图书</h5>
@@ -70,7 +68,7 @@
 				this.$http({
 						method: 'post',
 						// url: 'https://dev.oss.qmorn.com/qmorn/oss/app/res/book/search',
-						baseURL:'https://api1.q-links.net:10081',
+						baseURL: 'https://api1.q-links.net:10081',
 						url: '/res/book/recommend',
 					})
 					.then(response => {
@@ -110,7 +108,7 @@
 			searchbykey() {
 				this.$http({
 					method: 'post',
-					baseURL:'https://api1.q-links.net:10081',
+					baseURL: 'https://api1.q-links.net:10081',
 					url: '/res/book/recommend/search',
 					data: {
 						key: this.keywords
@@ -125,7 +123,7 @@
 						this.$router.push({
 							name: 'searchresult',
 							params: {
-								keywords:this.keywords,
+								keywords: this.keywords,
 								'books': books
 							}
 						})
@@ -134,11 +132,11 @@
 					console.log(error)
 				})
 			},
-			tosearch(){
+			tosearch() {
 				this.$router.push({
 					name: 'searchresult',
 					params: {
-						keywords:'',
+						keywords: '',
 						'books': []
 					}
 				})
@@ -156,9 +154,5 @@
 <style>
 	.lable {
 		height: 3rem;
-	}
-	.search{
-		right: 0;
-		top:0;
 	}
 </style>
