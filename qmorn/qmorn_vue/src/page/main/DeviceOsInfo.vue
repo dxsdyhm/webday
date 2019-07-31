@@ -15,6 +15,7 @@
 						<v-list-tile-content>
 							<v-list-tile-title>{{item.title}}</v-list-tile-title>
 						</v-list-tile-content>
+						<v-icon v-if='item.id===3 && newversion' small color="red">lens</v-icon>
 						<v-list-tile-action-text>{{item.dis}}</v-list-tile-action-text>
 						<v-icon v-if="item.co" class="chevron">chevron_right</v-icon>
 					</v-list-tile>
@@ -22,6 +23,19 @@
 				</template>
 			</v-list>
 		</div>
+		<v-dialog v-model="showupdate" scrollable>
+			<v-card>
+				<v-card-title class="headline">设备有新版本</v-card-title>
+				<v-card-text>
+					<div class="py-1" v-for="(item,index) in updateinfo.upgInfoList" :key='index'>{{item}}</div>
+				</v-card-text>
+				<v-card-actions>
+					<v-spacer></v-spacer>
+					<v-btn color="gray" flat @click="showupdate = false">取消</v-btn>
+					<v-btn color="error" flat @click="sendupdateinfo()">确定</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 	</v-layout>
 </template>
 
@@ -32,24 +46,47 @@
 	import {
 		mapGetters
 	} from 'vuex';
+	import {
+		CMD
+	} from '../../aliiot/cmd.js';
 	export default {
 		data() {
 			return {
-				title: '设备信息'
+				title: '设备信息',
+				updateinfo: {},
+				showupdate:false
 			}
 		},
 		methods: {
 			jumpTo(id) {
 				if (id == 3) {
 					//检查固件更新
+					if(this.newversion){
+						//展示弹窗
+						this.showupdate=true
+					}else{
+						this.checkDeviceUpdate(true)
+					}
 				}
 			},
 			getosInfo() {
 				let os = this.$store.getters.getDeviceOSInfo
 				sendSettingMesg(this.$iotdevice, os)
 			},
-			checkDeviceUpdate() {
-
+			checkDeviceUpdate(showTip) {
+				this.$api.user.checkdeviceversion({
+					option: 'GetUpgInfo',
+					deviceVersion: this.osinfo.versioncode - 2,
+					deviceId: this.deviceinfo.id,
+				}).then(res => {
+					//存在新版本
+					this.updateinfo = res.data;
+					if(showTip){
+						//
+					}
+				}).catch(res => {
+					//不存在新版本
+				})
 			},
 			capacity(value) {
 				if (null == value || value == '') {
@@ -63,6 +100,23 @@
 				//  保留的小数位数
 				size = size.toFixed(2);
 				return size + unitArr[index];
+			},
+			sendupdateinfo(){
+				let updatework = {
+					cmd: CMD.JSON_CODE_UPDATE_WORK,
+					option: 1,
+					msgid: 0,
+					error: 0,
+					upgFlag: this.updateinfo.upgFlag,
+					version: this.updateinfo.version,
+					showVersion:this.updateinfo.showVersion,
+					url:this.updateinfo.url,
+					md5:this.updateinfo.md5,
+					size:this.updateinfo.size,
+					upgInfoList:[]
+				}
+				sendSettingMesg(this.$iotdevice, updatework)
+				this.showupdate=false
 			}
 		},
 		mounted() {
@@ -70,11 +124,11 @@
 		},
 		computed: {
 			...mapGetters({
-				theme: 'getTheme'
+				theme: 'getTheme',
+				deviceinfo: 'getSelectDevice',
+				osinfo: 'getDeviceOSInfo'
 			}),
 			deviceosinfo() {
-				let deviceinfo = this.$store.getters.getSelectDevice
-				let osinfo = this.$store.getters.getDeviceOSInfo
 				return [{
 					id: 0,
 					title: '设备类型',
@@ -88,24 +142,32 @@
 				}, {
 					id: 2,
 					title: '设备ID',
-					dis: deviceinfo.id,
+					dis: this.deviceinfo.id,
 					co: false
 				}, {
 					id: 3,
 					title: '固件版本',
-					dis: osinfo.versionname,
+					dis: this.osinfo.versionname,
 					co: true
 				}, {
 					id: 4,
 					title: '存储空间',
-					dis: '剩余'+this.capacity(osinfo.sdcapacity),
+					dis: '剩余' + this.capacity(this.osinfo.sdcapacity),
 					co: true
 				}, {
 					id: 5,
 					title: '设备电量',
-					dis: osinfo.battery + '%',
+					dis: this.osinfo.battery + '%',
 					co: false
 				}];
+			},
+			newversion(){
+				return !!this.updateinfo&&this.updateinfo.upgFlag===1
+			}
+		},
+		watch: {
+			'$store.getters.getDeviceOSInfo': function(newOs, oldOs) {
+				this.checkDeviceUpdate(false)
 			}
 		}
 	}

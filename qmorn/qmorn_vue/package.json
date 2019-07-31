@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "check": "vue-cli-service build --report"
   },
   "dependencies": {
     "alibabacloud-iot-device-sdk": "^1.2.7",
@@ -16,8 +17,6 @@
     "js-md5": "^0.7.3",
     "js-sha1": "^0.6.0",
     "jssha": "^2.3.1",
-    "keymirror": "^0.1.1",
-    "qs": "^6.7.0",
     "vue": "^2.6.10",
     "vue-material": "^1.0.0-beta-11",
     "vue-qriously": "^1.1.1",
@@ -29,9 +28,11 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.2.0",
     "@vue/cli-service": "^3.2.0",
+    "babel-plugin-component": "^1.1.1",
     "material-design-icons-iconfont": "^5.0.1",
     "sass-loader": "^7.1.0",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "webpack-bundle-analyzer": "^3.4.1"
   },
   "postcss": {
     "plugins": {

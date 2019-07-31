@@ -2,8 +2,7 @@ import Vue from 'vue'
 
 import router from './router/router'
 //element
-//import ElementUI from 'element-ui';
-import Message from 'element-ui';
+import {Message} from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
 //Vuetify
@@ -19,9 +18,10 @@ import App from './App.vue'
 import filters from './filter/filter.js';
 import {iotinit,disconnect} from './aliiot/iot.js';
 import weixin from './weixin/weixin.js';
-import('vue-qriously').then(VueQriously=>{
-	Vue.use(VueQriously)
-})
+import VueQriously from 'vue-qriously'
+// import('vue-qriously').then(VueQriously=>{
+// 	Vue.use(VueQriously)
+// })
 if(weixin.isWeixin()){
 	import('weixin-js-sdk').then(wx=>{
 		Vue.prototype.$wx = wx;
@@ -30,8 +30,8 @@ if(weixin.isWeixin()){
 Vue.config.productionTip = false
 Vue.prototype.$api = api;
 
-//Vue.use(ElementUI);
 Vue.use(Message)
+Vue.prototype.$message = Message;
 Vue.component('qmorntoolbar',QmornToolBar)
 Vue.component('webview',WebView)
 

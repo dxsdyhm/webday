@@ -37,8 +37,8 @@
 				</v-card-text>
 				<v-card-actions>
 					<v-spacer></v-spacer>
-					<v-btn flat color="primary">取消</v-btn>
-					<v-btn flat color="primary" @click="nicknameShow=!nicknameShow">确定</v-btn>
+					<v-btn flat color="primary" @click="nicknameShow=false">取消</v-btn>
+					<v-btn flat color="primary" @click="nicknameShow=false">确定</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>

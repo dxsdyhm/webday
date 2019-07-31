@@ -7,7 +7,7 @@ import instance from '../http'; // 导入http中创建的axios实例
 import store from '../../store/index';
 
 const user = {
-    login (params) {
+    login(params) {
         return instance.post('/app/user/login', params);
     },
     getdeviceinfo(params){
@@ -72,6 +72,9 @@ const user = {
 	},
 	thirdlogin(params){
 		return instance.post('/app/user/thirdlogin2',params)
+	},
+	checkdeviceversion(params){
+		return instance.post('/app/upg/device/checkversion',params)
 	}
 }
 

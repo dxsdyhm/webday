@@ -10,7 +10,7 @@
 					<v-icon>library_music</v-icon>
 				</v-btn>
 			</router-link>
-			<router-link :to="selectdevice==null?'/main/empty':'/main/device'" replace>
+			<router-link to="/main/device" replace>
 				<v-btn flat color="pink lighten-3">
 					<span>设备</span>
 					<v-icon>widgets</v-icon>
@@ -51,6 +51,13 @@
 		watch:{
             activeBtn(newvalue,old){
 				this.$store.commit('updateActive', newvalue)
+			},
+			'$store.getters.getSelectDevice': function(newdevice, olddevice) {
+				if((!!newdevice)&&(!!newdevice.id)){
+					this.$router.replace('/main/device')
+				}else{
+					this.$router.replace('/main/empty')
+				}
 			}
 		},
 		methods: {
