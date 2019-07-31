@@ -81,8 +81,8 @@
 				}).then(res => {
 					//存在新版本
 					this.updateinfo = res.data;
-					if(showTip){
-						//
+					if(showTip&&(!this.newversion)){
+						this.$message('已经是最新版本')
 					}
 				}).catch(res => {
 					//不存在新版本
