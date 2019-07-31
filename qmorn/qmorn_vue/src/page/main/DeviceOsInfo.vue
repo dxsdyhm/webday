@@ -76,7 +76,7 @@
 			checkDeviceUpdate(showTip) {
 				this.$api.user.checkdeviceversion({
 					option: 'GetUpgInfo',
-					deviceVersion: this.osinfo.versioncode - 2,
+					deviceVersion: this.osinfo.versioncode,
 					deviceId: this.deviceinfo.id,
 				}).then(res => {
 					//存在新版本
