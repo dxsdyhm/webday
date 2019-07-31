@@ -118,7 +118,6 @@
 				this.value4 = temp[this.paremskey[4]];
 			},
 			changeFen(x) {
-				console.log(x)
 				this.value4 = x;
 				this.fen = false;
 			},

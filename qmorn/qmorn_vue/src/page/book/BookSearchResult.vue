@@ -53,7 +53,6 @@
 					pageIndex: this.pageIndex,
 					pageSize: this.pageSize,
 				}).then(response => {
-					console.log(response.data)
 					this.booklist = response.data.bookList;
 					this.$refs.searchbar.blur();
 				}).catch(error => {
@@ -70,8 +69,6 @@
 			}
 		},
 		mounted() {
-			console.log("=-==-=--=--=--=-=-")
-			console.log(this)
 			if (this.booklist.length <= 0) {
 				this.search()
 			}

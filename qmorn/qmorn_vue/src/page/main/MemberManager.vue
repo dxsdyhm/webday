@@ -143,7 +143,6 @@
 					guestId: this.deletid,
 					deviceId: this.selectdevice.id
 				}).then(res => {
-					console.log(res)
 					this.$store.commit('deleteGuestList', this.deletid)
 					this.deletid=0;
 				}).catch(res => {
@@ -157,7 +156,6 @@
 				let parems = Object.assign({}, this.newGeust);
 				parems.guestAccount = this.phonepresufix + this.newGeust.guestAccount;
 				this.$api.user.addDeviceMember(parems).then(res => {
-					console.log(res)
 					let data = res.data
 					//判断id 提示未注册
 					if (data.guestId === 0) {

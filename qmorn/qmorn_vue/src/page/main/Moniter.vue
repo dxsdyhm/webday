@@ -74,7 +74,6 @@
 					return;
 				}
 				let message=this.getSendTextMessage();
-				console.log(JSON.stringify(message))
 				sendGroupMesg(this.$iotdevice, message, this.userrole)
 				this.$store.commit('addGroupMessage', message)
 				this.messtext="";
@@ -132,7 +131,6 @@
 					this.selectdevice.id
 				]
 			}).then(res => {
-				console.log(res)
 				this.$store.commit('setGroupInfo', res.data.groupInfoAndMemberList[0])
 			}).catch(res => {
 				//登陆失败

@@ -2,7 +2,6 @@ import acount, {
 	info
 } from './config';
 function getCode() {
-	console.log(acount, info)
 	return `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${acount.appID}&redirect_uri=${info.redirect_uri}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
 }
 /**

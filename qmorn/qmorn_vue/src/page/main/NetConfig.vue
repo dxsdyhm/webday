@@ -40,8 +40,6 @@
 		},
 		methods: {
 			wifitoqr() {
-				console.log(this.pwd())
-				console.log(this.requild())
 				if(this.pwd()&&this.requild()){
 					this.$router.push({
 						name: 'qrcode',

@@ -160,7 +160,7 @@
 					msgid: 0,
 					error: 0,
 					VolumeMax: this.settingTemp.maxvolume,
-					CurrentVolume: Math.round(this.settingTemp.volume * 100 / this.settingTemp.maxvolume)
+					CurrentVolume: this.settingTemp.volume//Math.round(this.settingTemp.volume * 100 / this.settingTemp.maxvolume)
 				}
 				if (!!this.settingTemp.maxvolume) {
 					sendSettingMesg(this.$iotdevice, nic)
@@ -293,11 +293,11 @@
 			},
 			volume: {
 				get() {
-					return Math.round(this.settingTemp.volume * 100 / this.settingTemp.maxvolume);
+					return this.settingTemp.volume;//Math.round(this.settingTemp.volume * 100 / this.settingTemp.maxvolume);
 				},
 				set(value) {
 					this.$store.commit('updateSettingsParems', {
-						volume: Math.round(value * this.settingTemp.maxvolume / 100)
+						volume: value//Math.round(value * this.settingTemp.maxvolume / 100)
 					})
 				}
 			}

@@ -53,7 +53,6 @@ export function iotinit() {
 	device.on('message', (topic, payload) => {
 		const topicArray = topic.split('/')
 		//非本设备的消息不予处理
-		console.log(topic)
 		if(topic.indexOf('/ext/error')==0){
 			//发生错误
 			return;
@@ -116,7 +115,6 @@ export function sendSettingMesg(device, msg) {
 		"BodyFmt": 1,
 		"MesgBody": msgStr
 	};
-	console.log(msgStr)
 	device.publish(`/${deviceinfo.productKey}/${deviceinfo.deviceName}/user/ForwardMesgSend`, JSON.stringify(msgParen));
 }
 export function sendGroupMesg(device, msg, role) {
