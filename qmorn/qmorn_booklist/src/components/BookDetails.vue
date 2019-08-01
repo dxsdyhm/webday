@@ -5,6 +5,11 @@
 			<img ref="imgbooks" :src="book.coverUrl" @load="imgbooks" cross-origin="anonymous" class="figure-img img-fluid rounded"></img>
 			<div class="bookname">{{book.name}}</div>
 		</div>
+		<div class="text-right d-none d-sm-block">
+			<a :href='"https://static.qmorn.com/apk/app/qmorn_app_1.0.12.apk"' class="p-3 d-inline-flex cleara">
+				<i class="material-icons primaryicon mr-1">cloud_download</i>下载
+			</a>
+		</div>
 		<div class="col">
 			<p></p>
 			<div class="des">{{book.description}}</div>
@@ -45,5 +50,9 @@
 	.publish {
 		color: #A9A9A9;
 		font-size: 14px;
+	}
+	
+	.cleara{
+		text-decoration: none;
 	}
 </style>

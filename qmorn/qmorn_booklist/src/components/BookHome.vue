@@ -34,7 +34,7 @@
 					<Book v-for="(book,index) in getbook.slice(0,6)" :key="index" @click.native="singlelist(book)" :book="book"></Book>
 				</div>
 			</div>
-			<hr />
+			<hr class="d-sm-none" />
 			<div class="col px-0">
 				<div class="row lable align-items-center mb-2">
 					<h5 class="col-12 text-justify">精品图书</h5>
