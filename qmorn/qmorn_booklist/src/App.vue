@@ -19,7 +19,7 @@
 	.primarybg {
 		background-color: #17a2b8 !important;
 	}
-	.cleara{
-		text-decoration: none;
+	.shadowtrans {
+		transition: box-shadow .3s;
 	}
 </style>

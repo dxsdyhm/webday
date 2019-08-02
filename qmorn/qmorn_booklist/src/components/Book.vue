@@ -6,15 +6,15 @@
 			</div>
 			<figcaption class="figure-caption text-left mt-2">{{book.name}}</figcaption>
 		</figure>
-		<div class="card border-light d-none d-sm-block px-3 pb-3" v-bind:class="[shadowlarge?'shadow-lg':'shadow']" @mouseenter="addshadow" @mouseleave="releaseshadow">
+		<div class="card border-light d-none d-sm-block px-3 pb-3 shadowtrans" v-bind:class="[shadowlarge?'shadow-lg':'shadow']"
+		 @mouseenter="addshadow" @mouseleave="releaseshadow">
 			<b-img-lazy :src="book.coverUrl" class="img-fluid rounded cardimg mt-4"></b-img-lazy>
 			<figcaption class="figure-caption text-center mt-2">{{book.name}}</figcaption>
 			<hr />
 			<div class="text-left descrip">{{book.description}}</div>
 			<div class="row mt-2">
 				<div class="col text-left">{{book.pubdate}}</div>
-				<a v-if="!!book.bookUrl" :href='"https://static.qmorn.com/apk/app/qmorn_app_1.0.12.apk"' class="col-auto"
-				 v-on:click.stop.capture="down()">
+				<a v-if="!!book.bookUrl" :href='book.bookUrl' class="col-auto" v-on:click.stop.capture="down()">
 					<!-- <i class="material-icons col-auto primaryicon">cloud_download</i> -->
 					下载
 				</a>
@@ -25,20 +25,20 @@
 
 <script>
 	export default {
-		data(){
+		data() {
 			return {
-				shadowlarge:false,
+				shadowlarge: false,
 			}
 		},
 		methods: {
 			down() {
 				console.log("dsdsd")
 			},
-			addshadow(){
-				this.shadowlarge=true
+			addshadow() {
+				this.shadowlarge = true
 			},
-			releaseshadow(s){
-				this.shadowlarge=false
+			releaseshadow(s) {
+				this.shadowlarge = false
 			}
 		},
 		props: {
