@@ -10,7 +10,7 @@
 			<b-img-lazy :src="book.coverUrl" class="img-fluid rounded cardimg mt-4"></b-img-lazy>
 			<figcaption class="figure-caption text-center mt-2">{{book.name}}</figcaption>
 			<hr />
-			<div class="text-left descrip">不识字、甚至还没有学会说话和走路的幼儿，书本对他们真的有用吗甚至还没有学会说话和走路的幼儿甚至还没有学会说话和走路的幼儿</div>
+			<div class="text-left descrip">{{book.description}}</div>
 			<div class="row mt-2">
 				<div class="col text-left">{{book.pubdate}}</div>
 				<a v-if="!!book.bookUrl" :href='"https://static.qmorn.com/apk/app/qmorn_app_1.0.12.apk"' class="col-auto"
@@ -68,45 +68,6 @@
 			width: 6.5rem;
 		}
 	}
-
-	/* @media (min-width: 576px) and (max-width: 991.98px) {
-		.ratio {
-			overflow: hidden;
-			position: relative;
-			width: 7rem;
-			height: 7rem;
-		}
-
-		.foot {
-			width: 7rem;
-		}
-	}
-
-	@media (min-width: 992px) and (max-width: 1199.98px) {
-		.ratio {
-			overflow: hidden;
-			position: relative;
-			width: 9rem;
-			height: 9rem;
-		}
-
-		.foot {
-			width: 9rem;
-		}
-	}
-
-	@media (min-width: 1200px) {
-		.ratio {
-			overflow: hidden;
-			position: relative;
-			width: 10rem;
-			height: 10rem;
-		}
-
-		.foot {
-			width: 10rem;
-		}
-	} */
 
 	.cov {
 		position: absolute;
