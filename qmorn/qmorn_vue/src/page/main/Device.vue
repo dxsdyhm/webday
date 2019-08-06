@@ -92,10 +92,26 @@
 					pageIndex: 1,
 					pageSize: 100,
 				}).then(res => {
+					//如果存在currId，则选中id设备，否则随机选中第一台设备
+					let needcommit=false;
+					if(!!res.data.currId){
+						for (var i = 0; i < res.data.deviceList.length; i++) {
+							if(res.data.deviceList[i].id===res.data.currId){
+								this.$store.commit('setSelectDevice', res.data.deviceList[i])
+								break;
+							}
+						}
+					}else{
+						needcommit=true;
+					}
 					this.$store.commit('updateUserDevcie', res.data.deviceList)
 					if(this.$store.getters.getSelectDevice==null){
 						this.$router.push("/main/empty")
 					}else{
+						if(needcommit||(this.$store.getters.getSelectDevice.id!==res.data.currId)){
+							//需要上报当前选中id
+							this.postSelect()
+						}
 						this.inet();
 					}
 				}).catch(res => {
@@ -154,6 +170,15 @@
 			},
 			toadd(){
 				this.$router.push({name:'netconfig',params:{type:0}})
+			},
+			postSelect(){
+				this.$api.user.setselect({
+					deviceId:this.$store.getters.getSelectDevice.id
+				}).then(res => {
+					console.log(res);
+				}).catch(res => {
+					console.log(res)
+				})
 			}
 		},
 		mounted: function() {

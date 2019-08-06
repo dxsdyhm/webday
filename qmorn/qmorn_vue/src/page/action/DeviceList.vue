@@ -41,11 +41,25 @@
 					return device.id===this$store.state.selectDevice.id;
 				}
 				return false;
+			},
+			postSelect(newid){
+				this.$api.user.setselect({
+					deviceId:newid
+				}).then(res => {
+					console.log(res);
+				}).catch(res => {
+					console.log(res)
+				})
 			}
 		},
 		computed:{
 			devicelist:function(){
 				return this.$store.getters.getUserDeviceList;
+			}
+		},
+		watch:{
+			'$store.getters.getSelectDevice':function(select){
+				this.postSelect(select.id)
 			}
 		}
 	}

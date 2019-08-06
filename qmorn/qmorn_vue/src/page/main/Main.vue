@@ -10,7 +10,7 @@
 					<v-icon>library_music</v-icon>
 				</v-btn>
 			</router-link>
-			<router-link to="/main/device" replace>
+			<router-link to="/main/device">
 				<v-btn flat color="pink lighten-3">
 					<span>设备</span>
 					<v-icon>widgets</v-icon>

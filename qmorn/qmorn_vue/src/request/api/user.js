@@ -75,6 +75,9 @@ const user = {
 	},
 	checkdeviceversion(params){
 		return instance.post('/app/upg/device/checkversion',params)
+	},
+	setselect(params){
+		return instance.post('/app/relation/device/selected',params)
 	}
 }
 
