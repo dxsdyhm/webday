@@ -37,9 +37,11 @@
 			<hr class="d-sm-none" />
 			<div class="col px-0">
 				<div class="row lable align-items-center mb-2">
-					<h5 class="col-12 text-justify">精品图书</h5>
-					<!-- <div class="col-2 pr-0 text-right" @click="singlelist">更多</div>
-					<i class="material-icons" @click="singlelist">chevron_right</i> -->
+					<h5 class="col text-justify">精品图书</h5>
+					<div class="col-auto d-inline-flex" @click="sigleBookMore">
+						<div class="d-inline-block">更多</div>
+						<i class="material-icons pr-0">chevron_right</i>
+					</div>
 				</div>
 				<div class="row justify-content-start">
 					<Book v-for="(book,index) in getBookSingle" :key="index" @click.native="toSigleBook(book)" :book="book"></Book>
@@ -57,7 +59,8 @@
 		name: 'bookhome',
 		data() {
 			return {
-				keywords: ''
+				keywords: '',
+				books:[]
 			}
 		},
 		mounted: function() {
@@ -111,22 +114,18 @@
 					baseURL: 'https://api1.q-links.net:10081',
 					url: '/res/book/recommend/search',
 					data: {
-						key: this.keywords
+						key: this.keywords,
+						pageIndex:1,
+						pageSize:100
 					}
 				}).then(response => {
-					let books = response.data.data.books
-					if (books.length <= 0) {
+					this.books=response.data.data.books
+					if (this.books.length <= 0) {
 						//提示
 						alert('没有找到书本')
 					} else {
 						//跳转到搜索结果页
-						this.$router.push({
-							name: 'searchresult',
-							params: {
-								keywords: this.keywords,
-								'books': books
-							}
-						})
+						this.tosearch()
 					}
 				}).catch(function(error) {
 					console.log(error)
@@ -136,10 +135,15 @@
 				this.$router.push({
 					name: 'searchresult',
 					params: {
-						keywords: '',
-						'books': []
+						keywords: this.keywords,
+						'books': this.books
 					}
 				})
+			},
+			sigleBookMore(){
+				this.keywords=''
+				this.books=[]
+				this.tosearch()
 			}
 		},
 		computed: {
