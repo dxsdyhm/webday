@@ -60,7 +60,6 @@
 		data() {
 			return {
 				keywords: '',
-				books:[]
 			}
 		},
 		mounted: function() {
@@ -109,40 +108,40 @@
 				})
 			},
 			searchbykey() {
-				this.$http({
-					method: 'post',
-					baseURL: 'https://api1.q-links.net:10081',
-					url: '/res/book/recommend/search',
-					data: {
-						key: this.keywords,
-						pageIndex:1,
-						pageSize:100
-					}
-				}).then(response => {
-					this.books=response.data.data.books
-					if (this.books.length <= 0) {
-						//提示
-						alert('没有找到书本')
-					} else {
-						//跳转到搜索结果页
-						this.tosearch()
-					}
-				}).catch(function(error) {
-					console.log(error)
-				})
+				this.tosearch()
+				// this.$http({
+				// 	method: 'post',
+				// 	baseURL: 'https://api1.q-links.net:10081',
+				// 	url: '/res/book/recommend/search',
+				// 	data: {
+				// 		key: this.keywords,
+				// 		pageIndex:1,
+				// 		pageSize:100
+				// 	}
+				// }).then(response => {
+				// 	this.books=response.data.data.books
+				// 	if (this.books.length <= 0) {
+				// 		//提示
+				// 		alert('没有找到书本')
+				// 	} else {
+				// 		//跳转到搜索结果页
+				// 		this.tosearch()
+				// 	}
+				// }).catch(function(error) {
+				// 	console.log(error)
+				// })
 			},
 			tosearch() {
 				this.$router.push({
 					name: 'searchresult',
 					params: {
 						keywords: this.keywords,
-						'books': this.books
+						'muti':true
 					}
 				})
 			},
 			sigleBookMore(){
 				this.keywords=''
-				this.books=[]
 				this.tosearch()
 			}
 		},

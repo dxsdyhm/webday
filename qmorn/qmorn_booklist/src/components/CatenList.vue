@@ -17,8 +17,7 @@
 	export default {
 		name: 'catenlist',
 		data() {
-			return {
-			}
+			return {}
 		},
 		methods: {
 			toSeris(book) {

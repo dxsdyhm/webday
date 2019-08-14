@@ -9,12 +9,12 @@
 		<div class="card border-light d-none d-sm-block px-3 pb-3 shadowtrans" v-bind:class="[shadowlarge?'shadow-lg':'shadow']"
 		 @mouseenter="addshadow" @mouseleave="releaseshadow">
 			<b-img-lazy :src="book.coverUrl" class="img-fluid rounded cardimg mt-4"></b-img-lazy>
-			<figcaption class="figure-caption text-center mt-2">{{book.name}}</figcaption>
+			<figcaption class="figure-caption text-center mt-2 descrip1">{{book.name}}</figcaption>
 			<hr />
 			<div class="text-left descrip">{{book.description}}</div>
 			<div class="row mt-2">
 				<div class="col text-left">{{book.pubdate}}</div>
-				<a v-if="!!book.bookUrl" :href='book.bookUrl' class="col-auto" v-on:click.stop.capture="down()">
+				<a v-if="!!book.bookUrl" :href='urldevoce(book.bookUrl)' class="col-auto" v-on:click.stop.capture="down()">
 					<!-- <i class="material-icons col-auto primaryicon">cloud_download</i> -->
 					下载
 				</a>
@@ -39,6 +39,15 @@
 			},
 			releaseshadow(s) {
 				this.shadowlarge = false
+			},
+			urldevoce(url){
+				let index=url.indexOf("?")
+				if(index!=-1){
+					let sig=url.slice(index)
+					let urlexp=decodeURIComponent(url.slice(0,index))
+					return `${urlexp}${sig}`
+				}
+				return url
 			}
 		},
 		props: {
@@ -83,7 +92,8 @@
 
 	.cardimg {
 		max-width: 10rem;
-		max-height: 10rem;
+		height: 10rem;
+		cursor:pointer;
 	}
 
 	.descrip {
@@ -95,6 +105,16 @@
 		display: block;
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+	}
+	
+	.descrip1 {
+		height: 1.5em;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		display: block;
+		display: -webkit-box;
+		-webkit-line-clamp: 1;
 		-webkit-box-orient: vertical;
 	}
 	.shadowtrans {
