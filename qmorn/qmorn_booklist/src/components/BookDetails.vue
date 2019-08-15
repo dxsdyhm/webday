@@ -6,7 +6,7 @@
 			<div class="bookname">{{book.name}}</div>
 		</div>
 		<div class="text-right d-none d-sm-block">
-			<a :href='urldevoce(book.bookUrl)' class="p-3 d-inline-flex cleara">
+			<a :href='book.bookUrl|ossurl' class="p-3 d-inline-flex cleara">
 				<i class="material-icons primaryicon mr-1">cloud_download</i>下载
 			</a>
 		</div>
@@ -32,9 +32,6 @@
 			imgbooks() {
 
 			},
-			urldevoce(url){
-				return decodeURIComponent(url)
-			}
 		},
 	}
 </script>

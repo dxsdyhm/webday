@@ -17,10 +17,13 @@
 					<Book v-for="(book,index) in books" :key="index" @click.native="toSigleBook(book)" :book="book"></Book>
 				</div>
 			</div>
-			<div v-show="isloading" class="text-center">
+			<div v-if="isloading" class="text-center">
 				<div class="spinner-grow text-info" role="status">
 					<span class="sr-only">Loading...</span>
 				</div>
+			</div>
+			<div v-else class="btn btn-info btn-block d-block d-sm-none" @click="loadmore()">
+				加载更多
 			</div>
 		</div>
 	</div>
@@ -105,17 +108,7 @@
 				//可滚动容器超出当前窗口显示范围的高度
 				let scrollTop = document.documentElement.scrollTop;
 				if (innerHeight < (outerHeight + scrollTop+1)) {
-					//加载更多操作
-					if (this.isloading) {
-						console.log("loading");
-					} else {
-						if(this.end){
-							console.log("is the end");
-						}else{
-							this.pageIndex += 1
-							this.searchbykey()
-						}
-					}
+					this.loadmore()
 				}
 			},
 			searchByEnter() {
@@ -124,6 +117,19 @@
 				}else{
 					this.pageIndex = 1
 					this.searchbykey()
+				}
+			},
+			loadmore(){
+				//加载更多操作
+				if (this.isloading) {
+					console.log("loading");
+				} else {
+					if(this.end){
+						console.log("is the end");
+					}else{
+						this.pageIndex += 1
+						this.searchbykey()
+					}
 				}
 			}
 		},

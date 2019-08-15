@@ -6,6 +6,7 @@ import store from './store'
 import BootstrapVue from 'bootstrap-vue'
 import Book from './components/Book.vue'
 import QmornToolBar from './components/MdTitle.vue'
+import filters from './filters/filter.js';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../node_modules/bootstrap-vue/dist/bootstrap-vue.css'
@@ -15,6 +16,10 @@ Vue.prototype.$http = axios
 Vue.use(BootstrapVue)
 Vue.component('Book',Book)
 Vue.component('QmornToolBar',QmornToolBar)
+
+Object.keys(filters).forEach(key => {  
+  Vue.filter(key, filters[key])  
+}) 
 
 new Vue({
   render: h => h(App),
