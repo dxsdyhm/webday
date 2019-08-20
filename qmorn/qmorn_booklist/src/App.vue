@@ -1,6 +1,6 @@
 <template>
 	<div id="app">
-		<keep-alive include='bookhome,catenlist,bookserisdetal,searchresult'>
+		<keep-alive include='catenlist,bookserisdetal,searchresult'>
 			<router-view></router-view>
 		</keep-alive>
 		<br />

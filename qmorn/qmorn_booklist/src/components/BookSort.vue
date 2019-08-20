@@ -1,69 +1,46 @@
 <template>
 	<div>
-		<QmornToolBar title='搜索'></QmornToolBar>
-		<br />
-		<div class="container">
-			<div class="input-group">
-				<input type="text" class="form-control" placeholder="书名或者ISBN" v-model="keywords" @keyup.enter="searchByEnter()" />
-				<div class="input-group-append">
-					<span class="input-group-text btn btn-secondary" id="basic-addon2" @click="searchByEnter()">
-						<i class="material-icons">search</i>
-					</span>
-				</div>
+		<div class="col px-0">
+			<div class="row justify-content-start">
+				<Book v-for="(book,index) in books" :key="index" :book="book"></Book>
 			</div>
-			<br />
-			<div class="col px-0">
-				<div class="row justify-content-start">
-					<Book v-for="(book,index) in books" :key="index" @click.native="toSigleBook(book)" :book="book"></Book>
-				</div>
+		</div>
+		<div v-if="isloading" class="text-center">
+			<div class="spinner-grow text-info" role="status">
+				<span class="sr-only">Loading...</span>
 			</div>
-			<div v-if="isloading" class="text-center">
-				<div class="spinner-grow text-info" role="status">
-					<span class="sr-only">Loading...</span>
-				</div>
-			</div>
-			<div v-else class="btn btn-info btn-block d-block d-sm-none" @click="loadmore()">
-				加载更多
-			</div>
+		</div>
+		<div v-else class="btn btn-info btn-block d-block d-sm-none" @click="loadmore()">
+			加载更多
 		</div>
 	</div>
 </template>
 
 <script>
 	export default {
-		name: 'searchresult',
 		data() {
 			return {
-				keywords: this.$route.params.keywords,
-				books: [],
+				books:[],
 				pageIndex: 1,
 				isloading: false,
 				end:false,
-				lastkeyword:undefined
 			}
 		},
-		activated() {
-			this.keywords = this.$route.params.keywords;
-			let muti=this.$route.params.muti;
-			if(!!muti){
-				//正向进入搜索页面
-				this.searchByEnter()
-			}
+		props: {
+			booksort: {
+				type: String,
+				default: ''
+			},
+		},
+		mounted() {
+			this.getBooks()
 			window.addEventListener('scroll', this.onScroll)
 		},
-		deactivated() {
+		beforeDestroy() {
 			window.removeEventListener('scroll', this.onScroll)
 		},
-		methods: {
-			toSigleBook(book) {
-				this.$router.push({
-					name: 'bookdetail',
-					params: {
-						'book': book
-					}
-				})
-			},
-			searchbykey() {
+		methods:{
+			getBooks(){
 				this.isloading = true
 				this.$http({
 					method: 'post',
@@ -71,7 +48,7 @@
 					// url: 'https://dev.oss.qmorn.com/qmorn/oss/app/res/book/search',
 					url: '/res/book/recommend/search',
 					data: {
-						key: this.keywords,
+						key: "",
 						pageIndex: this.pageIndex,
 						pageSize: 54
 					}
@@ -83,7 +60,6 @@
 						this.keywords = ''
 						alert('没有找到书本')
 					} else {
-						this.lastkeyword=this.keywords;
 						let books = response.data.data.books
 						if (books === null || books.length <= 0) {
 							this.end=true
@@ -101,6 +77,19 @@
 					console.log(error)
 				})
 			},
+			toSigleBook(book) {
+				//系列应该跳转到系列列表，单本书跳转到详情
+				let target ='bookdetail'
+				if(!!book.seriseId){
+					target='bookcatena'
+				}
+				this.$router.push({
+					name: target,
+					params: {
+						'book': book
+					}
+				})
+			},
 			onScroll() {
 				let innerHeight = document.querySelector('#app').clientHeight;
 				//屏幕尺寸高度
@@ -109,14 +98,6 @@
 				let scrollTop = document.documentElement.scrollTop;
 				if (innerHeight < (outerHeight + scrollTop+1)) {
 					this.loadmore()
-				}
-			},
-			searchByEnter() {
-				if(this.lastkeyword===this.keywords){
-					console.log("与上一个关键词相同")
-				}else{
-					this.pageIndex = 1
-					this.searchbykey()
 				}
 			},
 			loadmore(){
@@ -128,14 +109,9 @@
 						console.log("is the end");
 					}else{
 						this.pageIndex += 1
-						this.searchbykey()
+						this.getBooks()
 					}
 				}
-			}
-		},
-		watch:{
-			keywords(){
-				this.end=false
 			}
 		}
 	}

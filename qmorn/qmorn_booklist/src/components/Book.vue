@@ -1,5 +1,5 @@
 <template>
-	<div class="col-4 col-sm-6 col-md-4 col-xl-4 my-3 text-center">
+	<div class="col-4 col-sm-6 col-md-6 col-xl-4 my-3 text-center">
 		<figure class="figure d-sm-none foot">
 			<div class="ratio rounded shadow">
 				<b-img-lazy :src="book.coverUrl" class="card-img cov"></b-img-lazy>
@@ -9,7 +9,7 @@
 		<div class="card border-light d-none d-sm-block px-3 pb-3 shadowtrans" v-bind:class="[shadowlarge?'shadow-lg':'shadow']"
 		 @mouseenter="addshadow" @mouseleave="releaseshadow">
 			<div class="conten d-flex flex-column">
-				<div>
+				<div @click="toSigleBook(book)">
 					<b-img-lazy :src="book.coverUrl" class="img-fluid rounded cardimg mt-4"></b-img-lazy>
 					<figcaption class="figure-caption text-center mt-2 descrip1">{{book.name}}</figcaption>
 					<hr />
@@ -45,6 +45,19 @@
 			},
 			releaseshadow(s) {
 				this.shadowlarge = false
+			},
+			toSigleBook(book) {
+				//系列应该跳转到系列列表，单本书跳转到详情
+				let target ='bookdetail'
+				if(!!book.seriseId){
+					target='bookcatena'
+				}
+				this.$router.push({
+					name: target,
+					params: {
+						'book': book
+					}
+				})
 			},
 		},
 		props: {
@@ -89,7 +102,7 @@
 
 	.cardimg {
 		max-width: 10rem;
-		max-height: 10rem;
+		height: 8rem;
 		cursor: pointer;
 	}
 
@@ -119,6 +132,6 @@
 		transition: box-shadow .3s;
 	}
 	.conten{
-		height: 20rem;
+		height: 25rem;
 	}
 </style>
