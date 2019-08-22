@@ -11,14 +11,14 @@
 		<div class="dowm">
 			<v-list>
 				<template v-for="(item,index) in deviceosinfo">
-					<v-list-tile class="list_action" avatar :key="item.title" @click="jumpTo(item.id)">
-						<v-list-tile-content>
-							<v-list-tile-title>{{item.title}}</v-list-tile-title>
-						</v-list-tile-content>
+					<v-list-item class="list_action" avatar :key="item.title" @click="jumpTo(item.id)">
+						<v-list-item-content>
+							<v-list-item-title>{{item.title}}</v-list-item-title>
+						</v-list-item-content>
 						<v-icon v-if='item.id===3 && newversion' small color="red">lens</v-icon>
-						<v-list-tile-action-text>{{item.dis}}</v-list-tile-action-text>
+						<v-list-item-action-text>{{item.dis}}</v-list-item-action-text>
 						<v-icon v-if="item.co" class="chevron">chevron_right</v-icon>
-					</v-list-tile>
+					</v-list-item>
 					<v-divider v-if="index + 1 < deviceosinfo.length && theme.showDevider" :key="index" color="#fefefe"></v-divider>
 				</template>
 			</v-list>

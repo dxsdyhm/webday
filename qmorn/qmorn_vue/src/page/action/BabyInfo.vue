@@ -1,21 +1,24 @@
 <template>
-	<v-layout column fill-height>
+	<div>
 		<qmorntoolbar :title='title'></qmorntoolbar>
 		<v-list class="babyinfo">
-			<v-list-tile v-for="(item,index) in babyTemp" :key="item.fun" avatar @click="changeBabyInfo(item.fun)">
-				<v-list-tile-content>
-					<v-list-tile-title v-text="item.fun"></v-list-tile-title>
-				</v-list-tile-content>
-				<v-list-tile-action-text v-if="item.fun == fun2">{{item.value | sexfilter}}</v-list-tile-action-text>
-				<v-list-tile-action-text v-else-if="item.fun == fun4">{{item.value | fensfilter}}</v-list-tile-action-text>
-				<v-list-tile-action-text v-else v-text="item.value"></v-list-tile-action-text>
+			<v-list-item v-for="(item,index) in babyTemp" :key="item.fun" avatar @click.stop="changeBabyInfo(item.fun)">
+				<v-list-item-content>
+					<v-list-item-title v-text="item.fun"></v-list-item-title>
+				</v-list-item-content>
+				<v-list-item-action-text v-if="item.fun == fun2">{{item.value | sexfilter}}</v-list-item-action-text>
+				<v-list-item-action-text v-else-if="item.fun == fun4">{{item.value | fensfilter}}</v-list-item-action-text>
+				<v-list-item-action-text v-else v-text="item.value"></v-list-item-action-text>
 				<v-icon>chevron_right</v-icon>
-			</v-list-tile>
+			</v-list-item>
 		</v-list>
-		<v-btn class="exit" color="primary" @click="commoiBaby" :disabled="commitDisable">修改</v-btn>
+		<v-col>
+			<v-btn block color="primary" @click="commoiBaby" :disabled="commitDisable">修改</v-btn>
+		</v-col>
 		<!-- 昵称输入 -->
 		<v-dialog v-model="nicknameShow">
-			<v-card>
+			<v-card min-height="150px">
+				<v-card-title class="align-end fill-height">{{title}}</v-card-title>
 				<v-card-text>
 					<v-text-field v-model="value1" :rules="nameRules" :counter="10" :label="fun1" required></v-text-field>
 				</v-card-text>
@@ -29,26 +32,24 @@
 		<v-bottom-sheet v-model="fen">
 			<v-list>
 				<v-subheader>{{fun4}}</v-subheader>
-				<v-list-tile v-for="x in 5" :key="x" @click="changeFen(x-1)">
-					<v-list-tile-avatar :ripple="{ class: 'primary--text' }">
+				<v-list-item v-for="x in 5" :key="x" @click="changeFen(x-1)">
+					<v-list-item-avatar :ripple="{ class: 'primary--text' }">
 						<v-icon v-if="value4==(x-1)" color="primary">radio_button_checked</v-icon>
 						<v-icon v-else color="gray">radio_button_unchecked</v-icon>
-					</v-list-tile-avatar>
-					<v-list-tile-title>{{ (x-1) | fensfilter}}</v-list-tile-title>
-				</v-list-tile>
+					</v-list-item-avatar>
+					<v-list-item-title>{{ (x-1) | fensfilter}}</v-list-item-title>
+				</v-list-item>
 			</v-list>
 		</v-bottom-sheet>
 		<!-- 性别选项 -->
 		<v-dialog v-model="sexShow">
 			<v-card class="qmorn_card">
-				<v-layout align-left justify-center fill-height row>
-					<v-radio-group v-model="value2" @click="sexShow = false">
-						<v-radio v-for="n in 2" :key="n" :label="n | sexfilter" :value="n"></v-radio>
-					</v-radio-group>
-				</v-layout>
+				<v-radio-group v-model="value2" @click="sexShow = false" column>
+					<v-radio v-for="n in 2" :key="n" :label="n | sexfilter" :value="n" color="primary"></v-radio>
+				</v-radio-group>
 			</v-card>
 		</v-dialog>
-	</v-layout>
+	</div>
 </template>
 
 <script>

@@ -2,22 +2,22 @@
 	<v-layout column="">
 		<qmorntoolbar :title="title"></qmorntoolbar>
 		<v-list v-if="devicelist&&devicelist.lenght>0">
-			<v-list-tile v-for="item in devicelist" :key="item.id" avatar @click="selectdevice(item)">
-				<v-list-tile-avatar>
+			<v-list-item v-for="item in devicelist" :key="item.id" avatar @click="selectdevice(item)">
+				<v-list-item-avatar>
 					<v-avatar :size=36 tile>
 						<img src="../../assets/img/ic_dev_elf.png" />
 					</v-avatar>
-				</v-list-tile-avatar>
+				</v-list-item-avatar>
 
-				<v-list-tile-content>
-					<v-list-tile-title>{{ item.remark }}</v-list-tile-title>
-					<v-list-tile-sub-title>{{ item.name }}</v-list-tile-sub-title>
-				</v-list-tile-content>
+				<v-list-item-content>
+					<v-list-item-title>{{ item.remark }}</v-list-item-title>
+					<v-list-item-sub-title>{{ item.name }}</v-list-item-sub-title>
+				</v-list-item-content>
 
-				<v-list-tile-action>
+				<v-list-item-action>
 					<v-icon :v-show="isSelectDevice(item)" color='primary'>check_circle</v-icon>
-				</v-list-tile-action>
-			</v-list-tile>
+				</v-list-item-action>
+			</v-list-item>
 		</v-list>
 		<v-layout v-else align-center justify-center column fill-height class="mt-5">
 			还没有设备

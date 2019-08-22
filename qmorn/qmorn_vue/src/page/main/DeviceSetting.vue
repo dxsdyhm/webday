@@ -1,26 +1,26 @@
 <template>
 	<v-layout v-if="selectdevice!=null" column align-space-around>
 		<qmorntoolbar :title="title"></qmorntoolbar>
-		<v-chip :value="!deviceonline" color="warning " text-color="white" class="mx-2">
+		<v-chip :active="!deviceonline" color="warning " text-color="white" class="mx-2">
 			<v-icon class="ma-2">warning</v-icon>
 			设备离线，无法远程操作.
 		</v-chip>
 		<v-list two-line>
 			<template v-for="(item,index) in funs">
-				<v-list-tile v-if="item.id!==6 || selectdevice.role!==2" class="list" :key="item.title" @click="changeInfo(item.id)">
-					<v-list-tile-content>
-						<v-list-tile-title>{{ item.title }}</v-list-tile-title>
-						<v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
-					</v-list-tile-content>
-					<v-list-tile-action-text v-if="item.id===0">{{settingTemp.nikname}}</v-list-tile-action-text>
-					<v-list-tile-action-text v-else-if="item.id===1">{{volume}}</v-list-tile-action-text>
-					<v-list-tile-action-text v-else-if="item.id===4">{{settingTemp.wifissid}}</v-list-tile-action-text>
+				<v-list-item v-if="item.id!==6 || selectdevice.role!==2" class="list" :key="item.title" @click="changeInfo(item.id)">
+					<v-list-item-content>
+						<v-list-item-title>{{ item.title }}</v-list-item-title>
+						<v-list-item-sub-title>{{ item.subtitle }}</v-list-item-sub-title>
+					</v-list-item-content>
+					<v-list-item-action-text v-if="item.id===0">{{settingTemp.nikname}}</v-list-item-action-text>
+					<v-list-item-action-text v-else-if="item.id===1">{{volume}}</v-list-item-action-text>
+					<v-list-item-action-text v-else-if="item.id===4">{{settingTemp.wifissid}}</v-list-item-action-text>
 					<v-icon v-if="item.solit===0" class="chevron">chevron_right</v-icon>
-					<v-list-tile-action v-if="item.solit===1">
+					<v-list-item-action v-if="item.solit===1">
 						<v-switch v-if="item.id===2" color="primary" v-model="childlockswitch"></v-switch>
 						<v-switch v-else-if="item.id===5" color="primary" v-model="smartpicbookswitch"></v-switch>
-					</v-list-tile-action>
-				</v-list-tile>
+					</v-list-item-action>
+				</v-list-item>
 				<!-- <v-divider v-if="index + 1 < funs.length" :key="index"></v-divider> -->
 			</template>
 		</v-list>
@@ -37,8 +37,8 @@
 				</v-card-text>
 				<v-card-actions>
 					<v-spacer></v-spacer>
-					<v-btn flat color="primary" @click="nicknameShow=false">取消</v-btn>
-					<v-btn flat color="primary" @click="nicknameShow=false">确定</v-btn>
+					<v-btn text color="primary" @click="nicknameShow=false">取消</v-btn>
+					<v-btn text color="primary" @click="nicknameShow=false">确定</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
@@ -57,8 +57,8 @@
 				<v-card-text>解除绑定后，你将不能再远程操作设备的功能</v-card-text>
 				<v-card-actions>
 					<v-spacer></v-spacer>
-					<v-btn color="green darken-1" flat @click="unbindShow = false">取消</v-btn>
-					<v-btn color="green darken-1" flat @click="unbind()">确定</v-btn>
+					<v-btn color="green darken-1" text @click="unbindShow = false">取消</v-btn>
+					<v-btn color="green darken-1" text @click="unbind()">确定</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>

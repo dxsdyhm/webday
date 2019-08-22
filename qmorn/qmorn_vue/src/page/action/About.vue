@@ -1,5 +1,5 @@
 <template>
-	<v-layout align-space-around justify-space-between column fill-height>
+	<div class="text-center">
 		<qmorntoolbar :title='title'></qmorntoolbar>
 		<div class="logo">
 			<v-avatar :size=144 tile>
@@ -8,18 +8,18 @@
 			<div class="version">{{this.$store.state.activeUser.versionName}}</div>
 		</div>
 		<div class="copyright">深圳启萌星科技有限公司提供技术支持</div>
-	</v-layout>
+	</div>
 </template>
 
 <script>
-	export default{
+	export default {
 		data() {
 			return {
-				title:'关于'
+				title: '关于'
 			}
 		},
 		methods: {
-			
+
 		},
 	}
 </script>

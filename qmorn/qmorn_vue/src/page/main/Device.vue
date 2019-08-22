@@ -1,6 +1,6 @@
 <template>
-	<v-layout pa-2 column fill-height class="white--text pink lighten-3" text-xs-center>
-		<v-layout class="ma-2" row justify-end>
+	<v-layout pa-2 column fill-height class="white--text pink lighten-3" text-center>
+		<v-layout class="ma-1" row justify-end>
 			<v-icon color="#fff" size="32" @click="toadd()">add</v-icon>
 		</v-layout>
 		<v-container grid-list-md>
@@ -20,10 +20,12 @@
 				</v-flex>
 			</v-layout>
 		</v-container>
-		<v-flex xs12>
+		<v-flex xs12 class="d-flex flex-column align-self-center">
+			<v-spacer></v-spacer>
 			<v-avatar :size=144 tile>
 				<img src="../../assets/img/ic_dev_elf.png" />
 			</v-avatar>
+			<v-spacer></v-spacer>
 		</v-flex>
 		<v-layout row wrap class="fun">
 			<v-flex xs4 class="item" v-for="item in fundata" :key="item.funid" @click="toFunction(item.path)">

@@ -17,7 +17,7 @@
 				</v-layout>
 				<v-card-actions>
 					<v-spacer></v-spacer>
-					<v-btn color="green darken-1" flat @click="back()">确定</v-btn>
+					<v-btn color="green darken-1" text @click="back()">确定</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
@@ -27,7 +27,7 @@
 				<v-card-text>配置超时,请确设备处于配网状态，并且输入的wifi与密码正确</v-card-text>
 				<v-card-actions>
 					<v-spacer></v-spacer>
-					<v-btn color="green darken-1" flat @click="reset()">重试</v-btn>
+					<v-btn color="green darken-1" text @click="reset()">重试</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
