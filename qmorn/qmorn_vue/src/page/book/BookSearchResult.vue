@@ -1,32 +1,27 @@
 <template>
-	<v-layout column>
+	<div>
 		<qmorntoolbar :title='title' gape="no"></qmorntoolbar>
 		<v-text-field ref="searchbar" class="ma-2 elevation-0 searchbar" v-model="keyword" solo flat hide-details label="输入书名或ISBN" append-icon="search" @click:append='search' @keyup.enter="search"></v-text-field>
-		<!-- <v-chip >
-			<v-text-field ref="searchbar" label="输入书名或ISBN" append-icon="search" value="keyword" hide-details single-line full-width @click:append='search' @keyup.enter="search"></v-text-field>
-		</v-chip> -->
 		<v-list v-if="booklist&&booklist.length>0">
-			<v-layout class="itembook" row v-for="(item, index) in booklist" :key="item.name" @click="toShowDetail(item)">
-				<v-flex xs3>
+			<v-row class="ma-0 my-n3" v-for="(item, index) in booklist" :key="item.id" @click="toShowDetail(item)">
+				<v-col cols="3">
 					<v-avatar :size=96 tile>
 						<v-img class="img" :src="item.coverUrl"></v-img>
 					</v-avatar>
-				</v-flex>
-				<v-flex xs9 fill-height>
-					<v-layout column justify-space-between fill-height class="bookdetail">
+				</v-col>
+				<v-col cols="9">
+					<div class="d-flex itembook flex-column pl-1">
 						<div>{{item.name}}</div>
 						<div class="bookPublish">{{item.description}}</div>
-						<p></p>
-						<p></p>
-						<div class="bookdowm">{{item.author}}&nbsp;&nbsp;{{item.publisher}}&nbsp;&nbsp;{{item.pubdate}}</div>
-					</v-layout>
-				</v-flex>
-			</v-layout>
+						<div class="bookdowm mt-auto">{{item.author}}&nbsp;&nbsp;{{item.publisher}}&nbsp;&nbsp;{{item.pubdate}}</div>
+					</div>
+				</v-col>
+			</v-row>
 		</v-list>
-		<v-layout v-else align-center justify-center column fill-height class="mt-4">
+		<div v-else align-center justify-center column fill-height class="mt-4">
 			没有查询到结果
-		</v-layout>
-	</v-layout>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -78,7 +73,7 @@
 
 <style>
 	.itembook {
-		padding: 0.5rem;
+		height: 6.2rem;
 	}
 
 	.bookPublish {
@@ -89,10 +84,4 @@
 	.bookdowm {
 		font-size: 0.5rem;
 	}
-
-	.bookdetail {
-		margin-left: 1rem;
-	}
-
-	.searchbar {}
 </style>

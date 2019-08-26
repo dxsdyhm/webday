@@ -12,7 +12,7 @@
 		<p></p>
 		<div class="des px-2">{{book.description}}</div>
 		<p></p>
-		<div>{{book.author}}&nbsp;&nbsp;&nbsp;{{book.publisher}}&nbsp;&nbsp;&nbsp;{{book.pubdate}}</div>
+		<div class="px-2">{{book.author}}&nbsp;&nbsp;&nbsp;{{book.publisher}}&nbsp;&nbsp;&nbsp;{{book.pubdate}}</div>
 		<v-btn v-if="booklistids" class="ma-4" color="gray" disabled>已添加到书架</v-btn>
 		<v-btn v-else class="ma-4" color="primary" @click="addbook">添加到书架</v-btn>
 	</v-layout>

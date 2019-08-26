@@ -1,5 +1,5 @@
 <template>
-	<v-layout pa-2 column fill-height class="white--text pink lighten-3" text-center>
+	<v-layout pa-2 column class="white--text pink lighten-3" text-center>
 		<v-layout class="ma-1" row justify-end>
 			<v-icon color="#fff" size="32" @click="toadd()">add</v-icon>
 		</v-layout>
@@ -122,16 +122,22 @@
 				})
 			},
 			getDeviceOnline() {
-				this.$api.user.getdevicebatter({
-					deviceList: [this.$store.getters.getSelectDevice.id]
-				}).then(res => {
-					this.$store.commit('updateSelectOnline', res.data.deviceStateList)
-					this.updateInfo()
-				}).catch(res => {
-					//登陆失败
-					this.$message(res.msg)
-				})
-				this.getAliOnline()
+				//检查登陆态，否则结束轮询
+				if(this.$store.getters.getLoginState){
+					this.$api.user.getdevicebatter({
+						deviceList: [this.$store.getters.getSelectDevice.id]
+					}).then(res => {
+						this.$store.commit('updateSelectOnline', res.data.deviceStateList)
+						this.updateInfo()
+					}).catch(res => {
+						//登陆失败
+						this.$message(res.msg)
+					})
+					this.getAliOnline()
+				}else{
+					clearInterval(this.interval)
+					console.log("stop intervel device state")
+				}
 			},
 			toFunction(path) {
 				this.$router.push(path)

@@ -1,5 +1,5 @@
 <template>
-	<column>
+	<div>
 		<qmorntoolbar :title='title'></qmorntoolbar>
 		<v-list class="userinfo">
 			<v-list-item avatar>
@@ -24,7 +24,7 @@
 		<v-col>
 			<v-btn block color="red" dark @click="exit">退出登陆</v-btn>
 		</v-col>
-	</column>
+	</div>
 </template>
 
 <script>
