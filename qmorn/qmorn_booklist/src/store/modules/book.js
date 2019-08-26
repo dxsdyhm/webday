@@ -10,7 +10,7 @@ const state = {
 		},
 		{
 			type: 'card',
-			name: '益智卡片',
+			name: '学习卡片',
 			number: 6
 		},
 		{
