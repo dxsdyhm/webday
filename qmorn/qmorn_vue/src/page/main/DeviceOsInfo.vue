@@ -11,7 +11,7 @@
 		<div class="dowm">
 			<v-list>
 				<template v-for="(item,index) in deviceosinfo">
-					<v-list-item class="list_action" avatar :key="item.title" @click="jumpTo(item.id)">
+					<v-list-item class="list_action" :key="item.title" @click="jumpTo(item.id)">
 						<v-list-item-content>
 							<v-list-item-title>{{item.title}}</v-list-item-title>
 						</v-list-item-content>

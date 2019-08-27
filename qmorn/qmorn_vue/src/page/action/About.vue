@@ -1,13 +1,15 @@
 <template>
-	<div class="text-center">
+	<div>
 		<qmorntoolbar :title='title'></qmorntoolbar>
-		<div class="logo">
-			<v-avatar :size=144 tile>
-				<img src="../../assets/img/logo.svg" />
-			</v-avatar>
-			<div class="version">{{this.$store.state.activeUser.versionName}}</div>
-		</div>
-		<div class="copyright">深圳启萌星科技有限公司提供技术支持</div>
+		<v-layout class="fullscreen text-center d-flex flex-column">
+			<div class="mt-auto mb-auto">
+				<v-avatar :size=144 tile>
+					<img src="../../assets/img/logo.svg" />
+				</v-avatar>
+				<div class="version">{{this.$store.state.activeUser.versionName}}</div>
+			</div>
+			<div class="copyright mt-auto">深圳启萌星科技有限公司提供技术支持</div>
+		</v-layout>
 	</div>
 </template>
 
@@ -25,10 +27,6 @@
 </script>
 
 <style>
-	.logo {
-		margin: 10rem auto;
-	}
-
 	.copyright {
 		text-align: center;
 		color: #a1a1a0;
@@ -38,6 +36,5 @@
 
 	.version {
 		margin: 1rem auto;
-		text-align: center;
 	}
 </style>

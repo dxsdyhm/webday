@@ -31,4 +31,10 @@
 </script>
 
 <style>
+	.test {
+		border: 0.0625rem solid #00695C;
+	}
+	.fullscreen {
+		height: 90vh;
+	}
 </style>

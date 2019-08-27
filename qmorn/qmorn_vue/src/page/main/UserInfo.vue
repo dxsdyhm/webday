@@ -1,5 +1,5 @@
 <template>
-	<div class="content">
+	<div class="cont">
 		<v-responsive :aspect-ratio="16/9" class="up pink lighten-3">
 			<v-layout align-center justify-center column fill-height @click="jumpTo('/userdetail')">
 				<v-avatar :size=72>
@@ -84,7 +84,6 @@
 </script>
 
 <style>
-	.content {}
 	.up {
 	}
 	.dowm {

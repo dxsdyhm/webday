@@ -10,7 +10,7 @@
 				<v-list-item v-if="item.id!==6 || selectdevice.role!==2" class="list" :key="item.title" @click="changeInfo(item.id)">
 					<v-list-item-content>
 						<v-list-item-title>{{ item.title }}</v-list-item-title>
-						<v-list-item-sub-title>{{ item.subtitle }}</v-list-item-sub-title>
+						<v-list-item-subtitle>{{ item.subtitle }}</v-list-item-subtitle>
 					</v-list-item-content>
 					<v-list-item-action-text v-if="item.id===0">{{settingTemp.nikname}}</v-list-item-action-text>
 					<v-list-item-action-text v-else-if="item.id===1">{{volume}}</v-list-item-action-text>
@@ -24,7 +24,7 @@
 				<!-- <v-divider v-if="index + 1 < funs.length" :key="index"></v-divider> -->
 			</template>
 		</v-list>
-		<v-btn class="mb-5" v-if="selectdevice.role===1" ripple color="primary" @click="unbindShow=true">
+		<v-btn class="mb-5 mx-4" v-if="selectdevice.role===1" ripple color="primary" @click="unbindShow=true">
 			解除绑定
 		</v-btn>
 		<!-- 昵称输入 -->

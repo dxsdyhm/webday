@@ -1,8 +1,6 @@
 <template>
-	<v-layout pa-2 column class="white--text pink lighten-3" text-center>
-		<v-layout class="ma-1" row justify-end>
-			<v-icon color="#fff" size="32" @click="toadd()">add</v-icon>
-		</v-layout>
+	<div class="white--text pink lighten-3 text-center d-flex flex-column cont">
+		<v-icon class="align-self-end pa-1 mt-2" color="#fff" size="32" @click="toadd()">add</v-icon>
 		<v-container grid-list-md>
 			<v-layout row wrap>
 				<v-flex v-for="item in onlinestate" :key="item.id" xs4>
@@ -20,20 +18,25 @@
 				</v-flex>
 			</v-layout>
 		</v-container>
-		<v-flex xs12 class="d-flex flex-column align-self-center">
-			<v-spacer></v-spacer>
+		<div class="mt-auto mb-auto">
 			<v-avatar :size=144 tile>
 				<img src="../../assets/img/ic_dev_elf.png" />
 			</v-avatar>
-			<v-spacer></v-spacer>
-		</v-flex>
-		<v-layout row wrap class="fun">
-			<v-flex xs4 class="item" v-for="item in fundata" :key="item.funid" @click="toFunction(item.path)">
+		</div>
+		<div class="d-flex justify-space-around fun">
+			<div v-for="item in fundata" :key="item.funid" @click="toFunction(item.path)">
 				<v-icon class="circle">{{item.icon}}</v-icon>
 				<div> {{item.funname}} </div>
-			</v-flex>
-		</v-layout>
-	</v-layout>
+			</div>
+			<!-- <v-flex xs4 class="item" v-for="item in fundata" :key="item.funid" @click="toFunction(item.path)">
+					<v-icon class="circle">{{item.icon}}</v-icon>
+					<div> {{item.funname}} </div>
+				</v-flex> -->
+		</div>
+	</div>
+	<!-- <v-layout column class="white--text pink lighten-3 pa-3" text-center>
+		
+	</v-layout> -->
 </template>
 <script>
 	import axios from 'axios';
@@ -123,7 +126,10 @@
 			},
 			getDeviceOnline() {
 				//检查登陆态，否则结束轮询
-				if(this.$store.getters.getLoginState){
+				if (this.$store.getters.getLoginState) {
+					clearInterval(this.interval)
+					console.log("stop intervel device state")
+				} else {
 					this.$api.user.getdevicebatter({
 						deviceList: [this.$store.getters.getSelectDevice.id]
 					}).then(res => {
@@ -134,9 +140,6 @@
 						this.$message(res.msg)
 					})
 					this.getAliOnline()
-				}else{
-					clearInterval(this.interval)
-					console.log("stop intervel device state")
 				}
 			},
 			toFunction(path) {
@@ -219,10 +222,9 @@
 
 <style>
 	.fun {
-		margin-bottom: 4rem;
+		width: 100%;
+		margin-bottom: 3rem;
 	}
-
-	.item {}
 
 	.circle {
 		width: 3rem;
@@ -239,9 +241,5 @@
 		width: 100%;
 		overflow: hidden;
 		text-overflow: ellipsis;
-	}
-
-	.ss {
-		height: 85vh;
 	}
 </style>

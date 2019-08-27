@@ -2,7 +2,7 @@
 	<div>
 		<qmorntoolbar :title='title'></qmorntoolbar>
 		<v-list class="userinfo">
-			<v-list-item avatar>
+			<v-list-item>
 				<v-list-item-content>
 					<v-list-item-title v-text="'头像'"></v-list-item-title>
 				</v-list-item-content>
@@ -11,7 +11,7 @@
 					<img :src="userimg">
 				</v-list-item-avatar>
 			</v-list-item>
-			<v-list-item avatar>
+			<v-list-item>
 				<v-list-item-content>
 					<v-list-item-title v-text="'手机号'"></v-list-item-title>
 				</v-list-item-content>

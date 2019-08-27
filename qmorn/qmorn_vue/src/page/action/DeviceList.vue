@@ -1,8 +1,8 @@
 <template>
-	<v-layout column="">
+	<v-layout column>
 		<qmorntoolbar :title="title"></qmorntoolbar>
-		<v-list v-if="devicelist&&devicelist.lenght>0">
-			<v-list-item v-for="item in devicelist" :key="item.id" avatar @click="selectdevice(item)">
+		<v-list v-if="(!!devicelist)&&(devicelist.length>0)">
+			<v-list-item v-for="item in devicelist" :key="item.id" @click="selectdevice(item)">
 				<v-list-item-avatar>
 					<v-avatar :size=36 tile>
 						<img src="../../assets/img/ic_dev_elf.png" />

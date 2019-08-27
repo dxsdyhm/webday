@@ -1,15 +1,15 @@
 <template>
-	<v-layout column fill-height justify-space-between>
+	<div class="d-flex flex-column all">
 		<keep-alive>
-			<router-view class="content"></router-view>
+			<router-view></router-view>
 		</keep-alive>
-		<v-bottom-navigation v-model="activeBtn" :input-value="showNav" grow absolute color="primary">
+		<v-bottom-navigation v-model="activeBtn" :input-value="showNav" grow absolute color="primary" height="8vh">
 			<v-btn v-for="item in bottonNav" :key="item.position" @click="selectNav(item)">
 				<span>{{item.name}}</span>
 				<v-icon>{{item.icon}}</v-icon>
 			</v-btn>
 		</v-bottom-navigation>
-	</v-layout>
+	</div>
 </template>
 
 <script>
@@ -87,7 +87,13 @@
 </script>
 
 <style>
-	.content {
-		margin-bottom: 3.5rem;
+	.all{
+		height: 100vh;
+	}
+	.cont{
+		height: 92vh;
+	}
+	.boot{
+		height: 8vh;
 	}
 </style>

@@ -1,7 +1,7 @@
 <template>
 	<v-layout column>
 		<qmorntoolbar :title="title"></qmorntoolbar>
-		<v-layout row>
+		<v-layout row class="ma-0">
 			<v-container grid-list-xl fluid v-if="getGroupMessage.length>0" row>
 				<v-layout class="latext" align-center v-for="(msg, index) in getGroupMessage" :key="msg.chatmsgid" row :align-start="!ismyself(msg.sendid)" :align-end="ismyself(msg.sendid)"
 				 :align-content-start="ismyself(msg.sendid)" :align-content-end="!ismyself(msg.sendid)">
@@ -28,7 +28,7 @@
 				</v-card>
 			</v-container>
 		</v-layout>
-		<v-footer app inset :style="{height: messageInputHeight}">
+		<v-footer class="pa-0" app inset :style="{height: messageInputHeight}">
 			<v-text-field ref="searchbar" class="ma-1 elevation-0 searchbar" v-model="messtext" solo flat hide-details label="" append-icon="send" @click:append='sendMessage()' @keyup.enter="sendMessage()"></v-text-field>
 		</v-footer>
 	</v-layout>
