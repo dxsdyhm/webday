@@ -120,16 +120,22 @@
 				})
 			},
 			getDeviceOnline() {
-				this.$api.user.getdevicebatter({
-					deviceList: [this.$store.getters.getSelectDevice.id]
-				}).then(res => {
-					this.$store.commit('updateSelectOnline', res.data.deviceStateList)
-					this.updateInfo()
-				}).catch(res => {
-					//登陆失败
-					this.$message(res.msg)
-				})
-				this.getAliOnline()
+				//检查登陆态，否则结束轮询
+				if (this.$store.getters.getLoginState) {
+					clearInterval(this.interval)
+					console.log("stop intervel device state")
+				} else {
+					this.$api.user.getdevicebatter({
+						deviceList: [this.$store.getters.getSelectDevice.id]
+					}).then(res => {
+						this.$store.commit('updateSelectOnline', res.data.deviceStateList)
+						this.updateInfo()
+					}).catch(res => {
+						//登陆失败
+						this.$message(res.msg)
+					})
+					this.getAliOnline()
+				}
 			},
 			toFunction(path) {
 				this.$router.push(path)

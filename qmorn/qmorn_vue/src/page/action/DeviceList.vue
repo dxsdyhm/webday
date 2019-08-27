@@ -1,7 +1,7 @@
 <template>
 	<v-layout column="">
 		<qmorntoolbar :title="title"></qmorntoolbar>
-		<v-list v-if="devicelist&&devicelist.lenght>0">
+		<v-list v-if="devicelist&&devicelist.length>0">
 			<v-list-tile v-for="item in devicelist" :key="item.id" avatar @click="selectdevice(item)">
 				<v-list-tile-avatar>
 					<v-avatar :size=36 tile>
@@ -15,7 +15,7 @@
 				</v-list-tile-content>
 
 				<v-list-tile-action>
-					<v-icon :v-show="isSelectDevice(item)" color='primary'>check_circle</v-icon>
+					<v-icon v-show="isSelectDevice(item)" color='primary'>check_circle</v-icon>
 				</v-list-tile-action>
 			</v-list-tile>
 		</v-list>
@@ -26,6 +26,9 @@
 </template>
 
 <script>
+	import {
+		mapGetters
+	} from 'vuex';
 	export default {
 		data() {
 			return {
@@ -37,8 +40,8 @@
 				this.$store.commit('setSelectDevice', device)
 			},
 			isSelectDevice(device){
-				if(!!this.$store.state.selectDevice){
-					return device.id===this$store.state.selectDevice.id;
+				if(!!this.deviceinfo){
+					return device.id===this.deviceinfo.id;
 				}
 				return false;
 			},
@@ -53,6 +56,9 @@
 			}
 		},
 		computed:{
+			...mapGetters({
+				deviceinfo: 'getSelectDevice',
+			}),
 			devicelist:function(){
 				return this.$store.getters.getUserDeviceList;
 			}

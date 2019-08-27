@@ -29,7 +29,8 @@
 				if(!!this.selectdevice&&(this.selectdevice.tulingLT===1)){
 					return '1f9c927241a64082a5be9d967dbc5991'
 				}else{
-					return '271f20c64afb4dbea6ad2645e2fbbcf8'
+					// return '271f20c64afb4dbea6ad2645e2fbbcf8'//熊卡AIwifi
+					return '9f97c6a1908e4a989f37174a3589232e'
 				}
 			}
 		},

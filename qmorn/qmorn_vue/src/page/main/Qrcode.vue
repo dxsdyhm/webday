@@ -2,7 +2,7 @@
 	<v-layout column align-center>
 		<qmorntoolbar :title='title'></qmorntoolbar>
 		<qriously :value="qrcode" :size="qrsize" />
-		<div class="mt-4">请将二维码放置到设备正前方，如果设备不能识别，请在设备面前小幅度移动手机</div>
+		<div class="ma-4" text-center>请将二维码放置到设备正前方，如果设备不能识别，请在设备面前小幅度移动手机</div>
 		<v-dialog v-model="newDevice">
 			<v-card>
 				<v-card-title class="headline">

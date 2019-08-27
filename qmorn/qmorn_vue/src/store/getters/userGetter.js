@@ -51,5 +51,8 @@ export const userInfo = {
 	},
 	getGroupMessage (state){
 		return state.groupmessage;
+	},
+	getLoginState (state){
+		return state.headers['sid']==='0'
 	}
 }

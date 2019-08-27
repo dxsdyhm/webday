@@ -26,12 +26,8 @@ const tip = (msg, option = 'info') => {
  * 携带当前页面路由，以期在登录页面完成登录后返回当前页面
  */
 const toLogin = () => {
-	router.replace({
-		path: '/',
-		query: {
-			redirect: router.currentRoute.fullPath
-		}
-	});
+	store.commit('updateSession', '0')
+	router.replace('/user');
 }
 
 /**
@@ -51,7 +47,7 @@ const errorHandle = (status, code, other) => {
 			tip('请求的资源不存在');
 			break;
 		default:
-			console.log('axios request error ,but default status ******'+status)
+			console.log('axios request error ,but default status ******' + status)
 	}
 }
 
@@ -77,10 +73,12 @@ Object.keys(store.state.activeUser.headers).forEach(function(key) {
 	instance.defaults.headers[key] = store.state.activeUser.headers[key]
 })
 
-const special=['/app/user/login','/app/com/sms/send','/app/com/verifycode/verify','/app/user/register','/app/user/pwd/reset','/app/user/thirdlogin2']
+const special = ['/app/user/login', '/app/com/sms/send', '/app/com/verifycode/verify', '/app/user/register',
+	'/app/user/pwd/reset', '/app/user/thirdlogin2'
+]
 
 //是否需要检查sessionid
-function nosession(url){
+function nosession(url) {
 	return special.includes(url);
 }
 
@@ -96,17 +94,17 @@ instance.interceptors.request.use(
 		// 而后我们可以在响应拦截器中，根据状态码进行一些统一的操作。
 		// const token = store.state.token;
 		// token && (config.headers.Authorization = token);
-		if(config.url==='/app/device/onlinestate'){
+		if (config.url === '/app/device/onlinestate') {
 			//在线状态使用特殊域名
-			config.baseURL=base.onlineBase1
-		}else{
-			config.baseURL=base.base1
+			config.baseURL = base.onlineBase1
+		} else {
+			config.baseURL = base.base1
 		}
-		if(nosession(config.url)){
+		if (nosession(config.url)) {
 			return config;
 		}
-		let sid=store.state.activeUser.headers['sid']
-		if(sid === '0'){
+		let sid = store.state.activeUser.headers['sid']
+		if (sid === '0') {
 			toLogin()
 			throw new Error('login')
 		}
@@ -134,7 +132,9 @@ instance.interceptors.response.use(
 	},
 	// 请求失败
 	error => {
-		const {response} = error;
+		const {
+			response
+		} = error;
 		if (response) {
 			// 请求已发出，但是不在2xx的范围
 			errorHandle(response.status, response.data.code, response.data.msg);
