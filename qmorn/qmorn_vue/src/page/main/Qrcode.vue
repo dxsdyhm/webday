@@ -1,8 +1,8 @@
 <template>
-	<v-layout column align-center>
+	<div class="column" column>
 		<qmorntoolbar :title='title'></qmorntoolbar>
 		<qriously :value="qrcode" :size="qrsize" />
-		<div class="mt-4">请将二维码放置到设备正前方，如果设备不能识别，请在设备面前小幅度移动手机</div>
+		<div class="ma-4 text-center">请将二维码放置到设备正前方，如果设备不能识别，请在设备面前小幅度移动手机</div>
 		<v-dialog v-model="newDevice">
 			<v-card>
 				<v-card-title class="headline">
@@ -17,13 +17,16 @@
 				</v-layout>
 				<v-card-actions>
 					<v-spacer></v-spacer>
-					<v-btn color="green darken-1" text @click="back()">确定</v-btn>
+					<v-btn color="green darken-1" flat @click="back()">确定</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
 		<!-- 搜索超时 -->
 		<v-dialog v-model="timeout">
 			<v-card>
+				<v-card-title class="headline">
+					超时
+				</v-card-title>
 				<v-card-text>配置超时,请确设备处于配网状态，并且输入的wifi与密码正确</v-card-text>
 				<v-card-actions>
 					<v-spacer></v-spacer>
@@ -31,7 +34,7 @@
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
-	</v-layout>
+	</div>
 </template>
 
 <script>

@@ -24,9 +24,9 @@ import {
 } from './aliiot/iot.js';
 import weixin from './weixin/weixin.js';
 import VueQriously from 'vue-qriously'
-// import('vue-qriously').then(VueQriously=>{
-// 	Vue.use(VueQriously)
-// })
+import('vue-qriously').then(VueQriously=>{
+	Vue.use(VueQriously)
+})
 if (weixin.isWeixin()) {
 	import('weixin-js-sdk').then(wx => {
 		Vue.prototype.$wx = wx;
