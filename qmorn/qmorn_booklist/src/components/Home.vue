@@ -4,7 +4,7 @@
 			<div class="container">
 				<b-navbar-brand href="javascript:;">
 					<a class="navbar-brand text-white home" @click="gohome()">
-						<img src="../assets/logo.svg" width="40" height="40" class="d-inline-block mr-3" alt="">启萌星</a>
+						<img src="../assets/logo.svg" width="40" height="40" class="d-inline-block mr-3" alt="">巴布精灵</a>
 				</b-navbar-brand>
 				<b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 				<b-collapse id="nav-collapse" is-nav>
