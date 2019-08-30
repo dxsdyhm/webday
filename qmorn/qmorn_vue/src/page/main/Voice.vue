@@ -1,6 +1,6 @@
 <template>
 	<div class="act-form">
-		<iframe class="voice cont" :src="srcid"></iframe>
+		<iframe class="voice cont" :src="srcid" frameborder='no' scrolling='no'></iframe>
 	</div>
 </template>
 
@@ -39,5 +39,7 @@
 <style>
 	.voice{
 		width: 100%;
+		/* scrolling:'no'; */
+		frameborder:'no';
 	}
 </style>

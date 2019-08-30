@@ -11,7 +11,7 @@
 
 				<v-list-item-content>
 					<v-list-item-title>{{ item.remark }}</v-list-item-title>
-					<v-list-item-sub-title>{{ item.name }}</v-list-item-sub-title>
+					<v-list-item-subtitle>{{ item.name }}</v-list-item-subtitle>
 				</v-list-item-content>
 
 				<v-list-item-action>
