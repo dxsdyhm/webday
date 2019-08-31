@@ -4,9 +4,9 @@
 		<v-container grid-list-md>
 			<v-layout row wrap>
 				<v-flex v-for="item in onlinestate" :key="item.id" xs4>
-					<v-card height="95">
+					<v-card height="95" @click='topage(item)'>
 						<v-card-actions>
-							<v-icon v-if="item.id==2" :color="item.text | batteryfilter">{{item.icon}}</v-icon>
+							<v-icon v-if="item.id==2" :color="item.text | batteryfilter">{{item.text | batteryiconfilter}}</v-icon>
 							<v-icon v-else-if="item.id==1" color="primary">{{deviceonline?item.icon:'wifi_off'}}</v-icon>
 							<v-icon v-else color="primary">{{item.icon}}</v-icon>
 							<div class="ml-1" v-if="item.id==1&&!deviceonline">(离线)</div>
@@ -85,7 +85,7 @@
 					{
 						id: 2,
 						icon: "battery_full",
-						text: "80"
+						text: "-1"
 					}
 				],
 				online: 0,
@@ -144,6 +144,15 @@
 			},
 			toFunction(path) {
 				this.$router.push(path)
+			},
+			topage(item){
+				if(item.id===0){
+					this.toFunction(this.fundata[0].path)
+				}else if(item.id===1){
+					this.toadd()
+				}else if(item.id===2){
+					
+				}
 			},
 			updateInfo() {
 				let slect = this.$store.getters.getSelectOnline;
