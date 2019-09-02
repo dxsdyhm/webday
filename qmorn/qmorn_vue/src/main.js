@@ -23,17 +23,12 @@ import {
 	disconnect
 } from './aliiot/iot.js';
 import weixin from './weixin/weixin.js';
-import VueQriously from 'vue-qriously'
+// import VueQriously from 'vue-qriously'
 import('vue-qriously').then(VueQriously=>{
 	Vue.use(VueQriously)
 })
-<<<<<<< HEAD
-if(weixin.isWeixin()){
-	import('weixin-js-sdk').then(wx=>{
-=======
 if (weixin.isWeixin()) {
 	import('weixin-js-sdk').then(wx => {
->>>>>>> vuetify2
 		Vue.prototype.$wx = wx;
 	})
 }
@@ -96,9 +91,5 @@ new Vue({
 	render: h => h(App),
 	router,
 	store,
-<<<<<<< HEAD
-}).$mount('#app')
-=======
 	vuetify: new Vuetify(opts)
 }).$mount('#app')
->>>>>>> vuetify2
