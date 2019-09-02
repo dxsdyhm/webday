@@ -1,5 +1,5 @@
 /**
- * 性别转义
+ * 阿里云下载地址转换
  * @param {*} value 
  */
 const ossurl=function(url){
@@ -12,6 +12,16 @@ const ossurl=function(url){
     return url
 }
 
+/**
+ * 购买链接转换
+ * @param {Object} key 搜索关键词
+ */
+const buyurl=function(key){
+	let url=encodeURI(key)
+    return `http://search.dangdang.com/?key=${url}`
+}
+
 export default {
     ossurl,
+	buyurl,
 }

@@ -6,6 +6,9 @@
 			<div class="bookname">{{book.name}}</div>
 		</div>
 		<div class="text-right d-none d-sm-block">
+			<a :href='book.name|buyurl' target='_blank' class="p-3 d-inline-flex cleara">
+				<i class="material-icons primaryicon mr-1">shopping_cart</i>购买
+			</a>
 			<a :href='book.bookUrl|ossurl' class="p-3 d-inline-flex cleara">
 				<i class="material-icons primaryicon mr-1">cloud_download</i>下载
 			</a>

@@ -19,6 +19,10 @@
 				</div>
 				<div class="row mt-2">
 					<div class="col text-left">{{book.pubdate}}</div>
+					<a v-if="!!book.bookUrl" :href='book.name|buyurl' class="col-auto" target='_blank' v-on:click.stop.capture="down()">
+						<!-- <i class="material-icons col-auto primaryicon">cloud_download</i> -->
+						购买
+					</a>
 					<a v-if="!!book.bookUrl" :href='book.bookUrl|ossurl' class="col-auto" v-on:click.stop.capture="down()">
 						<!-- <i class="material-icons col-auto primaryicon">cloud_download</i> -->
 						下载
