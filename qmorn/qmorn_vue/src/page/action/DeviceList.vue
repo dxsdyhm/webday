@@ -10,8 +10,8 @@
 				</v-list-item-avatar>
 
 				<v-list-item-content>
-					<v-list-item-title>{{ item.remark }}</v-list-item-title>
-					<v-list-item-subtitle>{{ item.name }}</v-list-item-subtitle>
+					<v-list-item-title>{{ showName(item) }}</v-list-item-title>
+					<!-- <v-list-item-subtitle>{{ item.name }}</v-list-item-subtitle> -->
 				</v-list-item-content>
 
 				<v-list-item-action>
@@ -50,6 +50,15 @@
 				}).catch(res => {
 					console.log(res)
 				})
+			},
+			showName(device){
+				if(!!device.remark){
+					return device.remark
+				}else if(!!device.name){
+					return device.name
+				}else{
+					return device.id
+				}
 			}
 		},
 		computed:{
