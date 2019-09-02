@@ -1,37 +1,52 @@
 <template>
-	<v-layout column>
-		<qmorntoolbar :title="title"></qmorntoolbar>
-		<v-layout row>
-			<v-container grid-list-xl fluid v-if="getGroupMessage.length>0" row>
-				<v-layout class="latext" align-center v-for="(msg, index) in getGroupMessage" :key="msg.chatmsgid" row :align-start="!ismyself(msg.sendid)" :align-end="ismyself(msg.sendid)"
-				 :align-content-start="ismyself(msg.sendid)" :align-content-end="!ismyself(msg.sendid)">
-					<v-avatar v-if="!ismyself(msg.sendid)">
-						<v-img :src="userimage(msg.sendid)"></v-img>
-					</v-avatar>
-					<v-flex xs6 sm4 :offset-xs6="ismyself(msg.sendid)" :offset-sm8="ismyself(msg.userid)">
-						<v-card class="msg" :color="ismyself(msg.sendid) ? 'primary' : 'blue' " flat>
+	<div v-resize="onResize">
+		<qmorntoolbar :title="title" gape="no"></qmorntoolbar>
+		<div class="d-flex flex-column" fluid v-if="getGroupMessage.length>0">
+			<v-row class="latext my-2" align='center' no-gutters v-for="(msg, index) in getGroupMessage" :key="msg.chatmsgid"
+			 :justify="ismyself(msg.sendid)?'end':'start'">
+				<template v-if="!ismyself(msg.sendid)">
+					<v-col cols="2" class="text-center">
+						<v-avatar>
+							<v-img :src="userinfo.image"></v-img>
+						</v-avatar>
+					</v-col>
+					<v-col cols="auto">
+						<v-card class="msg" :color="ismyself(msg.sendid) ? 'primary' : 'blue' " flat max-width="70vw">
 							<v-card-text :class="ismyself(msg.sendid) ? 'white--text' : 'white--text' ">
 								{{msg.text}}
 							</v-card-text>
 						</v-card>
-					</v-flex>
-					<v-avatar v-if="ismyself(msg.sendid)">
-						<v-img :src="userinfo.image"></v-img>
-					</v-avatar>
-				</v-layout>
-			</v-container>
-			<v-container v-else fluid>
-				<v-card color="blue">
-					<v-card-text>
-						<v-icon class="pa-2">info</v-icon>没有聊天记录
-					</v-card-text>
-				</v-card>
-			</v-container>
-		</v-layout>
-		<v-footer app inset :style="{height: messageInputHeight}">
-			<v-text-field ref="searchbar" class="ma-1 elevation-0 searchbar" v-model="messtext" solo flat hide-details label="" append-icon="send" @click:append='sendMessage()' @keyup.enter="sendMessage()"></v-text-field>
+					</v-col>
+				</template>
+				<template v-else>
+					<v-col cols="auto" class="">
+						<v-card class="msg" :color="ismyself(msg.sendid) ? 'primary' : 'blue' " flat max-width="70vw">
+							<v-card-text :class="ismyself(msg.sendid) ? 'white--text' : 'white--text' ">
+								{{msg.text}}
+							</v-card-text>
+						</v-card>
+					</v-col>
+					<v-col cols="2" class="text-center">
+						<v-avatar>
+							<v-img :src="userimage(msg.sendid)"></v-img>
+						</v-avatar>
+					</v-col>
+				</template>
+			</v-row>
+			<div ref="end"></div>
+		</div>
+		<v-container v-else fluid>
+			<v-card color="blue">
+				<v-card-text>
+					<v-icon class="pa-2">info</v-icon>没有聊天记录
+				</v-card-text>
+			</v-card>
+		</v-container>
+		<v-footer class="" app inset :absolute='keybord' padless :style="{height: messageInputHeight}" v-bind:class="keybord?'mb-5':''">
+			<v-text-field ref="searchbar" class="ma-1 elevation-0 searchbar" v-model="messtext" solo flat hide-details clearable
+			 label="" append-icon="send" @click:append='sendMessage()' @keyup.enter="sendMessage()"></v-text-field>
 		</v-footer>
-	</v-layout>
+	</div>
 </template>
 
 <script>
@@ -47,6 +62,11 @@
 				messageInputHeight: '56px',
 				title: '远程陪护',
 				messtext: '',
+				keybord: false,
+				windowSize: {
+					x: 0,
+					y: 0,
+				},
 				// messageTemp: {
 				// 	cmd: 27,
 				// 	option: 1,
@@ -70,29 +90,29 @@
 		},
 		methods: {
 			sendMessage() {
-				if(this.messtext.trim().length<=0){
+				if (this.messtext.trim().length <= 0) {
 					return;
 				}
-				let message=this.getSendTextMessage();
+				let message = this.getSendTextMessage();
 				sendGroupMesg(this.$iotdevice, message, this.userrole)
 				this.$store.commit('addGroupMessage', message)
-				this.messtext="";
+				this.messtext = "";
 			},
 			ismyself(userid) {
 				return parseInt(userid) === this.userinfo.uid;
 			},
 			getUtcTime() {
-				let date=new Date();
+				let date = new Date();
 				let y = date.getUTCFullYear();
 				let m = date.getUTCMonth();
 				let d = date.getUTCDate();
 				let h = date.getUTCHours();
 				let M = date.getUTCMinutes();
 				let s = date.getUTCSeconds();
-				return Date.UTC(y,m,d,h,M,s);
+				return Date.UTC(y, m, d, h, M, s);
 			},
-			getSendTextMessage(){
-				let msgid=this.chatmsid();
+			getSendTextMessage() {
+				let msgid = this.chatmsid();
 				return {
 					cmd: 27,
 					option: 1,
@@ -101,7 +121,7 @@
 					type: 0,
 					text: this.messtext,
 					url: '',
-					time: this.getUtcTime()/1000,
+					time: this.getUtcTime() / 1000,
 					duration: 0,
 					sendid: this.userinfo.uid,
 					chatmsgid: msgid,
@@ -113,19 +133,28 @@
 					extra: ''
 				}
 			},
-			chatmsid(){
-				return Math.round(new Date().getTime()/1000-this.$store.state.activeUser.lastUpdated/1000);
+			chatmsid() {
+				return Math.round(new Date().getTime() / 1000 - this.$store.state.activeUser.lastUpdated / 1000);
 			},
-			userimage(userid){
+			userimage(userid) {
 				for (var i = 0; i < this.users.length; i++) {
 					if (this.users[i].id === userid) {
 						return this.users[i].image;
 					}
 				}
 				return this.userinfo.image;
+			},
+			onResize(){
+				if(this.windowSize.y-window.innerHeight>60){
+					this.keybord=true
+				}else{
+					this.keybord=false
+				}
 			}
 		},
 		mounted() {
+			this.windowSize = { x: window.innerWidth, y: window.innerHeight }
+			this.onResize()
 			this.$api.user.getGroupInfo({
 				deviceList: [
 					this.selectdevice.id
@@ -155,11 +184,19 @@
 				}
 				return 2;
 			},
+		},
+		watch: {
+			'$store.getters.getGroupMessage': function(select) {
+				this.$vuetify.goTo(this.$refs.end, {
+					duration: 1000,
+					offset: 0,
+					easing: "easeInOutCubic",
+				})
+			}
 		}
 	}
 </script>
 
 <style>
-	.latext{
-	}
+	.latext {}
 </style>

@@ -36,6 +36,10 @@
 	import {
 		getUrlKey
 	} from '../../utils/utils.js'
+	import {
+		iotinit,
+		disconnect
+	} from '../../aliiot/iot.js';
 	export default {
 		props: {
 			logintype: {
@@ -85,6 +89,7 @@
 
 		},
 		mounted() {
+			disconnect()
 			if (this.logintype === '1') {
 				//微信登陆
 				console.log("微信登陆")

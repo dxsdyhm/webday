@@ -2,14 +2,14 @@
 	<v-layout column>
 		<qmorntoolbar :title="title"></qmorntoolbar>
 		<v-list>
-			<v-list-tile>
-				<v-list-tile-content>
-					<v-list-tile-title>{{ title }}</v-list-tile-title>
-				</v-list-tile-content>
-				<v-list-tile-action>
+			<v-list-item>
+				<v-list-item-content>
+					<v-list-item-title>{{ title }}</v-list-item-title>
+				</v-list-item-content>
+				<v-list-item-action>
 					<v-switch color="primary" v-model="lightswitch"></v-switch>
-				</v-list-tile-action>
-			</v-list-tile>
+				</v-list-item-action>
+			</v-list-item>
 		</v-list>
 	</v-layout>
 </template>

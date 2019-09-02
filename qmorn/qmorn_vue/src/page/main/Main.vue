@@ -1,29 +1,15 @@
 <template>
-	<v-layout column fill-height justify-space-between>
+	<div class="d-flex flex-column all">
 		<keep-alive>
-			<router-view class="content"></router-view>
+			<router-view></router-view>
 		</keep-alive>
-		<v-bottom-nav :active.sync="activeBtn" :value="showNav" absolute color="#fff">
-			<router-link to="/main/voice" replace>
-				<v-btn flat color="pink lighten-3">
-					<span>音乐</span>
-					<v-icon>library_music</v-icon>
-				</v-btn>
-			</router-link>
-			<router-link to="/main/device">
-				<v-btn flat color="pink lighten-3">
-					<span>设备</span>
-					<v-icon>widgets</v-icon>
-				</v-btn>
-			</router-link>
-			<router-link to="/main/userinfo" replace>
-				<v-btn flat color="pink lighten-3">
-					<span>我的</span>
-					<v-icon>person</v-icon>
-				</v-btn>
-			</router-link>
-		</v-bottom-nav>
-	</v-layout>
+		<v-bottom-navigation v-model="activeBtn" :input-value="showNav" grow absolute color="primary" height="8vh">
+			<v-btn v-for="item in bottonNav" :key="item.position" @click="selectNav(item)">
+				<span>{{item.name}}</span>
+				<v-icon>{{item.icon}}</v-icon>
+			</v-btn>
+		</v-bottom-navigation>
+	</div>
 </template>
 
 <script>
@@ -31,39 +17,68 @@
 		mapGetters
 	} from 'vuex';
 	export default {
-		name:'Main',
+		name: 'Main',
 		data() {
 			return {
 				activeBtn: 1,
-				showNav: true
+				showNav: true,
+				bottonNav: [{
+						position: 0,
+						name: '音乐',
+						icon: 'library_music',
+						path: '/main/voice'
+					},
+					{
+						position: 1,
+						name: '设备',
+						icon: 'widgets',
+						path: '/main/device'
+					},
+					{
+						position: 2,
+						name: '我的',
+						icon: 'person',
+						path: '/main/userinfo'
+					}
+				]
 			}
 		},
 		mounted: function() {
-			this.activeBtn=this.$store.getters.getActive
+			this.activeBtn = this.$store.getters.getActive
 		},
-		activated(){
-			if(this.activeBtn===1){
-				if(this.selectdevice===null||this.selectdevice===undefined){
+		activated() {
+			if (this.activeBtn === 1) {
+				if (this.selectdevice === null || this.selectdevice === undefined) {
 					this.$router.replace('/main/empty')
 				}
 			}
 		},
-		watch:{
-            activeBtn(newvalue,old){
+		watch: {
+			activeBtn(newvalue, old) {
 				this.$store.commit('updateActive', newvalue)
 			},
 			'$store.getters.getSelectDevice': function(newdevice, olddevice) {
-				if((!!newdevice)&&(!!newdevice.id)){
+				if ((!!newdevice) && (!!newdevice.id)) {
 					this.$router.replace('/main/device')
-				}else{
+				} else {
 					this.$router.replace('/main/empty')
 				}
 			}
 		},
 		methods: {
-
+			selectNav(item){
+				if(item.path===this.bottonNav[1].path){
+					if(this.selectdevice === null || this.selectdevice === undefined){
+						this.$router.replace('/main/empty')
+					}else{
+						this.$router.replace(item.path)
+					}
+				}else{
+					this.$router.replace(item.path)
+				}
+			},
 		},
-		computed:{
+		computed: {
 			...mapGetters({
 				selectdevice: 'getSelectDevice',
 			}),
@@ -72,7 +87,13 @@
 </script>
 
 <style>
-	.content {
-		margin-bottom: 3.5rem;
+	.all{
+		height: 100vh;
+	}
+	.cont{
+		height: 92vh;
+	}
+	.boot{
+		height: 8vh;
 	}
 </style>

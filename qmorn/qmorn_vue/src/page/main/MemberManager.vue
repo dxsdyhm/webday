@@ -3,48 +3,48 @@
 		<qmorntoolbar :title="title"></qmorntoolbar>
 		<v-list subheader>
 			<v-subheader>
-				<v-chip color="primary" text-color="white" small>
-					<v-avatar>
+				<v-chip color="primary" text-color="white">
+					<v-avatar left>
 						<v-icon>account_circle</v-icon>
 					</v-avatar>
 					管理员
 				</v-chip>
 			</v-subheader>
-			<v-list-tile avatar>
-				<v-list-tile-avatar>
+			<v-list-item avatar>
+				<v-list-item-avatar>
 					<img :src="user.image">
-				</v-list-tile-avatar>
+				</v-list-item-avatar>
 
-				<v-list-tile-content row>
-					<v-list-tile-title v-html="user.nickName"></v-list-tile-title>
-				</v-list-tile-content>
-			</v-list-tile>
+				<v-list-item-content row>
+					<v-list-item-title v-html="user.nickName"></v-list-item-title>
+				</v-list-item-content>
+			</v-list-item>
 		</v-list>
 
 		<v-divider></v-divider>
 
 		<v-list subheader>
 			<v-subheader>
-				<v-chip color="primary" text-color="white" small>
-					<v-avatar>
+				<v-chip color="primary" text-color="white">
+					<v-avatar left>
 						<v-icon>account_circle</v-icon>
 					</v-avatar>
 					成员
 				</v-chip>
 			</v-subheader>
-			<v-list-tile v-for="item in members" :key="item.id" avatar>
-				<v-list-tile-avatar>
+			<v-list-item v-for="item in members" :key="item.id" avatar>
+				<v-list-item-avatar>
 					<img :src="item.image">
-				</v-list-tile-avatar>
-				<v-list-tile-content>
-					<v-list-tile-title v-html="item.remarkName"></v-list-tile-title>
-				</v-list-tile-content>
-				<v-list-tile-action>
-					<v-btn flat icon color="primary" @click="showDelete(item)">
+				</v-list-item-avatar>
+				<v-list-item-content>
+					<v-list-item-title v-html="item.remarkName"></v-list-item-title>
+				</v-list-item-content>
+				<v-list-item-action>
+					<v-btn text icon color="primary" @click="showDelete(item)">
 						<v-icon color="primary">clear</v-icon>
 					</v-btn>
-				</v-list-tile-action>
-			</v-list-tile>
+				</v-list-item-action>
+			</v-list-item>
 		</v-list>
 		<v-btn v-model="fab" color="primary" dark fab fixed bottom right @click="showAdd()">
 			<v-icon dark>add</v-icon>
@@ -75,8 +75,8 @@
 				</v-card-text>
 				<v-card-actions>
 					<v-spacer></v-spacer>
-					<v-btn color="primary" flat @click="addShow = false">取消</v-btn>
-					<v-btn color="primary" flat @click="addGuest()">确定</v-btn>
+					<v-btn color="primary" text @click="addShow = false">取消</v-btn>
+					<v-btn color="primary" text @click="addGuest()">确定</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
@@ -86,8 +86,8 @@
 				<v-card-text>删除成员后，成员将不能在远程操作设备的功能</v-card-text>
 				<v-card-actions>
 					<v-spacer></v-spacer>
-					<v-btn color="green darken-1" flat @click="deleteShow = false">取消</v-btn>
-					<v-btn color="green darken-1" flat @click="deleteGuest()">确定</v-btn>
+					<v-btn color="green darken-1" text @click="deleteShow = false">取消</v-btn>
+					<v-btn color="green darken-1" text @click="deleteGuest()">确定</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>

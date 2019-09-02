@@ -23,8 +23,8 @@
 				<v-card-text>删除绘本后，设备在没有网络的情况下，将不能识别此绘本</v-card-text>
 				<v-card-actions>
 					<v-spacer></v-spacer>
-					<v-btn color="gray" flat @click="showDelete = false">取消</v-btn>
-					<v-btn color="error" flat @click="deleteBook()">确定</v-btn>
+					<v-btn color="gray" text @click="showDelete = false">取消</v-btn>
+					<v-btn color="error" text @click="deleteBook()">确定</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>

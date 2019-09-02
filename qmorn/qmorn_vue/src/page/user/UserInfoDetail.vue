@@ -1,28 +1,30 @@
 <template>
-	<v-layout column fill-height>
+	<div>
 		<qmorntoolbar :title='title'></qmorntoolbar>
 		<v-list class="userinfo">
-			<v-list-tile avatar>
-				<v-list-tile-content>
-					<v-list-tile-title v-text="'头像'"></v-list-tile-title>
-				</v-list-tile-content>
+			<v-list-item>
+				<v-list-item-content>
+					<v-list-item-title v-text="'头像'"></v-list-item-title>
+				</v-list-item-content>
 
-				<v-list-tile-avatar>
+				<v-list-item-avatar>
 					<img :src="userimg">
-				</v-list-tile-avatar>
-			</v-list-tile>
-			<v-list-tile avatar>
-				<v-list-tile-content>
-					<v-list-tile-title v-text="'手机号'"></v-list-tile-title>
-				</v-list-tile-content>
+				</v-list-item-avatar>
+			</v-list-item>
+			<v-list-item>
+				<v-list-item-content>
+					<v-list-item-title v-text="'手机号'"></v-list-item-title>
+				</v-list-item-content>
 			
-				<v-list-tile-action-text>
+				<v-list-item-action-text>
 					{{userphone}}
-				</v-list-tile-action-text>
-			</v-list-tile>
+				</v-list-item-action-text>
+			</v-list-item>
 		</v-list>
-		<v-btn class="exit" color="red" dark @click="exit">退出登陆</v-btn>
-	</v-layout>
+		<v-col :v-show="showlogout">
+			<v-btn block color="red" dark @click="exit">退出登陆</v-btn>
+		</v-col>
+	</div>
 </template>
 
 <script>
@@ -43,6 +45,9 @@
 			},
 			userphone(){
 				return this.$store.getters.getUserInfo.phoneNo
+			},
+			showlogout(){
+				return this.$store.getters.showSpecial
 			}
 		}
 	}

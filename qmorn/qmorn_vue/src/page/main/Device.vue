@@ -1,14 +1,12 @@
 <template>
-	<v-layout pa-2 column fill-height class="white--text pink lighten-3" text-xs-center>
-		<v-layout class="ma-2" row justify-end>
-			<v-icon color="#fff" size="32" @click="toadd()">add</v-icon>
-		</v-layout>
+	<div class="white--text pink lighten-3 text-center d-flex flex-column cont">
+		<v-icon class="align-self-end pa-1 mt-2" color="#fff" size="32" @click="toadd()">add</v-icon>
 		<v-container grid-list-md>
 			<v-layout row wrap>
 				<v-flex v-for="item in onlinestate" :key="item.id" xs4>
-					<v-card height="95">
+					<v-card height="95" @click='topage(item)'>
 						<v-card-actions>
-							<v-icon v-if="item.id==2" :color="item.text | batteryfilter">{{item.icon}}</v-icon>
+							<v-icon v-if="item.id==2" :color="item.text | batteryfilter">{{item.text | batteryiconfilter}}</v-icon>
 							<v-icon v-else-if="item.id==1" color="primary">{{deviceonline?item.icon:'wifi_off'}}</v-icon>
 							<v-icon v-else color="primary">{{item.icon}}</v-icon>
 							<div class="ml-1" v-if="item.id==1&&!deviceonline">(离线)</div>
@@ -20,18 +18,25 @@
 				</v-flex>
 			</v-layout>
 		</v-container>
-		<v-flex xs12>
+		<div class="mt-auto mb-auto">
 			<v-avatar :size=144 tile>
 				<img src="../../assets/img/ic_dev_elf.png" />
 			</v-avatar>
-		</v-flex>
-		<v-layout row wrap class="fun">
-			<v-flex xs4 class="item" v-for="item in fundata" :key="item.funid" @click="toFunction(item.path)">
+		</div>
+		<div class="d-flex justify-space-around fun">
+			<div v-for="item in fundata" :key="item.funid" @click="toFunction(item.path)">
 				<v-icon class="circle">{{item.icon}}</v-icon>
 				<div> {{item.funname}} </div>
-			</v-flex>
-		</v-layout>
-	</v-layout>
+			</div>
+			<!-- <v-flex xs4 class="item" v-for="item in fundata" :key="item.funid" @click="toFunction(item.path)">
+					<v-icon class="circle">{{item.icon}}</v-icon>
+					<div> {{item.funname}} </div>
+				</v-flex> -->
+		</div>
+	</div>
+	<!-- <v-layout column class="white--text pink lighten-3 pa-3" text-center>
+		
+	</v-layout> -->
 </template>
 <script>
 	import axios from 'axios';
@@ -80,7 +85,7 @@
 					{
 						id: 2,
 						icon: "battery_full",
-						text: "80"
+						text: "-1"
 					}
 				],
 				online: 0,
@@ -139,6 +144,15 @@
 			},
 			toFunction(path) {
 				this.$router.push(path)
+			},
+			topage(item){
+				if(item.id===0){
+					this.toFunction(this.fundata[0].path)
+				}else if(item.id===1){
+					this.toadd()
+				}else if(item.id===2){
+					
+				}
 			},
 			updateInfo() {
 				let slect = this.$store.getters.getSelectOnline;
@@ -217,10 +231,9 @@
 
 <style>
 	.fun {
-		margin-bottom: 4rem;
+		width: 100%;
+		margin-bottom: 3rem;
 	}
-
-	.item {}
 
 	.circle {
 		width: 3rem;
@@ -237,9 +250,5 @@
 		width: 100%;
 		overflow: hidden;
 		text-overflow: ellipsis;
-	}
-
-	.ss {
-		height: 85vh;
 	}
 </style>

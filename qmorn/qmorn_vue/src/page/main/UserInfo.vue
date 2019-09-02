@@ -1,9 +1,9 @@
 <template>
-	<div class="content">
+	<div class="cont">
 		<v-responsive :aspect-ratio="16/9" class="up pink lighten-3">
 			<v-layout align-center justify-center column fill-height @click="jumpTo('/userdetail')">
 				<v-avatar :size=72>
-					<img :src="userimg" />
+					<img class="circlw" :src="userimg" />
 				</v-avatar>
 				<div class="user_phone">
 					{{username}}
@@ -11,15 +11,15 @@
 			</v-layout>
 		</v-responsive>
 		<div class="dowm">
-			<v-list>
+			<v-list avatar>
 				<template v-for="(item,index) in items">
-					<v-list-tile class="list_action" avatar :key="item.title" @click="jumpTo(item.path)">
+					<v-list-item class="list_action" :key="item.title" @click="jumpTo(item.path)">
 						<v-icon class="action_icon " color="pink lighten-3">{{item.icon}}</v-icon>
-						<v-list-tile-content>
-							<v-list-tile-title>{{item.title}}</v-list-tile-title>
-						</v-list-tile-content>
+						<v-list-item-content>
+							<v-list-item-title>{{item.title}}</v-list-item-title>
+						</v-list-item-content>
 						<v-icon class="chevron">chevron_right</v-icon>
-					</v-list-tile>
+					</v-list-item>
 					<v-divider v-if="index + 1 < items.length && showDevider" :key="index" color="#fefefe"></v-divider>
 				</template>
 			</v-list>
@@ -84,7 +84,6 @@
 </script>
 
 <style>
-	.content {}
 	.up {
 	}
 	.dowm {
@@ -101,5 +100,8 @@
 	}
 	.chevron{
 		margin-right: 0.5rem;
+	}
+	.circlw{
+		
 	}
 </style>

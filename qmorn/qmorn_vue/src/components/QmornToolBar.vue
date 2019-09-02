@@ -1,11 +1,11 @@
 <template>
-	<v-toolbar dark flat color="primary" scroll-off-screen scroll-target="#scrolling-techniques" :class="gape">
+	<v-app-bar dark flat color="primary" scroll-off-screen scroll-target="#scrolling-techniques" :class="gape">
 		<v-btn icon @click="goBack">
 			<v-icon>arrow_back</v-icon>
 		</v-btn>
 		<v-toolbar-title class="white--text">{{title}}</v-toolbar-title>
 		<v-spacer></v-spacer>
-	</v-toolbar>
+	</v-app-bar>
 </template>
 
 <script>

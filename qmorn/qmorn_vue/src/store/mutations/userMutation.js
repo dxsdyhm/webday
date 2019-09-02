@@ -117,7 +117,7 @@ export const fetchUserMutation = {
 			state.groupmessage.push(action)
 		}
 	},
-	updateSession(state, action) {
-		state.headers.sid = action
+	updateSession (state,action){
+		state.headers.sid=action
 	}
 }

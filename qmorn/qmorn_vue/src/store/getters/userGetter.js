@@ -54,5 +54,9 @@ export const userInfo = {
 	},
 	getLoginState (state){
 		return state.headers['sid']==='0'
+	},
+	showSpecial (state){
+		//账号登陆默认返回true
+		return state.logintype===0
 	}
 }
