@@ -105,8 +105,9 @@
 						appToken: '97D0E83CD2ED48b0A511590B78EA3B0AC09B6234AFCF4bfa9B73BF8199BEA302',
 						packageName: 'com.qmx.qimengxing'
 					}).then(res => {
+						//修改登陆类型
+						this.$store.commit('setlogintype', 1)
 						//vuex 存储user信息
-						console.log(res)
 						this.$store.commit('updateUserInfo', res.data)
 						//router 跳转到main
 						this.$router.replace('main')

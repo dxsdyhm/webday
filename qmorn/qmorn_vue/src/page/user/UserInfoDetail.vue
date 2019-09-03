@@ -21,7 +21,7 @@
 				</v-list-item-action-text>
 			</v-list-item>
 		</v-list>
-		<v-col :v-show="showlogout">
+		<v-col  v-if="showlogout">
 			<v-btn block color="red" dark @click="exit">退出登陆</v-btn>
 		</v-col>
 	</div>

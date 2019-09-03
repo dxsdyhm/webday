@@ -56,6 +56,7 @@
 	import {
 		sendGroupMesg
 	} from '../../aliiot/iot.js';
+	import weixin from '../../weixin/weixin.js';
 	export default {
 		data() {
 			return {
@@ -145,7 +146,7 @@
 				return this.userinfo.image;
 			},
 			onResize(){
-				if(this.windowSize.y-window.innerHeight>60){
+				if((!weixin.isWeixin())&&this.windowSize.y-window.innerHeight>60){
 					this.keybord=true
 				}else{
 					this.keybord=false

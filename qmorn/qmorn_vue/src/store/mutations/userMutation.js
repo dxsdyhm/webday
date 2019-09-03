@@ -119,5 +119,8 @@ export const fetchUserMutation = {
 	},
 	updateSession (state,action){
 		state.headers.sid=action
+	},
+	setlogintype (state,action){
+		state.logintype=action
 	}
 }

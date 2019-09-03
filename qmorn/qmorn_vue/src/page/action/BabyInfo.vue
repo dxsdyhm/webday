@@ -2,7 +2,7 @@
 	<div>
 		<qmorntoolbar :title='title'></qmorntoolbar>
 		<v-list class="babyinfo">
-			<v-list-item v-for="(item,index) in babyTemp" :key="item.fun" avatar @click.stop="changeBabyInfo(item.fun)">
+			<v-list-item v-for="(item,index) in babyTemp" :key="item.fun" @click.stop="changeBabyInfo(item.fun)">
 				<v-list-item-content>
 					<v-list-item-title v-text="item.fun"></v-list-item-title>
 				</v-list-item-content>
@@ -90,7 +90,6 @@
 					this.$store.commit('updateBabyInfo', res.data.babyList)
 					this.updateBaby();
 				}).catch(res => {
-					//登陆失败
 					this.$message(res.msg)
 				})
 			},
@@ -109,10 +108,10 @@
 			},
 			updateBaby() {
 				let temp = this.$store.getters.getUserBabyInfo;
-				if (temp == undefined) {
+				if ((!!!temp) || temp.length<=0) {
 					return
 				}
-				this.babyid=temp[this.paremskey[0]];
+				this.babyid = temp[this.paremskey[0]];
 				this.value1 = temp[this.paremskey[1]];
 				this.value2 = temp[this.paremskey[2]];
 				this.value3 = temp[this.paremskey[3]];
@@ -133,10 +132,7 @@
 					//vuex 存储user信息
 					this.$store.commit('updateBabyInfo', [parems])
 					this.updateBaby();
-					Message({
-						message: "修改成功",
-						type: 'success'
-					});
+					this.$message("修改成功")
 				}).catch(res => {
 					//登陆失败
 					this.$message(res.msg)
