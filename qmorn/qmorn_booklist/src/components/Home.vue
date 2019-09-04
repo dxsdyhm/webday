@@ -79,6 +79,7 @@
 				})
 			},
 			scrollIntoView(item) {
+				console.log(item)
 				this.$store.commit('updatecurrentlisttype', item.type)
 			},
 			searchbykey() {
@@ -102,6 +103,7 @@
 		},
 		watch: {
 			'$store.getters.getcurretnbooklist': function(current) {
+				console.log(current)
 				this.$router.replace({
 					name: `${current}`,
 					params: {

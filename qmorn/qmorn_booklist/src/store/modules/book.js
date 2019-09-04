@@ -14,7 +14,7 @@ const state = {
 			number: 6
 		},
 		{
-			type: 'textbooks',
+			type: 'seriseTextbooks',
 			name: '全国教材',
 			number: 6
 		},

@@ -23,7 +23,7 @@ export default new Router({
 				component: require('@/components/BookCard').default
 			}, {
 				path: '/home/teachmaterial',
-				name: 'textbooks',
+				name: 'seriseTextbooks',
 				component: require('@/components/BookTeachmaterial').default
 			}, {
 				path: '/home/books',

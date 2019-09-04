@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="container">
-			<BookList :booksort="sort"></BookList>
+			<BookList :booksort="sort" :url="url"></BookList>
 		</div>
 	</div>
 </template>
@@ -11,6 +11,7 @@
 		name: 'bookteachmateral',
 		data() {
 			return {
+				url:'/res/book/recommend/serise/search',
 				sort: this.$route.params.sortname,
 			}
 		},

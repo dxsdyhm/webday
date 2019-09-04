@@ -31,6 +31,10 @@
 				type: String,
 				default: ''
 			},
+			url:{
+				type: String,
+				default: '/res/book/recommend/search'
+			}
 		},
 		activated() {
 			this.getBooks()
@@ -45,7 +49,7 @@
 				this.$http({
 					method: 'post',
 					baseURL: 'https://api1.q-links.net:10081',
-					url: '/res/book/recommend/search',
+					url: this.url,
 					data: {
 						key: "",
 						ctype:this.booksort,
@@ -60,7 +64,12 @@
 						this.keywords = ''
 						alert('没有找到书本')
 					} else {
-						let books = response.data.data.books
+						let books=[]
+						if(response.data.data.hasOwnProperty("books")){
+							books = response.data.data.books
+						}else if(response.data.data.hasOwnProperty("seriseBooks")){
+							books = response.data.data.seriseBooks
+						}
 						if (books === null || books.length <= 0) {
 							this.end=true
 							alert('没有更多了')
