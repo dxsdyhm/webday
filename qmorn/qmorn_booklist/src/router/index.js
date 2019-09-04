@@ -15,15 +15,15 @@ export default new Router({
 				component: require('@/components/BookHomeS').default
 			}, {
 				path: '/home/series',
-				name: 'series',
+				name: 'seriseBooks',
 				component: require('@/components/BookSeries').default
 			}, {
 				path: '/home/card',
-				name: 'card',
+				name: 'cards',
 				component: require('@/components/BookCard').default
 			}, {
 				path: '/home/teachmaterial',
-				name: 'teachmaterial',
+				name: 'textbooks',
 				component: require('@/components/BookTeachmaterial').default
 			}, {
 				path: '/home/books',

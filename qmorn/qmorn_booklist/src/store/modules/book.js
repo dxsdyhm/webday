@@ -4,17 +4,17 @@ const state = {
 	bookseris:{},
 	currentlisttype:'main',
 	types: [{
-			type: 'series',
+			type: 'seriseBooks',
 			name: '系列图书',
 			number: 6
 		},
 		{
-			type: 'card',
-			name: '学习卡片',
+			type: 'cards',
+			name: '益智卡片',
 			number: 6
 		},
 		{
-			type: 'teachmaterial',
+			type: 'textbooks',
 			name: '全国教材',
 			number: 6
 		},

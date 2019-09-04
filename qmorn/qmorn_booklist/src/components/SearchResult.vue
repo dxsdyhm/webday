@@ -72,6 +72,7 @@
 					url: '/res/book/recommend/search',
 					data: {
 						key: this.keywords,
+						ctype:'',
 						pageIndex: this.pageIndex,
 						pageSize: 54
 					}

@@ -74,28 +74,28 @@
 			return {
 				keywords: '',
 				types: [{
-						type: 'books',
+						type: 'seriseBooks',
 						name: '系列图书',
 						number: 6
 					},
 					{
-						type: 'card',
+						type: 'cards',
 						name: '益智卡片',
 						number: 6
 					},
 					{
-						type: 'jiaocai',
+						type: 'textbooks',
 						name: '全国教材',
 						number: 6
 					},
 					{
-						type: 'book',
+						type: 'books',
 						name: '精品图书',
 						number: 48
 					}
 				],
 				activetype: 'books',
-				tips:'Tips:<br> 资源更新时，用USB数据线连接设备和PC(个人电脑)，选择感兴趣的资源下载到电脑或者直接下载到对应目录<br>1.卡片资源复制到设备的<strong>"\\卡片_cards"</strong>目录。<br>2.其他书本资源复制到<strong>"\\书本_books"</strong>目录'
+				tips:'Tips:<br> 资源更新时，用USB数据线连接设备和PC(个人电脑)，选择感兴趣的资源下载到电脑或者直接下载到对应目录<br>1.卡片资源复制到设备的<strong>"\\卡片_cards"</strong>目录。<br>2.其他书本资源复制到<strong>"\\书本_books"</strong>目录',
 			}
 		},
 		mounted: function() {
@@ -110,11 +110,6 @@
 						url: '/res/book/recommend',
 					})
 					.then(response => {
-						// let test1 = response.data.data.seriseBooks.concat(response.data.data.seriseBooks).concat(response.data.data.seriseBooks)
-						// let test2 = response.data.data.books.concat(response.data.data.books).concat(response.data.data.books)
-						// console.log(test1)
-						// this.$store.commit('updateserisBook', test1)
-						// this.$store.commit('updateHomeBook', test2)
 						this.$store.commit('updateserisBook', response.data.data.seriseBooks)
 						this.$store.commit('updateHomeBook', response.data.data.books)
 					})

@@ -32,7 +32,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<Book v-for="(book,index) in getBookSingle.slice(index*6,index*6+typeitem.number)" :key="index"
+							<Book v-for="(book,index) in allbook[typeitem.type]" :key="index"
 							 :book="book"></Book>
 						</div>
 					</div>
@@ -51,6 +51,7 @@
 		name: 'bookhome',
 		data() {
 			return {
+				allbook:{},
 				activetype: 'books',
 				tips:'Tips:<br> 资源更新时，用USB数据线连接设备和PC(个人电脑)，选择感兴趣的资源下载到电脑或者直接下载到对应目录<br>1.卡片资源复制到设备的<strong>"\\卡片_cards"</strong>目录。<br>2.其他书本资源复制到<strong>"\\书本_books"</strong>目录'
 			}
@@ -66,8 +67,9 @@
 						url: '/res/book/recommend',
 					})
 					.then(response => {
-						this.$store.commit('updateserisBook', response.data.data.seriseBooks)
-						this.$store.commit('updateHomeBook', response.data.data.books)
+						// this.$store.commit('updateserisBook', response.data.data.seriseBooks)
+						// this.$store.commit('updateHomeBook', response.data.data.books)
+						this.allbook=response.data.data
 					})
 					.catch(function(error) {
 						console.log(error)
