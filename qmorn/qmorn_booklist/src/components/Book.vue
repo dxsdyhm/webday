@@ -105,8 +105,6 @@
 	}
 
 	.cardimg {
-		max-width: 10rem;
-		height: 8rem;
 		cursor: pointer;
 	}
 

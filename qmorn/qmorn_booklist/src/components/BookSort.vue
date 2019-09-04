@@ -37,11 +37,13 @@
 			}
 		},
 		activated() {
-			this.getBooks()
 			window.addEventListener('scroll', this.onScroll)
 		},
 		deactivated() {
 			window.removeEventListener('scroll', this.onScroll)
+		},
+		mounted() {
+			this.getBooks()
 		},
 		methods:{
 			getBooks(){

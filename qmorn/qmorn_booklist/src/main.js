@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios'
 import App from './App.vue'
-import router from './router'
+
 import store from './store'
 import BootstrapVue from 'bootstrap-vue'
 import Book from './components/Book.vue'
@@ -24,6 +24,7 @@ Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])  
 }) 
 
+import router from './router'
 new Vue({
   render: h => h(App),
   router,
