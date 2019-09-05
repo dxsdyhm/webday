@@ -1,6 +1,6 @@
 <template>
 	<div class="col-4 col-sm-6 col-md-6 col-xl-4 my-3 text-center">
-		<figure class="figure d-sm-none foot">
+		<figure class="figure d-sm-none foot" @click="toSigleBook(book)">
 			<div class="ratio rounded shadow">
 				<b-img-lazy :src="book.coverUrl" class="card-img cov"></b-img-lazy>
 			</div>
