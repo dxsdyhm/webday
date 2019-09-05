@@ -24,7 +24,7 @@
 				showNav: true,
 				bottonNav: [{
 						position: 0,
-						name: '音乐',
+						name: '点播',
 						icon: 'library_music',
 						path: '/main/voice'
 					},
