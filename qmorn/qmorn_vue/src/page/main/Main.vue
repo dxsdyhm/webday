@@ -20,7 +20,7 @@
 		name: 'Main',
 		data() {
 			return {
-				activeBtn: 1,
+				activeBtn: 0,
 				showNav: true,
 				bottonNav: [{
 						position: 0,

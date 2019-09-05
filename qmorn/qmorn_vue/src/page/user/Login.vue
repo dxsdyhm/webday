@@ -1,7 +1,7 @@
 <template>
 	<v-container>
 		<v-layout class="contain" align-center justify-center column fill-height>
-			<v-avatar class="qmorn" :size=96 tile>
+			<v-avatar class="qmorn" :size=156 tile>
 				<img src="../../assets/img/logo.svg" />
 			</v-avatar>
 			<v-layout v-if="logintype==='0'||showMuti" column align-space-between>

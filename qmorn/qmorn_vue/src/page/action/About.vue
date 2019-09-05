@@ -3,7 +3,7 @@
 		<qmorntoolbar :title='title'></qmorntoolbar>
 		<v-layout class="fullscreen text-center d-flex flex-column">
 			<div class="mt-auto mb-auto">
-				<v-avatar :size=144 tile>
+				<v-avatar :size=200 tile>
 					<img src="../../assets/img/logo.svg" />
 				</v-avatar>
 				<div class="version">{{this.$store.state.activeUser.versionName}}</div>

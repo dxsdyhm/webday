@@ -26,7 +26,7 @@ export const activeUser = {
 		selectDevice:null,
 		babyinfo:[],
 		booklist:[],
-		active:1,
+		active:0,
 		selectDeviceOnline:{},
 		aliiotstate:false,
 		deviceSetting:{

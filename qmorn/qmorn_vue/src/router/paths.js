@@ -54,7 +54,7 @@ var s = [{
 		path: '/main',
 		component: main,
 		name:'main',
-		redirect: '/main/device',
+		redirect: '/main/voice',
 		children: [{
 			path: '/main/voice',
 			component: voice
