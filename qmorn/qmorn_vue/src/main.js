@@ -45,10 +45,10 @@ const opts = {
 		dark: false,
 		themes: {
 			light: {
-				primary: '#F48FB1',
+				primary: '#f39c22',
 			},
 			dark: {
-				primary: '#F48FB1',
+				primary: '#f39c22',
 			}
 		}
 	}

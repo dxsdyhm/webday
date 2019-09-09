@@ -1,6 +1,6 @@
 <template>
 	<div class="cont">
-		<v-responsive :aspect-ratio="16/9" class="up pink lighten-3">
+		<v-responsive :aspect-ratio="16/9" class="up primary">
 			<v-layout align-center justify-center column fill-height @click="jumpTo('/userdetail')">
 				<v-avatar :size=72>
 					<img class="circlw" :src="userimg" />
@@ -14,7 +14,7 @@
 			<v-list avatar>
 				<template v-for="(item,index) in items">
 					<v-list-item class="list_action" :key="item.title" @click="jumpTo(item.path)">
-						<v-icon class="action_icon " color="pink lighten-3">{{item.icon}}</v-icon>
+						<v-icon class="action_icon " color="primary">{{item.icon}}</v-icon>
 						<v-list-item-content>
 							<v-list-item-title>{{item.title}}</v-list-item-title>
 						</v-list-item-content>
@@ -46,16 +46,16 @@
 						title: '我的设备',
 						path: '/devicelist'
 					},
-					{
-						icon: 'feedback',
-						title: '问题反馈',
-						path: '/webview'
-					},
-					{
-						icon: 'help',
-						title: '使用帮助',
-						path: '/help'
-					},
+					// {
+					// 	icon: 'feedback',
+					// 	title: '问题反馈',
+					// 	path: '/webview'
+					// },
+					// {
+					// 	icon: 'help',
+					// 	title: '使用帮助',
+					// 	path: '/help'
+					// },
 					{
 						icon: 'info',
 						title: '关于',
@@ -102,6 +102,6 @@
 		margin-right: 0.5rem;
 	}
 	.circlw{
-		
+		border: 0.15rem solid white;
 	}
 </style>

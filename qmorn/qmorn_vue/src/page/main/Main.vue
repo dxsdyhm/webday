@@ -47,11 +47,11 @@
 			this.activeBtn = this.$store.getters.getActive
 		},
 		activated() {
-			if (this.activeBtn === 1) {
-				if (this.selectdevice === null || this.selectdevice === undefined) {
-					this.$router.replace('/main/empty')
-				}
-			}
+			// if (this.activeBtn === 1) {
+			// 	if (this.selectdevice === null || this.selectdevice === undefined) {
+			// 		this.$router.replace('/main/empty')
+			// 	}
+			// }
 		},
 		watch: {
 			activeBtn(newvalue, old) {
@@ -67,15 +67,16 @@
 		},
 		methods: {
 			selectNav(item){
-				if(item.path===this.bottonNav[1].path){
-					if(this.selectdevice === null || this.selectdevice === undefined){
-						this.$router.replace('/main/empty')
-					}else{
-						this.$router.replace(item.path)
-					}
-				}else{
-					this.$router.replace(item.path)
-				}
+				// if(item.path===this.bottonNav[1].path){
+				// 	if(this.selectdevice === null || this.selectdevice === undefined){
+				// 		this.$router.replace('/main/empty')
+				// 	}else{
+				// 		this.$router.replace(item.path)
+				// 	}
+				// }else{
+				// 	this.$router.replace(item.path)
+				// }
+				this.$router.replace(item.path)
 			},
 		},
 		computed: {

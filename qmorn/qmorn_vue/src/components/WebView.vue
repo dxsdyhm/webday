@@ -7,7 +7,7 @@
 		props: {
 			url: {
 				type: String,
-				default: 'http:www.baidu.com'
+				default: 'https://www.qmorn.com/'
 			},
 		},
 		mounted: function() {

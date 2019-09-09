@@ -89,24 +89,24 @@
 						subtitle: '',
 						solit: 0 //0 箭头  1 开关
 					},
-					{
-						id: 1,
-						title: '音量设置',
-						subtitle: '',
-						solit: 0 //0 箭头  1 开关
-					},
+					// {
+					// 	id: 1,
+					// 	title: '音量设置',
+					// 	subtitle: '',
+					// 	solit: 0 //0 箭头  1 开关
+					// },
 					{
 						id: 2,
 						title: '童锁开关',
 						subtitle: '',
 						solit: 1 //0 箭头  1 开关
 					},
-					{
-						id: 3,
-						title: '小夜灯',
-						subtitle: '',
-						solit: 0 //0 箭头  1 开关
-					},
+					// {
+					// 	id: 3,
+					// 	title: '小夜灯',
+					// 	subtitle: '',
+					// 	solit: 0 //0 箭头  1 开关
+					// },
 					{
 						id: 4,
 						title: 'WiFi网络切换',

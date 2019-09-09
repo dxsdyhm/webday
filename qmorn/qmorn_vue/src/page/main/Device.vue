@@ -1,5 +1,5 @@
 <template>
-	<div class="white--text pink lighten-3 text-center d-flex flex-column cont">
+	<div class="white--text primary text-center d-flex flex-column cont">
 		<v-icon class="align-self-end pa-1 mt-2" color="#fff" size="32" @click="toadd()">add</v-icon>
 		<v-container grid-list-md>
 			<v-layout row wrap>
@@ -145,13 +145,13 @@
 			toFunction(path) {
 				this.$router.push(path)
 			},
-			topage(item){
-				if(item.id===0){
+			topage(item) {
+				if (item.id === 0) {
 					this.toFunction(this.fundata[0].path)
-				}else if(item.id===1){
+				} else if (item.id === 1) {
 					this.toadd()
-				}else if(item.id===2){
-					
+				} else if (item.id === 2) {
+
 				}
 			},
 			updateInfo() {
@@ -206,8 +206,14 @@
 				})
 			}
 		},
+		activated() {
+			if (this.selectdevice === null || this.selectdevice === undefined) {
+				this.$router.replace('/main/empty')
+			}
+		},
 		mounted: function() {
 			//获取用户所有设备
+			console.log("获取用户所有设备mounted")
 			this.getUserDevices()
 		},
 		beforeDestroy: function() {

@@ -95,9 +95,17 @@
 					return;
 				}
 				let message = this.getSendTextMessage();
-				sendGroupMesg(this.$iotdevice, message, this.userrole)
-				this.$store.commit('addGroupMessage', message)
-				this.messtext = "";
+				try {
+					sendGroupMesg(this.$iotdevice, message, this.userrole)
+					this.$store.commit('addGroupMessage', message)
+					this.messtext = "";
+				} catch (e) {
+					//TODO handle the exception
+					this.$message({
+						message: "发送失败，设备已离线",
+						type: "error"
+					})
+				}
 			},
 			ismyself(userid) {
 				return parseInt(userid) === this.userinfo.uid;
@@ -145,16 +153,19 @@
 				}
 				return this.userinfo.image;
 			},
-			onResize(){
-				if((!weixin.isWeixin())&&this.windowSize.y-window.innerHeight>60){
-					this.keybord=true
-				}else{
-					this.keybord=false
+			onResize() {
+				if ((!weixin.isWeixin()) && this.windowSize.y - window.innerHeight > 60) {
+					this.keybord = true
+				} else {
+					this.keybord = false
 				}
 			}
 		},
 		mounted() {
-			this.windowSize = { x: window.innerWidth, y: window.innerHeight }
+			this.windowSize = {
+				x: window.innerWidth,
+				y: window.innerHeight
+			}
 			this.onResize()
 			this.$api.user.getGroupInfo({
 				deviceList: [

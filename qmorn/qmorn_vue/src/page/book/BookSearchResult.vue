@@ -18,7 +18,7 @@
 				</v-col>
 			</v-row>
 		</v-list>
-		<div v-else align-center justify-center column fill-height class="mt-4">
+		<div v-else class="text-center mt-12">
 			没有查询到结果
 		</div>
 	</div>
