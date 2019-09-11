@@ -18,7 +18,7 @@
 		methods:{
 			checkTitle(){
 				let screenWidth = document.body.clientWidth
-				if(screenWidth>575){
+				if(screenWidth>=992){
 					document.title="资源下载"
 				}else{
 					document.title="书单"

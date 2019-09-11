@@ -1,12 +1,12 @@
 <template>
-	<div class="col-4 col-sm-6 col-md-6 col-xl-4 my-3 text-center">
-		<figure class="figure d-sm-none foot" @click="toSigleBook(book)">
+	<div class="col-4 col-lg-6 col-xl-4 my-3 text-center">
+		<figure class="figure d-lg-none foot" @click="toSigleBook(book)">
 			<div class="ratio rounded shadow">
 				<b-img-lazy :src="book.coverUrl" class="card-img cov"></b-img-lazy>
 			</div>
 			<figcaption class="figure-caption text-left mt-2">{{book.name}}</figcaption>
 		</figure>
-		<div class="card border-light d-none d-sm-block px-3 pb-3 shadowtrans" v-bind:class="[shadowlarge?'shadow-lg':'shadow']"
+		<div class="card border-light d-none d-lg-block px-3 pb-3 shadowtrans" v-bind:class="[shadowlarge?'shadow-lg':'shadow']"
 		 @mouseenter="addshadow" @mouseleave="releaseshadow">
 			<div class="conten d-flex flex-column">
 				<div @click="toSigleBook(book)">
@@ -79,7 +79,7 @@
 </script>
 
 <style>
-	@media (max-width: 575.98px) {
+	@media (max-width: 991.98px) {
 		.ratio {
 			overflow: hidden;
 			position: relative;
