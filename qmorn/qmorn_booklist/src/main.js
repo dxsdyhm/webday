@@ -21,10 +21,11 @@ Vue.component('QmornToolBar',QmornToolBar)
 Vue.component('BookList',booklist)
 
 Object.keys(filters).forEach(key => {  
-  Vue.filter(key, filters[key])  
-}) 
+  Vue.filter(key, filters[key])
+})
 
 import router from './router'
+
 new Vue({
   render: h => h(App),
   router,
