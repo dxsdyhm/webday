@@ -21,7 +21,7 @@
 				if(screenWidth>=992){
 					document.title="资源下载"
 				}else{
-					document.title="书单"
+					document.title="绘本书单"
 				}
 			}
 		},
