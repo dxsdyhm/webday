@@ -78,6 +78,9 @@ const user = {
 	},
 	setselect(params){
 		return instance.post('/app/relation/device/selected',params)
+	},
+	singqure(params){
+		return instance.post('/app/user/wx/jssdk/sign',params)
 	}
 }
 

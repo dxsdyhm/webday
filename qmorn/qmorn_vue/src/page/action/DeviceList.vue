@@ -14,7 +14,7 @@
 					<!-- <v-list-item-subtitle>{{ item.name }}</v-list-item-subtitle> -->
 				</v-list-item-content>
 				<v-list-item-action>
-					<v-icon :v-show="isSelectDevice(item)" color='primary'>check_circle</v-icon>
+					<v-icon v-show="isSelectDevice(item)" color='primary'>check_circle</v-icon>
 				</v-list-item-action>
 			</v-list-item>
 		</v-list>
@@ -40,7 +40,7 @@
 			},
 			isSelectDevice(device){
 				if(!!this.deviceinfo){
-					return device.id===this.deviceinfo.id;
+					return device.id==this.deviceinfo.id;
 				}
 				return false;
 			},

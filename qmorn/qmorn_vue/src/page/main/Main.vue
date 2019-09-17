@@ -45,6 +45,7 @@
 		},
 		mounted: function() {
 			this.activeBtn = this.$store.getters.getActive
+			this.getUserDevices()
 		},
 		activated() {
 			// if (this.activeBtn === 1) {
@@ -57,26 +58,49 @@
 			activeBtn(newvalue, old) {
 				this.$store.commit('updateActive', newvalue)
 			},
-			'$store.getters.getSelectDevice': function(newdevice, olddevice) {
-				if ((!!newdevice) && (!!newdevice.id)) {
-					this.$router.replace('/main/device')
-				} else {
-					this.$router.replace('/main/empty')
-				}
-			}
+			//不再主页面判断设备页状态
+			// '$store.getters.getSelectDevice': function(newdevice, olddevice) {
+			// 	if ((!!newdevice) && (!!newdevice.id)) {
+			// 		this.$router.replace('/main/device')
+			// 	} else {
+			// 		this.$router.replace('/main/empty')
+			// 	}
+			// }
 		},
 		methods: {
 			selectNav(item){
-				// if(item.path===this.bottonNav[1].path){
-				// 	if(this.selectdevice === null || this.selectdevice === undefined){
-				// 		this.$router.replace('/main/empty')
-				// 	}else{
-				// 		this.$router.replace(item.path)
-				// 	}
-				// }else{
-				// 	this.$router.replace(item.path)
-				// }
 				this.$router.replace(item.path)
+			},
+			getUserDevices() {
+				this.$api.user.getdeviceinfo({
+					pageIndex: 1,
+					pageSize: 100,
+				}).then(res => {
+					//如果存在currId，则选中id设备，否则随机选中第一台设备
+					let needcommit = false;
+					if (!!res.data.currId) {
+						for (var i = 0; i < res.data.deviceList.length; i++) {
+							if (res.data.deviceList[i].id === res.data.currId) {
+								this.$store.commit('setSelectDevice', res.data.deviceList[i])
+								break;
+							}
+						}
+					} else {
+						needcommit = true;
+					}
+					this.$store.commit('updateUserDevcie', res.data.deviceList)
+					if (this.$store.getters.getSelectDevice == null) {
+						//不再替换当前显示页面，页面切换由device页面自行完成
+						// this.$router.push("/main/empty")
+					} else {
+						if (needcommit || (this.$store.getters.getSelectDevice.id !== res.data.currId)) {
+							//需要上报当前选中id
+							this.postSelect()
+						}
+					}
+				}).catch(res => {
+					this.$message(res.msg)
+				})
 			},
 		},
 		computed: {

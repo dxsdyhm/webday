@@ -29,6 +29,9 @@ import bookdetail from '../page/book/BookDetail.vue'
 import regist from '../page/user/Regist.vue'
 import findpwd from '../page/user/FindPwd.vue'
 
+import test from '../page/user/Test.vue'
+import sharedevice from '../page/main/ShareDevice.vue'
+
 function isWeixin() {
 	var ua = navigator.userAgent.toLowerCase();
 	var isWeixin = ua.indexOf('micromessenger') != -1;
@@ -174,6 +177,11 @@ var s = [{
 		path: '/findpwd',
 		name: 'findpwd',
 		component: findpwd,
-	}
+	},
+	// {
+	// 	path: '/sharedevice',
+	// 	name: 'sharedevice',
+	// 	component: sharedevice,
+	// }
 ]
 export default s

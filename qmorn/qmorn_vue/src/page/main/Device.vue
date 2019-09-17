@@ -120,7 +120,6 @@
 						this.inet();
 					}
 				}).catch(res => {
-					//登陆失败
 					this.$message(res.msg)
 				})
 			},
@@ -213,7 +212,6 @@
 		},
 		mounted: function() {
 			//获取用户所有设备
-			console.log("获取用户所有设备mounted")
 			this.getUserDevices()
 		},
 		beforeDestroy: function() {

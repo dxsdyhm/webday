@@ -74,7 +74,7 @@ Object.keys(store.state.activeUser.headers).forEach(function(key) {
 })
 
 const special = ['/app/user/login', '/app/com/sms/send', '/app/com/verifycode/verify', '/app/user/register',
-	'/app/user/pwd/reset', '/app/user/thirdlogin2'
+	'/app/user/pwd/reset', '/app/user/thirdlogin2','/app/user/wx/jssdk/sign'
 ]
 
 //是否需要检查sessionid
