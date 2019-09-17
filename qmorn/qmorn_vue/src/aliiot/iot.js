@@ -53,7 +53,7 @@ export function iotinit() {
 	device.on('message', (topic, payload) => {
 		const topicArray = topic.split('/')
 		//非本设备的消息不予处理
-		if(topic.indexOf('/ext/error')==0){
+		if (topic.indexOf('/ext/error') == 0) {
 			//发生错误
 			return;
 		}
@@ -81,9 +81,9 @@ export function iotinit() {
 					break;
 				case 800:
 					//群组消息
-					if(parseInt(remote.DstGrpId)===store.getters.getGroupInfo.id){
+					if (parseInt(remote.DstGrpId) === store.getters.getGroupInfo.id) {
 						store.commit('addGroupMessage', msgBody)
-					}else{
+					} else {
 						console.log("非本群消息 :" + remote)
 					}
 					break;
@@ -111,7 +111,7 @@ export function sendSettingMesg(device, msg) {
 		"dwMesgType": 1,
 		"dwMesgID": device.mqttClient.nextId,
 		"tLocMesgTimeMs": new Date().getTime(),
-		"dwMesgSize": msgStr.length,
+		"dwMesgSize": jzStrLen(msgStr),
 		"BodyFmt": 1,
 		"MesgBody": msgStr
 	};
@@ -131,11 +131,31 @@ export function sendGroupMesg(device, msg, role) {
 		"dwMesgType": 800,
 		"dwMesgID": msg.msgid,
 		"tLocMesgTimeMs": msg.time,
-		"dwMesgSize":msgStr.length,
+		"dwMesgSize": jzStrLen(msgStr),
 		"BodyFmt": 1,
 		"MesgBody": msgStr,
 	};
+	console.log(msgStr.length)
+	console.log(jzStrLen(msgStr))
+	console.log(msgStr)
 	device.publish(`/${deviceinfo.productKey}/${deviceinfo.deviceName}/user/GroupMesgSend`, JSON.stringify(msgParen));
+}
+
+function jzStrLen(str) {
+	var bt = 0;
+	for (var i = 0; i < str.length; i++) {
+		var un = str.charCodeAt(i);
+		if (un >= 0 && un <= 127) {
+			bt += 1;
+		} else if (un > 127 && un <= 2048) {
+			bt += 2;
+		} else if (un > 2048 && un <= 65536) {
+			bt += 3;
+		} else if (un > 65536 && un <= 2097152) {
+			bt += 4;
+		}
+	}
+	return bt;
 }
 
 export function disconnect(device) {

@@ -27,7 +27,7 @@ import weixin from './weixin/weixin.js';
 import('vue-qriously').then(VueQriously=>{
 	Vue.use(VueQriously)
 })
-if (weixin.isWeixin()) {
+if (weixin.isWeixin()||true) {
 	import('weixin-js-sdk').then(wx => {
 		Vue.prototype.$wx = wx;
 	})
@@ -64,7 +64,7 @@ router.beforeResolve((to, from, next) => {
 	if (store.getters.getUserInfo) {
 		//已经登陆
 		//如果不存在，则处理登陆
-		if (from.path === '/user' && to.path === '/main/device') {
+		if (!!!Vue.prototype.$iotdevice) {
 			//登陆成功，执行iot初始化
 			Vue.prototype.$iotdevice = iotinit();
 		}
