@@ -81,6 +81,12 @@ const user = {
 	},
 	singqure(params){
 		return instance.post('/app/user/wx/jssdk/sign',params)
+	},
+	getsharedevice(params){
+		return instance.post('/app/relation/sharedeviceinfo',params)
+	},
+	getsharecode(params){
+		return instance.post('/app/relation/master/sharecode',params)
 	}
 }
 

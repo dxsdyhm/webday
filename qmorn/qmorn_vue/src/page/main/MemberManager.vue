@@ -47,7 +47,7 @@
 			</v-list-item>
 		</v-list>
 		<v-btn v-model="fab" color="primary" dark fab fixed bottom right @click="showAdd()">
-			<v-icon dark>add</v-icon>
+			<v-icon dark>{{shareicon}}</v-icon>
 		</v-btn>
 		<!-- 添加成员 -->
 		<v-dialog v-model="addShow" value="addShow" max-width="600px" lazy>
@@ -151,7 +151,12 @@
 				this.deletid = guesi.id;
 			},
 			showAdd() {
-				this.addShow = true;
+				//普通网页是手机号分享，微信是二维码或者微信分享
+				if(this.showSpecial){
+					this.addShow = true;
+				}else{
+					this.$router.push('/sharedevice')
+				}
 			},
 			deleteGuest() {
 				this.deleteShow = false;
@@ -236,8 +241,16 @@
 			...mapGetters({
 				selectdevice: 'getSelectDevice',
 				user: 'getUserInfo',
-				members: 'getGuestList'
+				members: 'getGuestList',
+				showSpecial:'showSpecial'
 			}),
+			shareicon(){
+				if(this.showSpecial){
+					return "add"
+				}else{
+					return "share"
+				}
+			}
 		},
 		mounted() {
 			this.getMembers()
@@ -247,7 +260,7 @@
 
 <style>
 	.tips {
-		font-size: 0.5rem;
+		font-size: 0.6rem;
 		color: #A1A1A0;
 	}
 </style>

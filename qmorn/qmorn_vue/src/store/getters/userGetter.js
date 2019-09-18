@@ -58,5 +58,8 @@ export const userInfo = {
 	showSpecial (state){
 		//账号登陆默认返回true
 		return state.logintype===0
+	},
+	getShareInfo (state){
+		return state.shareinfo
 	}
 }

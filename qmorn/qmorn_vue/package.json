@@ -21,7 +21,7 @@
     "vue-material": "^1.0.0-beta-11",
     "vue-qriously": "^1.1.1",
     "vue-router": "^3.0.6",
-    "vuetify": "^2.0.15",
+    "vuetify": "^2.0.18",
     "vuex": "^3.1.1",
     "weixin-js-sdk": "^1.4.0-test"
   },
@@ -30,7 +30,6 @@
     "@vue/cli-service": "^3.2.0",
     "babel-plugin-component": "^1.1.1",
     "material-design-icons-iconfont": "^5.0.1",
-    "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.10",
     "webpack-bundle-analyzer": "^3.4.1"
   },

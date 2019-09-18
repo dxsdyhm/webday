@@ -178,10 +178,10 @@ var s = [{
 		name: 'findpwd',
 		component: findpwd,
 	},
-	// {
-	// 	path: '/sharedevice',
-	// 	name: 'sharedevice',
-	// 	component: sharedevice,
-	// }
+	{
+		path: '/sharedevice',
+		name: 'sharedevice',
+		component: sharedevice,
+	}
 ]
 export default s

@@ -8,7 +8,7 @@
 				<v-card-title class="headline">
 					发现新设备
 				</v-card-title>
-				<v-layout align-center justify-center column fill-height>
+				<v-layout align-center justify-center column>
 					<v-avatar class="pa-2" :size=96>
 						<img src="../../assets/img/ic_dev_elf.png" />
 					</v-avatar>
@@ -16,8 +16,7 @@
 					<v-card-text>设备ID:&nbsp;&nbsp;&nbsp;&nbsp;{{device.id}}</v-card-text>
 				</v-layout>
 				<v-card-actions>
-					<v-spacer></v-spacer>
-					<v-btn color="green darken-1" flat @click="back()">确定</v-btn>
+					<v-btn color="primary" block @click="back()">确定</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>

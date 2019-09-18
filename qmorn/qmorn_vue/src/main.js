@@ -60,6 +60,14 @@ Object.keys(filters).forEach(key => {
 })
 
 router.beforeResolve((to, from, next) => {
+	//将分享信息存起来，登陆后如果存在信息，则处理分享流程
+	if(!!to.query.sharecode){
+		let shareinfo={
+			sharecode:to.query.sharecode,
+			shareid:to.query.shareid
+		}
+		store.commit('setShareInfo',shareinfo)
+	}
 	//检查用户登陆信息，如果存在，则处理存在的信息
 	if (store.getters.getUserInfo) {
 		//已经登陆

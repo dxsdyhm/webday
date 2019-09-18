@@ -65,6 +65,7 @@ export const activeUser = {
 		logintype:0,
 		stateList:[],
 		groupmessage:[],
+		shareinfo:undefined
     },
     actions: fetchUserAction,
     getters: userInfo,

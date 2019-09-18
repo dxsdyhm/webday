@@ -122,5 +122,8 @@ export const fetchUserMutation = {
 	},
 	setlogintype (state,action){
 		state.logintype=action
+	},
+	setShareInfo (state,action){
+		state.shareinfo=action
 	}
 }
