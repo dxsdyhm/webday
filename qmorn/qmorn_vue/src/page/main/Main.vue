@@ -5,7 +5,7 @@
 		</keep-alive>
 		<v-dialog v-model="newDevice">
 			<v-card class="pa-4">
-				<v-card-title class=" text-center">
+				<v-card-title class="text-center">
 					收到一个分享的设备
 				</v-card-title>
 				<v-layout align-center justify-center column>
@@ -137,12 +137,12 @@
 					autoAddDev: 1,
 				}).then(res => {
 					//返回的结果包含部分设备信息
-					console.log(res)
 					this.device={
 						remark:res.data.masterName,
 						id:res.data.deviceId
 					}
 					this.newDevice=true;
+					this.$store.commit('setShareInfo',undefined)
 					this.getUserDevices()
 				}).catch(res => {
 					this.$message(res.msg)

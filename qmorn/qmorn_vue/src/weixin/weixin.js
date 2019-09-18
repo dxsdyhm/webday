@@ -1,8 +1,8 @@
 import acount, {
 	info
 } from './config';
-function getCode() {
-	return `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${acount.appID}&redirect_uri=${info.redirect_uri}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
+function getCode(parems) {
+	return `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${acount.appID}&redirect_uri=${info.redirect_uri}&response_type=code&scope=snsapi_userinfo&state=${parems}#wechat_redirect`
 }
 /**
  * 是否微信打开

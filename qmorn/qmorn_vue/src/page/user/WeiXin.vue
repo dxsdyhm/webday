@@ -4,13 +4,25 @@
 
 <script>
 	import weinxin from '../../weixin/weixin.js';
+	import {
+		mapGetters
+	} from 'vuex';
 	export default{
 		data() {
 			return {
 			}
 		},
 		mounted() {
-			window.location.href=weinxin.getCode()
+			if(!!this.getShareInfo){
+				window.location.href=weinxin.getCode(this.getShareInfo.sharecode)
+			}else{
+				window.location.href=weinxin.getCode('0')
+			}
+		},
+		computed: {
+			...mapGetters({
+				getShareInfo: 'getShareInfo',
+			}),
 		}
 	}
 </script>
