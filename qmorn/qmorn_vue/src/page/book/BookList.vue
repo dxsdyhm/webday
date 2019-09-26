@@ -4,7 +4,7 @@
 		<v-container fluid grid-list-lg>
 			<v-layout row wrap>
 				<v-flex v-for="item in bookLists" :key="item.id" xs4 md2>
-					<v-card class="elevation-${showDelete?3:1}" @touchstart="gotouchstart(item)" @touchmove="gotouchmove" @touchend="gotouchend">
+					<v-card class="elevation-${showDelete?3:1} bookcard" @touchstart="gotouchstart(item)" @touchmove="gotouchmove" @touchend="gotouchend">
 						<v-img :src="item.coverUrl" aspect-ratio="1"></v-img>
 						<div class="cardText">
 							<div class="bookName">{{item.name}}</div>
@@ -188,5 +188,9 @@
 
 	.cardText {
 		padding: 1rem 0.3rem 0.9rem 0.3rem;
+	}
+	
+	.bookcard {
+		height: 11rem;
 	}
 </style>

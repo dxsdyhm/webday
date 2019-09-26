@@ -146,7 +146,8 @@
 			},
 			topage(item) {
 				if (item.id === 0) {
-					this.toFunction(this.fundata[0].path)
+					// this.toFunction(this.fundata[0].path)
+					this.$router.push('/deviceosinfo')
 				} else if (item.id === 1) {
 					this.toadd()
 				} else if (item.id === 2) {
