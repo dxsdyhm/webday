@@ -4,6 +4,17 @@
 			<img src="../../assets/img/ic_device_add.png">
 		</v-avatar>
 		<div>还没有设备，点击添加吧~</div>
+		<!-- 配网指引 -->
+		<v-dialog v-model="netconfig">
+			<v-card>
+				<v-card-title class="headline">设备配网</v-card-title>
+				<v-card-text>添加设备首先需要让设备连上网络，回到公众号，在底部菜单中选择“帮助”-->“设备联网”或者微信搜索“配网工具”小程序即可进入配网功能</v-card-text>
+				<v-card-actions>
+					<v-spacer></v-spacer>
+					<v-btn color="green darken-1" text @click="yes()">确定</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 	</v-layout>
 </template>
 <script>
@@ -12,7 +23,9 @@
 	} from 'vuex';
 	export default {
 		data() {
-			return {}
+			return {
+				netconfig:false,
+			}
 		},
 		mounted() {
 			//检查选中设备是否存在
@@ -27,7 +40,15 @@
 		},
 		methods:{
 			toadd(){
-				this.$router.push({name:'netconfig',params:{type:0}})
+				//如果是微信环境，指引用户在公众号菜单或者小程序中配网
+				if(this.$weixin.isWeixin()){
+					this.netconfig=true;
+				}else{
+					this.$router.push({name:'netconfig',params:{type:0}})
+				}
+			},
+			yes(){
+				this.netconfig=false;
 			}
 		}
 	}

@@ -15,10 +15,12 @@ import {
  * 禁止点击蒙层、显示一秒后关闭
  */
 const tip = (msg, option = 'info') => {
-	Message({
-		message: msg,
-		type: option
-	});
+	if(!!msg){
+		Message({
+			message: msg,
+			type: option
+		});
+	}
 }
 
 /**

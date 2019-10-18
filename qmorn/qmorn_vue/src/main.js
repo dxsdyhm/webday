@@ -34,6 +34,7 @@ if (weixin.isWeixin()||true) {
 }
 Vue.config.productionTip = false
 Vue.prototype.$api = api;
+Vue.prototype.$weixin = weixin;
 
 Vue.use(Message)
 Vue.prototype.$message = Message;

@@ -72,7 +72,9 @@
 					//router 跳转到main
 					this.$router.replace('main')
 				}).catch(res => {
-					this.$message(res.msg)
+					if(!!res){
+						this.$message(res.msg)
+					}
 				})
 			},
 			checkAccount() {
