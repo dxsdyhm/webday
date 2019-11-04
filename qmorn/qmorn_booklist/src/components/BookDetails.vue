@@ -5,13 +5,15 @@
 			<img ref="imgbooks" :src="book.coverUrl" @load="imgbooks" cross-origin="anonymous" class="figure-img img-fluid rounded"></img>
 			<div class="bookname">{{book.name}}</div>
 		</div>
-		<div class="text-right d-none d-sm-block">
+		<div class="text-right">
 			<a v-if="!!book.goodsUrl" :href='book.goodsUrl' target='_blank' class="p-3 d-inline-flex cleara">
 				<i class="material-icons primaryicon mr-1">shopping_cart</i>购买
 			</a>
-			<a v-if="!!book.bookUrl" :href='book.bookUrl|ossurl' class="p-3 d-inline-flex cleara">
-				<i class="material-icons primaryicon mr-1">cloud_download</i>下载
-			</a>
+			<div class="text-right d-none d-sm-inline-block">
+				<a v-if="!!book.bookUrl" :href='book.bookUrl|ossurl' class="p-3 d-inline-flex cleara">
+					<i class="material-icons primaryicon mr-1">cloud_download</i>下载
+				</a>
+			</div>
 		</div>
 		<div class="col">
 			<p></p>
