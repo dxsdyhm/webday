@@ -5,8 +5,6 @@ export const info={
 
 export default {
 	// appID:"wx65f9f2332760c43d",
-	// appsecret:'9bd1a29396531fb4b7ae4ede9ee6e0a6',
 	// appID:"wx7813959c146df255",
-	// appsecret:'28bd93cff33e27334e9b6e4be48d2cb7'
-	appID:'wx0571fe9e5f0aaf53',
+	appID:'wx33d8681b6a1c1c1b',
 }
