@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "alibabacloud-iot-device-sdk": "^1.2.7",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.27",
     "element-ui": "^2.10.0",
